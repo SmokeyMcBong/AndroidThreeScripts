@@ -17,6 +17,12 @@ n=$(tput sgr0)
 # Default Project Location (Let the script find its own directory structure - Now it's portable !)
 projectlocation="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Time & Date
+today=`date '+%Y-%m-%d_%H:%M:%S'`;
+
+# Log Files
+LogLocation=logs
+logfile=${projectlocation}/${LogLocation}/log.log
 
 #############################################################################################################
 
