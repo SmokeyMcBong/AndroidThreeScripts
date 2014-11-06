@@ -1,11 +1,9 @@
 #!/bin/bash
-# import config file
-source A3S.def
-source user.preferences
+source A3S.def 				# import Default Script Settings
+source user.preferences	 	# import User Configurable Settings
 mainmenu()
 {
 	clear
-	#echo -ne "\e[8;100;350t" 
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' "   ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -26,17 +24,17 @@ mainmenu()
 	printf '%s\n' ""
 	printf '%s\n' "   ${c}0${b})  Install ALL Dependencies (${r}<-Important!${b})"    
 	printf '%s\n' "    -------------------------------------------------------------             ${c}r1${b})  Clean ROM Build Folder Structure                                       ${c}k1${b})  Edit Kernel 'defconfig' File"
-	printf '%s\n' "    ${b}Linux Setup                                                               ${c}r2${b})  Sync ROM Repo's                                                        ${c}k2${b})  Clean Kernel Folder And Remove '.config' file"
+	printf '%s\n' "   ${b}Linux Setup                                                                ${c}r2${b})  Sync ROM Repo's                                                        ${c}k2${b})  Clean Kernel Folder And Remove '.config' file"
 	printf '%s\n' "   ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel                ${c}r3${b})  Compile ROM From Source                                                ${c}k3${b})  Compile Kernel & Modules" 
 	printf '%s\n' "   ${c}2${b})  Download & Install Android Studio 0.8.6 & SDK Bundle                   ${c}r4${b})  Copy New 'system Folder' & 'boot.img' to working_folder                ${c}k4${b})  Create New boot.img file"
 	printf '%s\n' "   ${c}3${b})  Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Apps                 -------------------------------------------------------------              ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
 	printf '%s\n' "    -------------------------------------------------------------             ${c}r5${b})  Pull Gapps From Device                                                  -------------------------------------------------------------"
-	printf '%s\n' "    ${b}Android ROM Development Setup                                             ${c}r6${b})  Download Additional App's Using 'Additions.links' file                 ${c}k6${b})  Edit 'aroma-config' file in working_folder"
+	printf '%s\n' "   ${b}Android ROM Development Setup                                              ${c}r6${b})  Download Additional App's Using 'Additions.links' file                 ${c}k6${b})  Edit 'aroma-config' file in working_folder"
 	printf '%s\n' "   ${c}4${b})  Setup Build Environment for ROM Development                            ${c}r7${b})  Download Xposed Framework/Modules Using 'Xposed.links' file            ${c}k7${b})  Edit 'updater-script' file in working_folder"
 	printf '%s\n' "   ${c}5${b})  Download Personal ROM Development Repo's                               ${c}r8${b})  Copy Grabbed_Files structure to working_folder structure                -------------------------------------------------------------"
 	printf '%s\n' "   ${c}6${b})  Download ROM Source Code (Current Source = ${g}${DesiredRomName}${b})               -------------------------------------------------------------              ${c}k8${b})  Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' "    -------------------------------------------------------------             ${c}r9${b})  Edit 'aroma-config' file in working_folder"
-	printf '%s\n' "    ${b}Android Kernel Development Setup                                          ${c}r10${b}) Edit 'updater-script' file in working_folder"
+	printf '%s\n' "   ${b}Android Kernel Development Setup                                           ${c}r10${b}) Edit 'updater-script' file in working_folder"
 	printf '%s\n' "   ${c}7${b})  Setup Build Environment for Kernel Development                         ${c}r11${b}) Edit 'build.prop' file in working_folder"
 	printf '%s\n' "   ${c}8${b})  Download Sabermod 4.9.2 Toolchain For Kernel Compile                    -------------------------------------------------------------"
 	printf '%s\n' "   ${c}9${b})  Download Kernel Source Code (Current Source = ${g}${DesiredKernelName}${b})         ${c}r12${b}) Zip working_folder Contents Ready For Flashing on Device"
@@ -53,6 +51,7 @@ mainmenu()
 	printf '%s\n' "   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------${n}"
 	printf '%s\n' ""	
 	read mainmen
+	# Fresh-To-Ready Menu
 	if [ "$mainmen" == 0 ] ; then
 		installDependencies
 	elif [ "$mainmen" == 1 ] ; then
@@ -73,16 +72,96 @@ mainmenu()
 		downloadktoolchain
 	elif [ "$mainmen" == 9 ] ; then 
 		downloadksource
+
+	# RomBuilder Menu
+	elif [ "$mainmen" == r1 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r2 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r3 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r4 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r5 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r6 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r7 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r8 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r9 ] ; then 
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r10 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r11 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == r12 ] ; then 
+		# insert code here...
+			printf '%s\n' "placeholder"
+
+	# KernelBuilder Menu
+	elif [ "$mainmen" == k1 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == k2 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == k3 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == k4 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == k5 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == k6 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == k7 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+	elif [ "$mainmen" == k8 ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+		
+	# Main Menu Preferences/Exit/Reboot/Shutdown
+	elif [ "$mainmen" == p ] ; then
+		# insert code here...
+			printf '%s\n' "placeholder"
+
 	elif [ "$mainmen" == e ] ; then
 		exitscript
 	elif [ "$mainmen" == r ] ; then
 		restartpc
 	elif [ "$mainmen" == s ] ; then
 		shutdownpc
-	elif [ "$mainmen" != 0 ] && [ "$mainmen" != 1 ] && [ "$mainmen" != 2 ] && [ "$mainmen" != 3 ] &&
+	elif 
+		 # Fresh-To-Ready Menu
+		 [ "$mainmen" != 0 ] && [ "$mainmen" != 1 ] && [ "$mainmen" != 2 ] && [ "$mainmen" != 3 ] &&
 		 [ "$mainmen" != 4 ] && [ "$mainmen" != 5 ] && [ "$mainmen" != 6 ] && [ "$mainmen" != 7 ] &&
 		 [ "$mainmen" != 8 ] && [ "$mainmen" != 9 ] && 
-		 [ "$mainmen" != e ] && [ "$mainmen" != r ] && [ "$mainmen" != s ]; then
+		 # RomBuilder Menu
+		 [ "$mainmen" != r1 ] && [ "$mainmen" != r2 ] && [ "$mainmen" != r3 ] && [ "$mainmen" != r4 ] && 
+		 [ "$mainmen" != r5 ] && [ "$mainmen" != r6 ] && [ "$mainmen" != r7 ] && [ "$mainmen" != r8 ] && 
+		 [ "$mainmen" != r9 ] && [ "$mainmen" != r10 ] && [ "$mainmen" != r11 ] && [ "$mainmen" != r12 ] &&
+		 # KernelBuilder Menu
+		 [ "$mainmen" != k1 ] && [ "$mainmen" != k2 ] && [ "$mainmen" != k3 ] && [ "$mainmen" != k4 ] && 
+		 [ "$mainmen" != k5 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k8 ] &&
+		 # Main Menu Preferences/Exit/Reboot/Shutdown
+		 [ "$mainmen" != e ] && [ "$mainmen" != e ] && [ "$mainmen" != r ] && [ "$mainmen" != s ]; then
 			mainmenu
 	fi
 }
@@ -556,7 +635,7 @@ exitscript() # Exit Script
 {
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "    - Exiting Fresh-To-Ready Script ...   "
+	printf '%s\n' "    - Exiting 'AndroidThreeScripts' ...   "
 	showPreProgress
 	showPostProgress
 	printf '%s\n'  ""
