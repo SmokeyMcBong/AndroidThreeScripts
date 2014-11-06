@@ -1,0 +1,58 @@
+### Default Configuration file for AndroidThreeScripts.sh script ###
+
+#------------------------------------------------------------------------------------------------------------
+#----->>>> DO NOT EDIT THESE VALUES UNLESS RELEVANT CHANGES TO THE SHELL SCRIPT ARE MADE AS WELL!! <<<<------
+#------------------------------------------------------------------------------------------------------------
+# 
+
+# Color Codes (blue,red,white,green,cyan,normal,underlined)
+b=$(tput setaf 4)
+r=$(tput setaf 1)
+w=$(tput setaf 7)
+g=$(tput setaf 2)
+c=$(tput setaf 6)
+u=$(tput smul)
+n=$(tput sgr0)
+
+# Default Project Location (Let the script find its own directory structure - Now it's portable !)
+projectlocation="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
+#############################################################################################################
+
+
+#------------------------------------------------------------------------------------------------------------
+#-------------->>>> PROGRESS BAR FUNCTION, EDIT THE SLEEP AND BAR LENGTH VALUES AS NEEDED <<<<---------------
+#------------------------------------------------------------------------------------------------------------
+# 
+
+# Crude Progress Bar Functions
+function showPreProgress { 
+	printf " >                                                (01%%)\r" 
+	sleep 0.05
+	printf " >>>>>>                                           (10%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>                                       (20%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>                                  (30%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>                             (40%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>                        (50%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>                   (60%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>              (70%%)\r" 
+	sleep 0.5	
+}
+function showPostProgress {
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         (90%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> (100%%) - ${green}Done\r${normal}"
+	printf "\n"
+}
+
+#############################################################################################################
+
+
+### END OF CONFIG FILE ###

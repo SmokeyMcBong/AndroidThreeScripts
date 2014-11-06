@@ -1,0 +1,46 @@
+### User Configuration file for AndroidThreeScripts.sh script ###
+
+#------------------------------------------------------------------------------------------------------------
+#----------------------------------->>>> EDIT THESE VALUES AS NEEDED <<<<------------------------------------
+#------------------------------------------------------------------------------------------------------------
+# 
+
+# Set Desired Rom Source To Download (AOSP/AOKP/MIUI etc)
+DesiredRomName="DirtyUnicorns"
+DesiredRomSource="https://github.com/SmokeyMcBong/manifest.git"
+
+# Set Desired Kernel Source To Download 
+DesiredKernelName="FONZinator v3.x"
+DesiredKernelSource="https://github.com/SmokeyMcBong/android_kernel_htc_msm8960.git"
+
+# Personal ROM Related Repos (add/remove to fit personal needs)
+PersonalRepo1="https://github.com/SmokeyMcBong/manifest.git"
+PersonalRepo2="https://github.com/SmokeyMcBong/build.git"
+PersonalRepo3="https://github.com/SmokeyMcBong/packages_apps_OmniSwitch.git"
+PersonalRepo4="https://github.com/SmokeyMcBong/vendor_du.git"
+PersonalRepo5="https://github.com/SmokeyMcBong/packages_apps_Settings.git"
+
+# 3rd Party App Locations
+SunflowerFilename="sunflower-0.2.59-1.all.deb"
+SunflowerSource="http://sunflower-fm.org/pub/sunflower-0.2.59-1.all.deb"
+SublimeFilename="sublime-text_build-3065_amd64.deb"
+SublimeSource="http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3065_amd64.deb"
+UtweakFilename="ubuntu-tweak_0.8.7-1~trusty2_all.deb"
+UtweakSource="https://launchpad.net/ubuntu-tweak/0.8.x/0.8.7/+download/ubuntu-tweak_0.8.7-1~trusty2_all.deb"
+AstudioName="Android Studio 0.8.6 & SDK Bundle"
+AstudioSource=""
+
+# SaberMod Linux Kernel
+SaberLinuxSource="https://github.com/SmokeyMcBong/Linux-manifest.git"
+
+# SaberMod Android Kernel Toolchain Repo
+ToolchainSource="https://github.com/SmokeyMcBong/sabermod-arm-eabi-4.9.git"
+
+# Temp Directory For Downloads
+TempDir="downloads"
+
+# Repo sync command # of jobs
+sync="repo sync -j16"
+
+
+### END OF CONFIG FILE ###
