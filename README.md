@@ -1,7 +1,7 @@
 AndroidThreeScripts
 ===================
 
-[WiP] Complete Android Build Helper
+Complete Android Build Helper
 
 ============
 
