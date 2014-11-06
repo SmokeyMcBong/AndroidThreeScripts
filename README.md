@@ -5,7 +5,7 @@ AndroidThreeScripts
 
 ============
 
-<img src="https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/Screenshot.png" alt="alt text" title="Title" />
+<img src="https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/AndroidThreeScripts.png" alt="alt text" title="Title" />
 
 This script will give the following options upon executing it...
 
