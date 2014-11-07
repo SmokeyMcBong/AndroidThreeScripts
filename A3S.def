@@ -5,6 +5,9 @@
 #------------------------------------------------------------------------------------------------------------
 # 
 
+# Script Version/Date
+scriptbuild="(v1.1 - 07/11/2014)"
+
 # Color Codes (blue,red,white,green,cyan,normal,underlined)
 b=$(tput setaf 4)
 r=$(tput setaf 1)
@@ -23,6 +26,32 @@ today=`date '+%Y-%m-%d_%H:%M:%S'`;
 # Log Files
 LogLocation=logs
 logfile=${projectlocation}/${LogLocation}/log.log
+logsize=""
+
+# Build Environmennt Checks
+currentenvsetup="${c}Not Configured Yet${b}"
+
+# Initial Environment Paths and Variables
+pathheader="# A3S - Initial Path Setup"
+path='export PATH=~/bin:$PATH'
+# Android Studio Install Path
+studiopathheader="# A3S - Android Studio Path"
+studiopath='export PATH=$PATH:/home/thefonz/Android/android-studio/bin'
+# Rom Dev Environment Paths and Variables
+romdevheader="# A3S - Rom Dev Setup"
+ccache='export USE_CCACHE=1'
+# Kernel Dev Environment Paths and Variables
+kerneldevheader="# A3S - Kernel Dev Setup"
+kernelarch='export ARCH=arm'
+ccompile='export CCOMPILE=$CROSS_COMPILE'
+ccompilearm='export CROSS_COMPILE=arm-eabi'
+toolchainpath='export PATH=$PATH:/home/thefonz/Android/KernelDevelopment/Toolchain/sabermod-arm-eabi-4.9/bin'
+
+sysdefapp="xdg-open "
+
+
+
+
 
 #############################################################################################################
 

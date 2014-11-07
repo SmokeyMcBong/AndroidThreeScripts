@@ -3,7 +3,7 @@ source A3S.def			# import Default Script Settings
 source user.preferences	# import User Configurable Settings
 mainmenu()
 {
-	log_file_dir_check && clear
+	startup_checks && clear
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' "   ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -19,7 +19,7 @@ mainmenu()
 	printf '%s\n' "     ${g}################################################################         ################################################################         ################################################################"
 	printf '%s\n' ""
 	printf '%s\n' ""
-	printf '%s\n' "     ${b}                     Setup Build Environment...                                        Compile Rom, Add Features & AROMA...                                      Compile Kernel, Add Features & AROMA..."
+	printf '%s\n' "     ${b}                    Setup Build Environment...                                        Compile Rom, Add Features & AROMA...                                     Compile Kernel, Add Features & AROMA..."
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' "     ${c}0${b})  Install ALL Dependencies (${r}<-Important!${b})"    
@@ -39,15 +39,17 @@ mainmenu()
 	printf '%s\n' "     ${c}8${b})  Download Sabermod 4.9.2 Toolchain For Kernel Compile                  -------------------------------------------------------------"
 	printf '%s\n' "     ${c}9${b})  Download Kernel Source Code (Current Source = ${g}${DesiredKernelName}${b})       ${c}r12${b}) Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' ""
-	printf '%s\n' ""
-	printf '%s\n' ""
+	printf '%s\n' "      -------------------------------------------------------------"
+	printf '%s\n' "     ${c}Info>${b} Build Environment Currently Set To : ${g}${currentenvsetup}${b}"
+	printf '%s\n' "         (Use Options ${c}4${b} and ${c}7${b} To Switch Build Environments)"
+	printf '%s\n' ""	
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' "   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-	printf '%s\n' "   ${c}p${b} )  Edit Preferences (this has all the user configurable settings for ALL three main functions)                                                                                      'AndroidThreeScripts'"
+	printf '%s\n' "   ${c}p${b} )  Edit Preferences   ${c}d${b} )  Delete Logs [Current = ${g}${logsize}kb${b}]                                                                                                                             'AndroidThreeScripts'"
 	printf '%s\n' "   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"	
-	printf '%s\n' "   ${c}e${b} )  Exit Script    ${c}r${b} )  Restart PC    ${c}s${b} )  Shutdown PC                                                                                                                     Written by 'theFONZ' (v1.0 - 06/11/2014)"
+	printf '%s\n' "   ${c}e${b} )  Exit Script        ${c}r${b} )  Restart PC        ${c}s${b} )  Shutdown PC                                                                                                            Written by 'theFONZ' ${scriptbuild}"
 	printf '%s\n' "   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------${n}"
 	printf '%s\n' ""	
 	read mainmen
@@ -139,9 +141,9 @@ mainmenu()
 		
 	# Main Menu Preferences/Exit/Reboot/Shutdown
 	elif [ "$mainmen" == p ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
-
+		editprefs
+	elif [ "$mainmen" == d ] ; then
+		deletelogs
 	elif [ "$mainmen" == e ] ; then
 		exitscript
 	elif [ "$mainmen" == r ] ; then
@@ -161,14 +163,25 @@ mainmenu()
 		 [ "$mainmen" != k1 ] && [ "$mainmen" != k2 ] && [ "$mainmen" != k3 ] && [ "$mainmen" != k4 ] && 
 		 [ "$mainmen" != k5 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k8 ] &&
 		 # Main Menu Preferences/Exit/Reboot/Shutdown
-		 [ "$mainmen" != e ] && [ "$mainmen" != e ] && [ "$mainmen" != r ] && [ "$mainmen" != s ]; then
+		 [ "$mainmen" != p ] && [ "$mainmen" != d ] && [ "$mainmen" != e ] && [ "$mainmen" != r ] && [ "$mainmen" != s ]; then
 			mainmenu
 	fi
 }
-log_file_dir_check() # make startup check for log file dir and create if doesnt exist
+startup_checks() # make startup checks
 {
+	# check for log directory, create if not found
 	if [ ! -d "$LogLocation" ]; then
  		mkdir logs
+	fi
+	# check for log directory size and show result
+	DIRSIZE=`du -s $LogLocation | cut -f 1`
+		logsize=$DIRSIZE
+	# check for bash.rc entries and show result
+	File=~/.bashrc
+	if grep -q "$romdevheader" "$File"; then
+  		 currentenvsetup="Rom Development"
+	elif grep -q "$kerneldevheader" "$File"; then
+		currentenvsetup="Kernel Development"
 	fi
 }
 show_stage_header() # menu ui : show_stage_header.
@@ -218,14 +231,16 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 			  sudo apt-get purge -y openjdk-\* icedtea-\* icedtea6-\* && sudo add-apt-repository -y ppa:webupd8team/java && sudo apt-get update && sudo apt-get install -y oracle-java6-installer && sudo apt-get install -y git gnupg ccache lzop flex bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 libc6-dev lib32bz2-1.0 lib32ncurses5-dev x11proto-core-dev libx11-dev:i386 libreadline6-dev:i386 lib32z1-dev libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown libxml2-utils xsltproc libreadline6-dev lib32readline-gplv2-dev libncurses5-dev bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev lib32bz2-dev squashfs-tools pngcrush schedtool dpkg-dev && sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so && mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo && sudo apt-get install -y libcloog-isl-dev libcap-dev liblz4* &&
 			  printf '%s\n'  ""
 			  printf '%s\n'  "Adding Paths and Variables to .bashrc file..."
+			  cleanbash &&
 			  sleep 2
-			  echo 'export PATH=~/bin:$PATH' >> ~/.bashrc && 
+			  echo ${pathheader} >> ~/.bashrc &&
+			  echo ${path} "# A3S Path Settings" >> ~/.bashrc && 
 				source ~/.bashrc &&
 			showPostProgress && sleep 2
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$installDependenciesopt0" == 2 ] ; then
@@ -234,11 +249,9 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		installDependencies
 	fi 
 }
-
 saberinstall() # Download, Compile & Install Latest SaberMod Linux Kernel
 {
 	clear
-	Function="saberinstall"
 	Stagenumber="1"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -252,28 +265,46 @@ saberinstall() # Download, Compile & Install Latest SaberMod Linux Kernel
 	printf '%s\n'  ""
 	read saberinstallopt0
 	if [ "$saberinstallopt0" == 1 ] ; then
+		Function="saberdownload"
 		clear
-		((
+		(
 		Stagenumber="1"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Downloading Newest SaberMod Linux Kernel Source... <-${n}             "
-			cd && mkdir Linux && cd Linux && sleep 1
+			cd && 
+				if [ ! -d Linux ]; then
+ 					mkdir Linux
+				else 
+					rm -rf Linux && mkdir Linux 
+				fi		
+			cd Linux && sleep 1
 			  repo init -u ${SaberLinuxSource} && exec ${sync} & wait
 			showPostProgress && sleep 2
 		show_stage_completed
-		sleep 4
+		) 2>&1 | tee ${logfile} 
+			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
+		sleep 2.5
 		saberinstall
 	elif [ "$saberinstallopt0" == 2 ] ; then
+		Function="sabercompileinstall"
 		clear
+		(
 		Stagenumber="1"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Compiling & Installing Newest SaberMod Linux Kernel... <-${n}             "
-			cd && cd Linux && . ubuntu & wait
-			showPostProgress && sleep 2
+			cd && cd Linux && 
+				if [ -f ubuntu ]; then
+					. ubuntu & wait
+				else
+					printf '%s\n'  "Sabermod 'ubuntu' script NOT found!"
+				sleep 2.5
+				mainmenu
+				fi		
+		showPostProgress && sleep 2
 		show_stage_completed
-		)) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$saberinstallopt0" == 3 ] ; then
@@ -292,7 +323,7 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) Install Android Studio 0.8.6 & SDK Bundle"
+	printf '%s\n' "   1) Install ${AstudioName} "
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
@@ -302,28 +333,73 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 		(
 		Stagenumber="2"
 		show_stage_header
-		printf '%s\n'  "        ${b}-> Downloading Android Studio 0.8.6 & SDK Bundle ... <-${n}          "
+		printf '%s\n'  "        ${b}-> Downloading ${AstudioName} ... <-${n}          "
 		sleep 2
 		cd &&
-			wget ${AstudioSource} &&
+		if [ ! -d Android ]; then
+ 				mkdir Android
+			fi		
+		cd Android &&
+		if [ -d android-studio ]; then
+ 				rm -rf android-studio
+			fi	
+		for filename in *; do
+			case "${filename}" in
+				android-studio-bundle*) rm -f "$filename";;
+			esac
+		done &&	
+		wget ${AstudioSource} &&
 		sleep 2		
 		clear
 		Stagenumber="2"
 		show_stage_header
-		printf '%s\n'  "        ${b}-> Installing Android Studio 0.8.6 & SDK Bundle ... <-${n}          "
+		printf '%s\n'  "        ${b}-> Installing ${AstudioName} ... <-${n}          "
 		sleep 2  
-			tar -zxvf android-studio-bundle-135.1339820-linux.tgz && 
+		for filename in *; do
+			case "${filename}" in
+				android-studio-bundle*) tar -zxvf "$filename";;
+			esac
+		done &&	
+			#tar -zxvf android-studio-bundle-135.1339820-linux.tgz && 
 		sleep 2
 		clear
 		Stagenumber="2"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Cleaning Up ... <-${n}          "
 		sleep 2 
-			rm -f android-studio-bundle-135.1339820-linux.tgz &&
+		for filename in *; do
+			case "${filename}" in
+				android-studio-bundle*) rm -f "$filename";;
+			esac
+		done &&	
+		sleep 2
+		clear
+		Stagenumber="2"
+		show_stage_header
+		printf '%s\n'  "        ${b}-> Adding Android Studio Path Environment... <-${n}          "
+		sleep 2 
+		StudioPathHeader=$studiopathheader
+		if grep -q "$StudioPathHeader" "$File"; then
+  			sed -i '/'"$StudioPathHeader"'/d' $File	
+		fi
+		StudioPath="# A3S Android Studio Path Settings"
+		if grep -q "$StudioPath" "$File"; then
+			sed -i '/'"${StudioPath}"'/d' $File	
+		fi
+		echo ${studiopathheader} >> ~/.bashrc &&
+		echo ${StudioPath} "# A3S Android Studio Path Settings" >> ~/.bashrc && 
+		source ~/.bashrc &&
+		sleep 2
+		clear
+		Stagenumber="2"
+		show_stage_header
+		printf '%s\n'  "${b}-> All done ! Type 'studio.sh' in terminal to start Android-Studio <-${n}          "
+		sleep 2 
+		showPostProgress && sleep 2
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$installstudioopt0" == 2 ] ; then
@@ -354,7 +430,11 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
 		show_stage_header
 		printf '%s\n'  "  ${b}-> Downloading 3rd Party Apps... <-${n}  " 
 		sleep 1
-		cd ${projectlocation} && mkdir ${TempDir} && cd ${TempDir} &&
+			cd ${projectlocation} && 
+				if [ -d ${TempDir} ]; then
+ 					rm -rf ${TempDir}
+				fi
+			mkdir ${TempDir} && cd ${TempDir} &&
 		    wget ${SunflowerSource} && wget ${SublimeSource} && wget ${UtweakSource} &&
 			clear
 			Stagenumber="3"
@@ -365,7 +445,7 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
             show_stage_completed
 			) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$installappsopt0" == 2 ] ; then
@@ -396,22 +476,33 @@ setuprenv() # Setup ROM Build Environment
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Setting Build Environment For - ROM Development... <-${n}             "
 		printf '%s\n'  ""
-		printf '%s\n'  "Adding Paths and Variables to .bashrc file..."
+		printf '%s\n'  "Creating Folders, Adding Paths and Variables to .bashrc file..."
 		showPreProgress
+		cleanbash &&
 		sleep 2
 		cd && 
 		  echo '' >> ~/.bashrc &&
-		  echo '# This is for Android ROM & Toolchain build environments' >> ~/.bashrc &&
-		  echo 'export PATH=~/bin:$PATH' >> ~/.bashrc &&
-		  echo 'export USE_CCACHE=1' >> ~/.bashrc &&
+		  echo ${romdevheader} >> ~/.bashrc &&
+		  echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
+		  echo ${ccache} "# A3S Ccache Settings" >> ~/.bashrc &&
 		  source ~/.bashrc
-		cd && mkdir AndroidROMdev && cd AndroidROMdev && mkdir MyRepos &&
+		cd && 
+			if [ ! -d Android ]; then
+ 				mkdir Android
+			fi		
+		cd Android && 
+			if [ ! -d MyRepositories ]; then
+ 				mkdir MyRepositories
+			fi
+			if [ ! -d RomDevelopment ]; then
+ 				mkdir RomDevelopment
+			fi	
 		showPostProgress
 		sleep 2
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$setuprenvopt0" == 2 ] ; then
@@ -441,13 +532,21 @@ downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
 		Stagenumber="5"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Downloading Personal ROM-Related Repos... <-${n}             "
-		cd && cd AndroidROMdev/MyRepos &&
+		cd && 
+			if [ ! -d Android ]; then
+ 				mkdir Android
+			fi		
+		cd Android && 
+			if [ ! -d MyRepositories ]; then
+ 				mkdir MyRepositories
+			fi
+		cd MyRepositories &&
 			git clone -v ${PersonalRepo1} && git clone -v ${PersonalRepo2} && git clone -v ${PersonalRepo3} &&		
 			git clone -v ${PersonalRepo4} && git clone -v ${PersonalRepo5} && 
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$downloadpresonalrreposopt0" == 2 ] ; then
@@ -477,12 +576,24 @@ downloadrsource()  # Download Desired ROM Source Code
 		Stagenumber="6"
 		show_stage_header
 		printf '%s\n'  "     ${b}-> Downloading ${DesiredRomName} Source Code ... <-${n}       "
-		cd && cd AndroidROMdev && mkdir ${DesiredRomName} && cd ${DesiredRomName} &&
-		repo init -u ${DesiredRomSource} -b du44 && ${sync} & wait
+		cd && 
+			if [ ! -d Android ]; then
+ 				mkdir Android
+			fi		
+		cd Android && 
+			if [ ! -d RomDevelopment ]; then
+ 				mkdir RomDevelopment
+			fi	
+		cd RomDevelopment && 
+			if [ -d ${DesiredRomName} ]; then
+ 				rm -rf ${DesiredRomName}
+			fi
+		mkdir ${DesiredRomName} && cd ${DesiredRomName} &&
+			repo init -u ${DesiredRomSource} -b du44 && ${sync} & wait
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$downloadrsourceopt0" == 2 ] ; then
@@ -513,25 +624,37 @@ setupkenv() # Setup Kernel Build Environment
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Setting Build Environment For - Kernel Development... <-${n}             "
 		printf '%s\n'  ""
-		printf '%s\n'  "Adding Paths and Variables to .bashrc file..."
-		ShowPreProgress
+		printf '%s\n'  "Creating Folders, Adding Paths and Variables to .bashrc file..."
+		showPreProgress
+		cleanbash &&		
 		sleep 2
 		cd && 
 		  echo '' >> ~/.bashrc &&
-		  echo '# This is for Android Kernel build environments' >> ~/.bashrc &&
-		  echo 'export PATH=~/bin:$PATH' >> ~/.bashrc &&
-		  echo 'export ARCH=arm' >> ~/.bashrc &&
-		  echo 'export CCOMPILE=$CROSS_COMPILE' >> ~/.bashrc &&
-		  echo 'export CROSS_COMPILE=arm-eabi-' >> ~/.bashrc &&
-		  echo 'export PATH=$PATH:/home/thefonz/AndroidKERNELdev/Toolchain/sabermod-arm-eabi-4.9/bin' >> ~/.bashrc &&
+		  echo ${kerneldevheader} >> ~/.bashrc &&
+		  echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
+		  echo ${kernelarch} "# A3S KernelArch Settings" >> ~/.bashrc &&
+		  echo ${ccompile} "# A3S Ccompile Settings" >> ~/.bashrc &&
+		  echo ${ccompilearm} "# A3S Ccompile Arm Settings" >> ~/.bashrc &&
+		  echo ${toolchainpath} "# A3S ToolchainPath Settings" >> ~/.bashrc &&
 		  source ~/.bashrc
-		cd && mkdir AndroidKERNELdev && cd AndroidKERNELdev && mkdir MyRepos &&
-	ShowPostProgress
+		cd && 
+			if [ ! -d Android ]; then
+ 				mkdir Android
+			fi		
+		cd Android && 
+			if [ ! -d KernelDevelopment ]; then
+ 				mkdir KernelDevelopment
+			fi
+		cd KernelDevelopment &&
+		if [ ! -d MyKernelRepositories ]; then
+ 				mkdir MyKernelRepositories
+			fi			
+	showPostProgress
 	sleep 2
 	show_stage_completed
 	) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$setupkenvopt0" == 2 ] ; then
@@ -561,12 +684,24 @@ downloadktoolchain() # Download SaberMod 4.9.2 Kernel Toolchain
 		Stagenumber="8"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Downloading SaberMod 4.9.2 Toolchain... <-${n}             "
-		cd && cd AndroidKERNELdev && mkdir Toolchain && cd Toolchain &&
+		cd && 
+			if [ ! -d Android ]; then
+ 				mkdir Android
+			fi		
+		cd Android && 
+			if [ ! -d KernelDevelopment ]; then
+ 				mkdir KernelDevelopment
+			fi
+		cd KernelDevelopment &&
+			if [ ! -d Toolchain ]; then
+ 				mkdir Toolchain
+			fi
+		 cd Toolchain &&
 			git clone ${ToolchainSource} &&
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$downloadktoolchainopt0" == 2 ] ; then
@@ -596,12 +731,24 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 		Stagenumber="9"
 		show_stage_header
 		printf '%s\n'  "     ${b}-> Downloading ${DesiredKernelName} Source Code ... <-${n}       "
-		cd && cd AndroidKERNELdev && mkdir ${DesiredKernelName} && cd ${DesiredKernelName} &&
-		git clone ${DesiredKernelSource} &&
+		cd && 
+			if [ ! -d Android ]; then
+ 				mkdir Android
+			fi		
+		cd Android && 
+			if [ ! -d KernelDevelopment ]; then
+ 				mkdir KernelDevelopment
+			fi	
+		cd KernelDevelopment && 
+			if [ -d ${DesiredKernelName} ]; then
+ 				rm -rf ${DesiredKernelName}
+			fi
+		mkdir ${DesiredKernelName} && cd ${DesiredKernelName} &&
+			git clone ${DesiredKernelSource} &&
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
-		sleep 4
+		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$downloadksourceopt0" == 2 ] ; then
@@ -611,7 +758,7 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 	fi
 }
 
-#### port RomBuilder and KernelBuildr source here >> #
+#### port RomBuilder and KernelBuilder source here >> #
 #
 #
 #
@@ -624,8 +771,82 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 #
 #
 #
-# << port RomBuilder and KernelBuildr source here ###
+# << port RomBuilder and KernelBuilder source here ###
 
+cleanbash() # check 'bash.rc' for conflicting entries before adding new ones
+{
+	PathHeader=$pathheader
+	if grep -q "$PathHeader" "$File"; then
+  		sed -i '/'"$PathHeader"'/d' $File	
+	fi
+	Path="# A3S Path Settings"
+	if grep -q "$Path" "$File"; then
+		sed -i '/'"${Path}"'/d' $File	
+	fi
+	RomDevHeader=$romdevheader
+	if grep -q "$RomDevHeader" "$File"; then
+  		sed -i '/'"$RomDevHeader"'/d' $File
+	fi
+	Ccache="# A3S Ccache Settings"
+	if grep -q "$Ccache" "$File"; then
+		sed -i '/'"$Ccache"'/d' $File
+	fi
+	KernelDevHeader=$kerneldevheader
+	if grep -q "$KernelDevHeader" "$File"; then
+  		sed -i '/'"$KernelDevHeader"'/d' $File
+	fi
+	KernelArch="# A3S KernelArch Settings"
+	if grep -q "$KernelArch" "$File"; then
+		sed -i '/'"$KernelArch"'/d' $File
+	fi
+	Ccompile="# A3S Ccompile Settings"
+	if grep -q "$Ccompile" "$File"; then
+  		sed -i '/'"$Ccompile"'/d' $File
+	fi
+	CcompileArm="# A3S Ccompile Arm Settings"
+	if grep -q "$CcompileArm" "$File"; then
+		sed -i '/'"$CcompileArm"'/d' $File
+	fi
+	ToolchainPath="# A3S ToolchainPath Settings"
+	if grep -q "$ToolchainPath" "$File"; then
+		sed -i '/'"$ToolchainPath"'/d' $File
+	fi
+}
+editprefs() # open 'user.preferences'  
+{
+	${sysdefapp} ${projectlocation}/user.preferences  &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'user.preferences' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in 
+ 		 y|Y ) showPreProgress 
+				showPostProgress
+				sleep 1
+				exec ${projectlocation}/AndroidThreeScripts.sh;;
+ 		 n|N ) mainmenu;;
+		 * ) editprefs;;
+	esac
+}
+deletelogs() # Delete logs if they exist
+{
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Delete All Logs ?? (y/n)?" choice
+	case "$choice" in 
+ 		 y|Y ) if [ -d ${projectlocation}/${LogLocation} ]; then
+				showPreProgress 
+					rm -rf ${projectlocation}/${LogLocation}
+				showPostProgress
+				sleep 1
+			   fi
+			exec ${projectlocation}/AndroidThreeScripts.sh;;
+ 		 n|N ) cd ${projectlocation} &
+			exec ${projectlocation}/AndroidThreeScripts.sh;;
+ 		 * ) deletelogs;;
+	esac
+}
 exitscript() # Exit Script
 {
 	printf '%s\n'  ""

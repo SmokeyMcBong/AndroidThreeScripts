@@ -10,7 +10,7 @@ DesiredRomName="DirtyUnicorns"
 DesiredRomSource="https://github.com/SmokeyMcBong/manifest.git"
 
 # Set Desired Kernel Source To Download 
-DesiredKernelName="FONZinator v3.x"
+DesiredKernelName="FONZinatorM7"
 DesiredKernelSource="https://github.com/SmokeyMcBong/android_kernel_htc_msm8960.git"
 
 # Personal ROM Related Repos (add/remove to fit personal needs)
