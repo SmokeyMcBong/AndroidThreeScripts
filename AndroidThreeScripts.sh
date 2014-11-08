@@ -77,59 +77,51 @@ mainmenu()
 
 	# RomBuilder Menu
 	elif [ "$mainmen" == r1 ] ; then
-		cleanbuildr	
+		rbcleanbuild
 	elif [ "$mainmen" == r2 ] ; then
-		syncbuild	
+		rbsyncbuild	
 	elif [ "$mainmen" == r3 ] ; then
-		compilebuild	
+		rbcompilebuild	
 	elif [ "$mainmen" == r4 ] ; then
-		copyrom	
+		rbcopy	
 	elif [ "$mainmen" == r5 ] ; then
-		gapps
+		rbgapps
 	elif [ "$mainmen" == r6 ] ; then
-		additions
+		rbadditions
 	elif [ "$mainmen" == r7 ] ; then
-		xposed	
+		rbxposed	
 	elif [ "$mainmen" == r8 ] ; then
-		copyrb	
+		rbcopy2	
 	elif [ "$mainmen" == r9 ] ; then 
-		editaroma	
+		rbeditaroma	
 	elif [ "$mainmen" == r10 ] ; then
-		editupdaterscript
+		rbeditupdaterscript
 	elif [ "$mainmen" == r11 ] ; then
-		editbuildprop
+		rbeditbuildprop
 	elif [ "$mainmen" == r12 ] ; then 
-		editadditions
+		rbeditadditions
 	elif [ "$mainmen" == r13 ] ; then 
-		editxposed
+		rbeditxposed
 	elif [ "$mainmen" == r14 ] ; then 
-		ziprb
+		rbzip
 
 	# KernelBuilder Menu
 	elif [ "$mainmen" == k1 ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
+		kbdefconfig
 	elif [ "$mainmen" == k2 ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
+		kbcleanbuild
 	elif [ "$mainmen" == k3 ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
+		kbcompilebuild
 	elif [ "$mainmen" == k4 ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
+		kbcreateboot	
 	elif [ "$mainmen" == k5 ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
+		kbcopy	
 	elif [ "$mainmen" == k6 ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
+		kbeditaroma	
 	elif [ "$mainmen" == k7 ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
+		kbeditupdaterscript
 	elif [ "$mainmen" == k8 ] ; then
-		# insert code here...
-			printf '%s\n' "placeholder"
+		kbzip
 		
 	# Main Menu Preferences/Exit/Reboot/Shutdown
 	elif [ "$mainmen" == p ] ; then
@@ -639,10 +631,10 @@ setupkenv() # Setup Kernel Build Environment
 			if [ ! -d KernelDevelopment ]; then
  				mkdir KernelDevelopment
 			fi
-		cd KernelDevelopment &&
-		if [ ! -d MyKernelRepositories ]; then
- 				mkdir MyKernelRepositories
-			fi			
+		#cd KernelDevelopment &&
+		#if [ ! -d MyKernelRepositories ]; then
+ 		#		mkdir MyKernelRepositories
+		#	fi			
 	showPostProgress
 	sleep 2
 	show_stage_completed
@@ -752,10 +744,10 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 	fi
 }
 # RomBuilder Menu >>>
-cleanbuildr() # Invoke both 'make clean' & 'make clobber' Commands 
+rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands 
 {
 	clear
-	Function="cleanbuild"
+	Function="rbcleanbuild"
 	Stagenumber="r1"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -766,8 +758,8 @@ cleanbuildr() # Invoke both 'make clean' & 'make clobber' Commands
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read cleanbuildopt0
-	if [ "$cleanbuildopt0" == 1 ] ; then
+	read rbcleanbuildopt0
+	if [ "$rbcleanbuildopt0" == 1 ] ; then
 		clear
 		(
 		Stagenumber="r1"
@@ -804,16 +796,16 @@ cleanbuildr() # Invoke both 'make clean' & 'make clobber' Commands
 		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
-	elif [ "$cleanbuildopt0" == 2 ] ; then
+	elif [ "$rbcleanbuildopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$cleanbuildopt0" != 1 ] && [ "$cleanbuildopt0" != 2 ] ; then
-		cleanbuildr
+	elif [ "$rbcleanbuildopt0" != 1 ] && [ "$rbcleanbuildopt0" != 2 ] ; then
+		rbcleanbuild
 	fi
 }
-syncbuild() # Invoke 'repo sync -j5' Command to sync repos
+rbsyncbuild() # Invoke 'repo sync -j5' Command to sync repos
 {
 	clear
-	Function="syncbuild"
+	Function="rbsyncbuild"
 	Stagenumber="r2"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -824,8 +816,8 @@ syncbuild() # Invoke 'repo sync -j5' Command to sync repos
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read syncbuildopt0
-	if [ "$syncbuildopt0" == 1 ] ; then
+	read rbsyncbuildopt0
+	if [ "$rbsyncbuildopt0" == 1 ] ; then
 		clear
 		(
 		Stagenumber="r2"
@@ -859,16 +851,16 @@ syncbuild() # Invoke 'repo sync -j5' Command to sync repos
 		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
-	elif [ "$syncbuildopt0" == 2 ] ; then
+	elif [ "$rbsyncbuildopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$syncbuildopt0" != 1 ] && [ "$syncbuildopt0" != 2 ] ; then
-		syncbuild
+	elif [ "$rbsyncbuildopt0" != 1 ] && [ "$rbsyncbuildopt0" != 2 ] ; then
+		rbsyncbuild
 	fi
 }
-compilebuild() # Compile Rom From Source
+rbcompilebuild() # Compile Rom From Source
 {
 	clear
-	Function="compilebuild"
+	Function="rbcompilebuild"
 	Stagenumber="r3"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -879,8 +871,8 @@ compilebuild() # Compile Rom From Source
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read compilebuildpt0
-	if [ "$compilebuildpt0" == 1 ] ; then
+	read rbcompilebuildopt0
+	if [ "$rbcompilebuildopt0" == 1 ] ; then
 		clear
 		(
 		Stagenumber="r3"
@@ -913,16 +905,16 @@ compilebuild() # Compile Rom From Source
 		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
-	elif [ "$compilebuildpt0" == 2 ] ; then
+	elif [ "$rbcompilebuildopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$compilebuildpt0" != 1 ] && [ "$compilebuildpt0" != 2 ] ; then
-		compilebuild
+	elif [ "$rbcompilebuildopt0" != 1 ] && [ "$rbcompilebuildopt0" != 2 ] ; then
+		rbcompilebuild
 	fi
 }
-copyrom() # Copy newly compiled system and boot.img to working_folder
+rbcopy() # Copy newly compiled system and boot.img to working_folder
 {       
 	clear
-	Function="copyrom"
+	Function="rbcopy"
 	Stagenumber="r4"
 	ComiledRomAlias="DU_m7gsm_"
 	show_stage_header
@@ -934,8 +926,8 @@ copyrom() # Copy newly compiled system and boot.img to working_folder
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read copyromopt0
-	if [ "$copyromopt0" == 1 ] ; then
+	read rbcopyopt0
+	if [ "$rbcopyopt0" == 1 ] ; then
 		clear
 		Stagenumber="r4"
 		show_stage_header
@@ -976,13 +968,13 @@ copyrom() # Copy newly compiled system and boot.img to working_folder
 				showPostProgress
 				printf '%s\n' " - Creating Temp Folder..."
 				showPreProgress
-					mkdir ${projectlocation}/RomBuilder/working_folder/temp && ${setperms} ${projectlocation}/RomBuilder/working_folder/temp
+					mkdir ${projectlocation}/RomBuilder/working_folder/temp && 
 				showPostProgress
 			else 
 				sleep 1 
 				printf '%s\n' " - Creating Temp Folder..."
 				showPreProgress
-					mkdir ${projectlocation}/RomBuilder/working_folder/temp && ${setperms} ${projectlocation}/RomBuilder/working_folder/temp
+					mkdir ${projectlocation}/RomBuilder/working_folder/temp && 
 				showPostProgress
 			fi
 			# Copy Compiled Rom to working_folder
@@ -1030,16 +1022,16 @@ copyrom() # Copy newly compiled system and boot.img to working_folder
 			sleep 2.5
 			mainmenu
 		fi
-	elif [ "$copyromopt0" == 2 ] ; then
+	elif [ "$rbcopyopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$copyromopt0" != 1 ] && [ "$copyromopt0" != 2 ] ; then
-		copyrom
+	elif [ "$rbcopyopt0" != 1 ] && [ "$rbcopyopt0" != 2 ] ; then
+		rbcopy
 	fi
 }
-gapps() # Pull Gapps Files From Device 
+rbgapps() # Pull Gapps Files From Device 
 {
 	clear
-	Function="gapps"
+	Function="rbgapps"
 	Stagenumber="r5"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -1050,8 +1042,8 @@ gapps() # Pull Gapps Files From Device
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read gappsopt0
-	if [ "$gappsopt0" == 1 ] ; then
+	read rbgappsopt0
+	if [ "$rbgappsopt0" == 1 ] ; then
 		clear
 		(
 		Stagenumber="r5"
@@ -1093,16 +1085,16 @@ gapps() # Pull Gapps Files From Device
 		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
-	elif [ "$gappsopt0" == 2 ] ; then
+	elif [ "$rbgappsopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$gappsopt0" != 1 ] && [ "$gappsopt0" != 2 ] ; then
-		gapps
+	elif [ "$rbgappsopt0" != 1 ] && [ "$rbgappsopt0" != 2 ] ; then
+		rbgapps
 	fi
 }
-additions() # Download Additional Apps Using 'additions.links' File
+rbadditions() # Download Additional Apps Using 'additions.links' File
 {
 	clear
-	Function="additions"
+	Function="rbadditions"
 	Stagenumber="r6"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -1113,8 +1105,8 @@ additions() # Download Additional Apps Using 'additions.links' File
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read additionsopt0
-	if [ "$additionsopt0" == 1 ] ; then
+	read rbadditionsopt0
+	if [ "$rbadditionsopt0" == 1 ] ; then
 		clear
 		(
 		Stagenumber="r6"
@@ -1180,16 +1172,16 @@ additions() # Download Additional Apps Using 'additions.links' File
 		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
-	elif [ "$additionsopt0" == 2 ] ; then
+	elif [ "$rbadditionsopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$additionsopt0" != 1 ] && [ "$additionsopt0" != 2 ] ; then
-		additions
+	elif [ "$rbadditionsopt0" != 1 ] && [ "$rbadditionsopt0" != 2 ] ; then
+		rbadditions
 	fi
 }
-xposed() # Download Additional Apps Using 'additions.links' File
+rbxposed() # Download Additional Apps Using 'additions.links' File
 {
 	clear
-	Function="xposed"
+	Function="rbxposed"
 	Stagenumber="r7"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -1200,8 +1192,8 @@ xposed() # Download Additional Apps Using 'additions.links' File
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read xposedopt0
-	if [ "$xposedopt0" == 1 ] ; then
+	read rbxposedopt0
+	if [ "$rbxposedopt0" == 1 ] ; then
 		clear
 		(
 		Stagenumber="r7"
@@ -1242,16 +1234,16 @@ xposed() # Download Additional Apps Using 'additions.links' File
 		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
-	elif [ "$xposedopt0" == 2 ] ; then
+	elif [ "$rbxposedopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$xposedopt0" != 1 ] && [ "$xposedopt0" != 2 ] ; then
-		xposed
+	elif [ "$rbxposedopt0" != 1 ] && [ "$rbxposedopt0" != 2 ] ; then
+		rbxposed
 	fi
 }
-copyrb()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
+rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 {
 	clear
-	Function="copyrb"
+	Function="rbcopy2"
 	Stagenumber="r8"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -1262,8 +1254,8 @@ copyrb()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read copyopt0
-	if [ "$copyopt0" == 1 ] ; then
+	read rbcopy2opt0
+	if [ "$rbcopy2opt0" == 1 ] ; then
 		clear
 		(
 		Stagenumber="r8"
@@ -1404,15 +1396,15 @@ copyrb()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
-	elif [ "$copyopt0" == 2 ] ; then
+	elif [ "$rbcopy2opt0" == 2 ] ; then
 		mainmenu
-	elif [ "$copyopt0" != 1 ] && [ "$copyopt0" !=2 ] ; then
-		copyrb
+	elif [ "$rbcopy2opt0" != 1 ] && [ "$rbcopy2opt0" !=2 ] ; then
+		rbcopy2
 	fi
 }
-editaroma() # Edit 'aroma-config' File
+rbeditaroma() # Edit 'aroma-config' File
 {
-	${sysdefapp} ${aromadir}/aroma-config &&
+	${sysdefapp} ${rbaromadir}/aroma-config &&
 	printf '%s\n'  ""
 	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'aroma-config' ??"
 	printf '%s\n'  ""
@@ -1424,10 +1416,10 @@ editaroma() # Edit 'aroma-config' File
 				sleep 1
 				exec ${projectlocation}/AndroidThreeScripts.sh;;
  		 n|N ) mainmenu;;
-		 * ) editaroma;;
+		 * ) rbeditaroma;;
 	esac	
 }
-editupdaterscript() # Edit 'updater-script' File
+rbeditupdaterscript() # Edit 'updater-script' File
 {
 	${sysdefapp} ${aromadir}/updater-script &&
 	printf '%s\n'  ""
@@ -1441,10 +1433,10 @@ editupdaterscript() # Edit 'updater-script' File
 				sleep 1
 				exec ${projectlocation}/AndroidThreeScripts.sh;;
  		 n|N ) mainmenu;;
-		 * ) editupdaterscript;;
+		 * ) rbeditupdaterscript;;
 	esac	
 }
-editbuildprop() # Edit 'build.prop' File
+rbeditbuildprop() # Edit 'build.prop' File
 {
 	if [ -f ${buildprop} ]; then
 		${sysdefapp} ${buildprop} &&
@@ -1459,14 +1451,14 @@ editbuildprop() # Edit 'build.prop' File
 					sleep 1
 					exec ${projectlocation}/AndroidThreeScripts.sh;;
  			 n|N ) mainmenu;;
-			 * ) editbuildprop;;
+			 * ) rbeditbuildprop;;
 		esac
 	else
 		printf '%s\n'  " No 'build.prop' File Found !, Have You Copied The Compiled Rom Yet ??  "
 		sleep 3 && mainmenu	
 	fi
 }
-editadditions() # Edit 'Additions.links' File
+rbeditadditions() # Edit 'Additions.links' File
 {
 	${sysdefapp} ${projectlocation}/RomBuilder/Additions.links  &&
 	printf '%s\n'  ""
@@ -1480,10 +1472,10 @@ editadditions() # Edit 'Additions.links' File
 				sleep 1
 				exec ${projectlocation}/AndroidThreeScripts.sh;;
  		 n|N ) mainmenu;;
-		 * ) editadditions;;
+		 * ) rbeditadditions;;
 	esac	
 }
-editxposed() # Edit 'Xposed.links' File
+rbeditxposed() # Edit 'Xposed.links' File
 {
 	${sysdefapp} ${projectlocation}/RomBuilder/Xposed.links  &&
 	printf '%s\n'  ""
@@ -1497,13 +1489,13 @@ editxposed() # Edit 'Xposed.links' File
 				sleep 1
 				exec ${projectlocation}/AndroidThreeScripts.sh;;
  		 n|N ) mainmenu;;
-		 * ) editxposed;;
+		 * ) rbeditxposed;;
 	esac	
 }
-ziprb()   # Zip working_folder Contents To Make Flashable Zip File
+rbzip()   # Zip working_folder Contents To Make Flashable Zip File
 {       
 	clear
-	Function="ziprb"
+	Function="rbzip"
 	Stagenumber="r14"
 	show_stage_header
 	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -1514,8 +1506,8 @@ ziprb()   # Zip working_folder Contents To Make Flashable Zip File
 	printf '%s\n' "   2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read zipopt0
-	if [ "$zipopt0" == 1 ] ; then
+	read rbzipopt0
+	if [ "$rbzipopt0" == 1 ] ; then
 		clear
 		(
 		Stagenumber="r14"
@@ -1542,28 +1534,527 @@ ziprb()   # Zip working_folder Contents To Make Flashable Zip File
 		sleep 2.5
 		cd ${projectlocation} &
 			exec ${projectlocation}/AndroidThreeScripts.sh
-	elif [ "$zipopt0" == 2 ] ; then
+	elif [ "$rbzipopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$zipopt0" != 1 ] && [ "$zipopt0" != 2 ] ; then
-		ziprb
+	elif [ "$rbzipopt0" != 1 ] && [ "$rbzipopt0" != 2 ] ; then
+		rbzip
 	fi
 }
 # KernelBuilder Menu >>>
-#### port KernelBuilder source here >> #
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# << port KernelBuilder source here ###
+kbdefconfig() # Edit '${dconfig}' File
+{
+	cd && ${sysdefapp} ${dconfigdir}/${dconfig} &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED '${dconfig}' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in 
+ 		 y|Y ) showPreProgress 
+				showPostProgress
+				sleep 1 && cd ${projectlocation}
+				exec ${projectlocation}/AndroidThreeScripts.sh;;
+ 		 n|N ) mainmenu;;
+		 * ) kbdefconfig;;
+	esac	
+}
+kbcleanbuild() # Invoke the 'make clean' Command and remove '.config' file
+{
+	clear
+	Function="kbcleanbuild"
+	Stagenumber="k2"
+	show_stage_header
+	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "   1) CLEAN KERNEL BUILD FOLDERS"
+	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbcleanbuildopt0
+	if [ "$kbcleanbuildopt0" == 1 ] ; then
+		clear
+		(
+		Stagenumber="k2"
+		show_stage_header
+		printf '%s\n'  "      ${b}-> Cleaning Previous Folder Structure... <-${n}             "
+		cd && 
+			if [ -d Android ]; then
+ 				cd Android
+			else
+				printf '%s\n'  " No Root 'Android' Folder Found !, Have You Downloaded The Source ??  "
+				sleep 3 && mainmenu
+			fi
+			if [ -d KernelDevelopment ]; then
+ 				cd KernelDevelopment
+			else
+				printf '%s\n'  " No Root 'KernelDevelopment' Folder Found !, Have You Downloaded The Source ??  "
+				sleep 3 && mainmenu
+			fi		
+			if [ -d ${DesiredKernelName} ]; then
+ 				cd ${DesiredKernelName}
+			else
+				printf '%s\n'  " No Root '${DesiredKernelName}' Folder Found !, Have You Downloaded The Source ?? "
+				sleep 3 && mainmenu
+			fi
+		 	showPreProgress
+				clean="make clean"
+					exec ${clean} & wait
+					rm -f .config &&
+			showPostProgress && sleep 2
+		show_stage_completed
+		) 2>&1 | tee ${logfile} 
+			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
+		sleep 2.5
+		cd ${projectlocation} &
+			exec ${projectlocation}/AndroidThreeScripts.sh
+	elif [ "$kbcleanbuildopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbcleanbuildopt0" != 1 ] && [ "$kbcleanbuildopt0" != 2 ] ; then
+		kbcleanbuild
+	fi
+}
+kbcompilebuild() # Compile Kernel
+{
+	clear
+	Function="kbcompilebuild"
+	Stagenumber="k3"
+	show_stage_header
+	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "   1) COMPILE KERNEL & MODULES"
+	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbcompilebuildopt0
+	if [ "$kbcompilebuildopt0" == 1 ] ; then
+		clear
+		(
+		Stagenumber="k3"
+		show_stage_header
+		printf '%s\n'  "      ${b}-> Compiling New Kernel & Modules... <-${n}             "
+		sleep 2
+		if [ ! -d ${projectlocation}/KernelBuilder/compiled_files ]; then
+			mkdir ${projectlocation}/KernelBuilder/compiled_files
+		fi
+		if [ -d ${kdir3} ]; then	
+			printf '%s\n' " - Cleaning... ($kdir3)"
+			showPreProgress
+				rm -rf ${kdir3} && 
+			showPostProgress
+		else 
+			sleep 1 
+		fi
+		if [ -d ${kdir2} ]; then
+			printf '%s\n' " - Cleaning... ($kdir2)"
+			showPreProgress
+				rm -rf ${kdir2} && 
+			showPostProgress
+		else 
+			sleep 1 
+		fi
+		cd && cd Android/KernelDevelopment/${DesiredKernelName} &&
+			exec make ${dconfig} & wait
+				sleep 2
+			exec ${compilekernel} & wait
+				sleep 4
+		# Copy zImage To 'compiled_files' folder
+		printf '%s\n'  ""
+		printf '%s\n'  "      ${b}-> Copying New zImage to 'compiled_files'... <-${n}         "
+		cd
+			if [ -d ${kdir3} ]; then	
+				printf '%s\n' " - Cleaning... ($kdir3)"
+				showPreProgress
+					rm -rf ${kdir3} && 
+					mkdir ${kdir3} && 
+				showPostProgress
+				printf '%s\n' " - Copying... (zImage) to ($kdir3)"
+				showPreProgress
+					cp -ar ${zimagedir}/zImage ${kdir3} &&
+				showPostProgress
+			else 
+				sleep 1 
+				printf '%s\n' " - Copying... (zImage) to ($kdir3)"
+				showPreProgress
+					mkdir ${kdir3} &&
+					cp -ar ${zimagedir}/zImage ${kdir3} &&
+				showPostProgress
+			fi
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		read -p "Copy kernel Modules to compiled_files too? .. Continue?? (y/n)" choice
+		case "$choice" in 
+			y|Y ) printf '%s\n'  "      ${b}-> Copying New Modules to 'compiled_files'... <-${n}         "
+				# Copy Modules To 'compiled_files' folder
+				cd && cd Android/KernelDevelopment/${DesiredKernelName} &&
+					if [ -d ${kdir2} ]; then
+						printf '%s\n' " - Cleaning... ($kdir2)"
+						showPreProgress
+							rm -rf ${kdir2} && 
+							mkdir ${kdir2} && 
+						showPostProgress
+						printf '%s\n' " - Copying... (Modules) to ($kdir2)"
+						showPreProgress
+							cp `find ./ | grep .ko$` modules.order ${kdir2}/ &&
+							cd ${kdir2}
+							rm -f modules.order &&
+						showPostProgress
+					else 
+						sleep 1 
+						printf '%s\n' " - Copying... (Modules) to ($kdir2)"
+						showPreProgress
+							mkdir ${kdir2} && 
+							cp `find ./ | grep .ko$` modules.order ${kdir2}/ &&
+							cd ${kdir2}
+							rm -f modules.order &&
+						showPostProgress
+					fi
 
+		;;
+			n|N ) 
+				sleep 2
+				show_stage_completed
+				sleep 4
+				mainmenu
+		esac
+	sleep 2
+	show_stage_completed
+	) 2>&1 | tee ${logfile} 
+			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
+		sleep 2.5
+		cd ${projectlocation} &
+			exec ${projectlocation}/AndroidThreeScripts.sh
+	elif [ "$kbcompilebuildopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbcompilebuildopt0" != 1 ] && [ "$kbcompilebuildopt0" != 2 ] ; then
+		kbcompilebuild
+	fi
+}
+kbcreateboot()  # Create New boot.img file
+{
+	clear
+	Function="kbcreateboot"
+	Stagenumber="k4"
+	show_stage_header
+	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "   1) CREATE NEW 'boot.img' FILE"
+	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbcreatebootopt0
+	if [ "$kbcreatebootopt0" == 1 ] ; then
+		clear
+		(
+		Stagenumber="k4"
+		show_stage_header
+		printf '%s\n'  "   ${b}-> Cleaning Previous Folder Structure ... <-${n}       "
+		cd
+			if [ -d ${bootdir} ]; then
+				printf '%s\n' " - Cleaning... ($bootdir)"
+				showPreProgress
+					rm -rf ${bootdir} && 
+					mkdir ${bootdir} &&
+				showPostProgress
+				sleep 2
+			else 
+				sleep 1 
+				printf '%s\n' " - Creating... ($bootdir)"
+				showPreProgress
+					mkdir ${bootdir} &&
+				showPostProgress
+				sleep 2
+			fi
+		clear
+		Stagenumber="k4"
+		show_stage_header
+		printf '%s\n'  "       ${b} (Openning 'original_bootimg' folder,"
+		printf '%s\n'  "    place stock 'boot.img' from compiled ROM in the folder)${n} "
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		cd
+		${sysdefapp} ${bootdir}
+		sleep 4
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		read -p "${b}Placed stock 'boot.img' file in directory? .. Continue?? (y/n)${n} " choice
+		case "$choice" in 
+			y|Y ) printf '%s\n'  "Extracting 'boot.img'..."
+				cd && cd ${bootdir}
+					abootimg -x boot.img 
+						sleep 4
+					mkdir initrd &&
+						sleep 4
+					cd initrd 
+						zcat ../initrd.img | cpio -i &&
+				showPostProgress
+				sleep 4
+				clear
+				Stagenumber="k4"
+				show_stage_header
+				printf '%s\n'  ""
+				printf '%s\n'  ""
+				printf '%s\n'  ""
+				printf "          ${b}Editing 'default.prop' file...\r          "
+				exec ${sysdefapp} default.prop & wait
+				printf '%s\n'  ""
+				printf '%s\n'  ""
+				read -p "Finished editing 'default.prop'? .. Continue?? (y/n)" choice
+				case "$choice" in 
+					y|Y ) printf "Finished Editing 'default.prop' file.${n}\r "
+						printf "\n"
+						sleep 4
+						clear
+						Stagenumber="k4"
+						show_stage_header
+						printf '%s\n'  "        ${b}-> Cleaning Folder Structure... <-${n}         "
+						printf '%s\n'  ""
+						printf '%s\n' " - Removing Files..."
+						showPreProgress
+							cd && cd ${bootdir}
+								rm -f boot.img && 
+								rm -f initrd.img && 
+								rm -f zImage && 
+						showPostProgress
+						printf '%s\n'  ""
+						printf '%s\n' " - Copying... (zImage) to (${bootdir})"
+						showPreProgress
+							cd
+							cp ${kdir3}/zImage ${bootdir}
+						showPostProgress
+						printf '%s\n'  ""
+						printf '%s\n'  ""
+						printf '%s\n' " - Creating 'initrd.img'..."
+						cd && cd ${bootdir}/initrd
+							find . | cpio -o -H newc | gzip > ../initrd.img &&
+						sleep 2
+						showPostProgress
+						printf "\n"
+						printf '%s\n'  ""
+						printf '%s\n'  ""
+						printf '%s\n' " - Creating New 'boot.img'..."
+						cd && cd ${bootdir}
+							abootimg --create boot.img -k zImage -r initrd.img &&
+							sleep 0.5
+							abootimg --create boot.img -f bootimg.cfg -k zImage -r initrd.img &&
+							sleep 2
+						showPostProgress
+						printf "\n"
+						printf '%s\n'  ""
+						printf '%s\n'  ""
+						if [ -d ${dir1} ]; then
+							printf '%s\n' " - Cleaning... ($dir1)"
+							showPreProgress
+								cd
+								rm -rf ${kdir1} && 
+								mkdir ${kdir1} &&
+							showPostProgress
+							printf '%s\n' " - Copying New 'boot.img' to $dir1..."
+							showPreProgress
+								cd && cd ${bootdir}
+								cp boot.img ${kdir1}
+							showPostProgress
+						else 
+							sleep 1 
+							printf '%s\n' " - Cannot Remove ($dir1), Does Not Exist"
+							printf '%s\n' " - Copying New 'boot.img' to $dir1..."
+							showPreProgress
+								cd
+								mkdir ${kdir1} && 
+								cd && cd ${bootdir}
+								cp boot.img ${kdir1}
+							showPostProgress
+						fi
+				;;
+					n|N ) 
+						mainmenu;;
+					* ) printf '%s\n'  "cancelled"
+						createboot;;
+				esac
+		;;
+			n|N ) 
+				mainmenu;;
+			* ) printf '%s\n'  "invalid response"
+				createboot;;
+		esac
+	show_stage_completed
+	) 2>&1 | tee ${logfile} 
+			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
+		sleep 2.5
+		cd ${projectlocation} &
+			exec ${projectlocation}/AndroidThreeScripts.sh
+	elif [ "$kbcreatebootopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbcreatebootopt0" != 1 ] && [ "$kbcreatebootopt0" !=2 ] ; then
+		kbcreateboot
+	fi
+}
+kbcopy()  # Copy compiled_files To working_folder, Ready To Be Zipped Up
+{
+	clear
+	Function="kbcopy"
+	Stagenumber="k5"
+	show_stage_header
+	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "   1) COPY 'COMPILED_FILES' TO WORKING_FOLDER"
+	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbcopyopt0
+	if [ "$kbcopyopt0" == 1 ] ; then
+		clear
+		(
+		Stagenumber="k5"
+		show_stage_header
+		printf '%s\n'  "     ${b}-> Cleaning Folder Structure & Copying Files ... <-${n}       "
+		cd
+		if [ -d ${tkdir1} ]; then
+			printf '%s\n' " - Removing... ($tkdir1)"
+			showPreProgress
+				rm -rf ${tkdir1} && 
+			showPostProgress
+			printf '%s\n' " - Copying... ($kdir1) to ($tkdir1)"
+			showPreProgress
+				cp -ar ${kdir1} ${projectlocation}/KernelBuilder/working_folder/AROMA &&
+			showPostProgress
+		else 
+			sleep 1 
+			printf '%s\n' " - Copying... ($kdir1) to ($tdir1)"
+			showPreProgress
+				cp -ar ${kdir1} ${projectlocation}/KernelBuilder/working_folder/AROMA &&
+			showPostProgress
+		fi
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		read -p "Copy kernel Modules to 'working_folder' too? .. Continue?? (y/n)" choice
+		case "$choice" in 
+			y|Y ) printf '%s\n'  "        ${b}-> Copying New Modules to 'working_folder'... <-${n}         "
+				# Copy Modules To 'working_folder' 
+				if [ -d ${tkdir2} ]; then
+					printf '%s\n' " - Removing... ($tkdir2)"
+					showPreProgress
+						rm -rf ${tkdir2} && 
+					showPostProgress
+					printf '%s\n' " - Copying... ($kdir2) to ($tkdir2)"
+					showPreProgress
+						cp -ar ${kdir2} ${projectlocation}/KernelBuilder/working_folder/AROMA/system/lib &&
+					showPostProgress
+				else 
+					sleep 1 
+					printf '%s\n' " - Copying... ($kdir2) to ($tkdir2)"
+					showPreProgress
+						cp -ar ${kdir2} ${projectlocation}/KernelBuilder/working_folder/AROMA/system/lib &&
+					showPostProgress
+				fi
+		;;
+			n|N ) 
+			show_stage_completed
+			sleep 4
+			mainmenu
+		esac
+		show_stage_completed
+		) 2>&1 | tee ${logfile} 
+			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
+		sleep 2.5
+		cd ${projectlocation} &
+			exec ${projectlocation}/AndroidThreeScripts.sh
+	elif [ "$kbcopyopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbcopyopt0" != 1 ] && [ "$kbcopyopt0" !=2 ] ; then
+		kbcopy
+	fi
+}
+kbeditaroma() # Edit 'aroma-config' File
+{
+	${sysdefapp} ${kbaromadir}/aroma-config &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'aroma-config' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in 
+ 		 y|Y ) showPreProgress 
+				showPostProgress
+				sleep 1
+				exec ${projectlocation}/AndroidThreeScripts.sh;;
+ 		 n|N ) mainmenu;;
+		 * ) kbeditaroma;;
+	esac	
+}
+kbeditupdaterscript() # Edit 'aroma-config' File
+{
+	${sysdefapp} ${kbaromadir}/updater-script &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'aroma-config' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in 
+ 		 y|Y ) showPreProgress 
+				showPostProgress
+				sleep 1
+				exec ${projectlocation}/AndroidThreeScripts.sh;;
+ 		 n|N ) mainmenu;;
+		 * ) kbeditupdaterscript;;
+	esac	
+}
+kbzip() # Zip working_folder Contents To Make Flashable Zip File
+{       
+	clear
+	Function="kbzip"
+	Stagenumber="k8"
+	show_stage_header
+	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "   1) ZIP WORKING_FOLDER CONTENTS READY TO FLASH ON DEVICE"
+	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbzipopt0
+	if [ "$kbzipopt0" == 1 ] ; then
+		clear
+		(
+		Stagenumber="k8"
+		show_stage_header
+		printf '%s\n'  "  ${b}-> Cleaning Previous Zip Structure & Zipping New Files... <-${n}  " 
+		printf '%s\n'  ""
+		printf '%s\n' " - Zipping Working_Folder Structure Ready For Flash" 
+		showPreProgress
+		sleep 2 
+		if [ ! -d ${finalout} ]; then
+			mkdir ${finalout}
+		fi
+		printf "" 
+		source ${dconfigdir}/${dconfig}
+		cd ${projectlocation}/KernelBuilder/working_folder
+			exec zip -r ${finalout}/${CONFIG_LOCALVERSION}_${today}.zip * & wait
+		showPostProgress
+		printf ""
+		sleep 2
+		show_stage_completed
+		) 2>&1 | tee ${logfile} 
+			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
+		sleep 2.5
+		cd ${projectlocation} &
+			exec ${projectlocation}/AndroidThreeScripts.sh
+	elif [ "$kbzipopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbzipopt0" != 1 ] && [ "$kbzipopt0" != 2 ] ; then
+		kbzip
+	fi
+}
+# A3S mainmenu / Preferences/ Shutdown/ Restart etc
 cleanbash() # check 'bash.rc' for conflicting entries before adding new ones
 {
 	PathHeader=$pathheader

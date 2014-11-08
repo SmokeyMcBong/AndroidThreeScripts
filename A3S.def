@@ -6,7 +6,7 @@
 # 
 
 # Script Version/Date
-scriptbuild="(v1.2 - 08/11/2014)"
+scriptbuild="(v1.3 - 08/11/2014)"
 
 # Color Codes (blue,red,white,green,cyan,normal,underlined)
 b=$(tput setaf 4)
@@ -53,8 +53,11 @@ sysdefapp="xdg-open "
 # Temp Directory For Downloads
 TempDir="downloads"
 
-# 'aroma-config' & 'updater-script' Location
-aromadir=${projectlocation}/RomBuilder/working_folder/META-INF/com/google/android
+# RomBuilder 'aroma-config' & 'updater-script' Location
+rbaromadir=${projectlocation}/RomBuilder/working_folder/META-INF/com/google/android
+
+# RomBuilder 'aroma-config' & 'updater-script' Location
+kbaromadir=${projectlocation}/KernelBuilder/working_folder/META-INF/com/google/android
 
 # build.prop Location
 buildprop=${projectlocation}/RomBuilder/working_folder/system/build.prop
@@ -64,6 +67,18 @@ Additionsdir=${projectlocation}/RomBuilder/working_folder/AROMA/Additions
 
 # Final Output Folder
 finalout=${projectlocation}/Final_Products
+
+# Local compiled_files Directories
+kdir1=${projectlocation}/KernelBuilder/compiled_files/boot
+kdir2=${projectlocation}/KernelBuilder/compiled_files/modules
+kdir3=${projectlocation}/KernelBuilder/compiled_files/zImage
+
+# original_bootimg Directory
+bootdir=${projectlocation}/KernelBuilder/original_bootimg
+
+# Target working_folder Directories
+tkdir1=${projectlocation}/KernelBuilder/working_folder/AROMA/boot
+tkdir2=${projectlocation}/KernelBuilder/working_folder/AROMA/system/lib/modules
 
 
 

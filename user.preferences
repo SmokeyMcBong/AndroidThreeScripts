@@ -48,6 +48,15 @@ compilerom="brunch du_m7gsm-userdebug"
 # Compiled Rom Location
 outdir=${DesiredRomName}/out/target/product/m7gsm
 
+# Default Compile Kernel Command (Depending on Toolchain Setup)
+compilekernel="make ARCH=arm CROSS_COMPILE=arm-eabi-"
+
+# Default Kernel 'defconfig' File
+dconfig=m7_defconfig
+
+# Default Kernel 'defconfig' File Location
+dconfigdir=Android/KernelDevelopment/${DesiredKernelName}/arch/arm/configs
+
 # Local grabbed_files Directories
 DIR1=${projectlocation}/RomBuilder/grabbed_files/Gapps
 #DIR2=${projectlocation}/RomBuilder/grabbed_files/BootAnim - removed for now, as tracking own vender_du repo
