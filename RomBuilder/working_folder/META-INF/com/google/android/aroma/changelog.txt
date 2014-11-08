@@ -1,0 +1,106 @@
+<@center><b><#selectbg_g>Dirty Unicorns ChangeLog</#></b>
+
+<b><#selectbg_g>ROM Author-> the_FONZ @xda developers</#></b>
+
+<b><#selectbg_g>Version 7.5 Features</#></b></@>
+
+- Update to 4.4.3_r1.1\n
+- Enabled appointment details in Calendar\n
+- Kernel Tweaker Removed\n
+- Halo Color\n
+- New HALO drawables for KK\n
+- ART fixed (Thanks Google!)\n
+- Show Seconds next to StatusBar Clock\n
+- Add Speakerphone Glowpad Target\n
+- Icon pack support\n
+- Add custom hotword detection\n
+- Fixes and improvements to OmniSwitch\n
+- Added JB-like battery icon\n
+- Fix volume rocker to skip tracks\n
+- New Ad blocker\n
+- Implement App circle sidebar\n
+- Multi-Floating windows\n
+- Implement SIM card management\n
+- Add support pause/resume/stop notifications\n
+
+
+<b><#selectbg_g>Version 7.6 Features</#></b></@>
+
+- Update to Android 4.4.4\n
+- Added few toggles/tiles\n
+- Change QS Fliptile animation\n
+- Pattern size upgrade for pattern lockscreen\n
+- Added Option to reset battery stats\n
+- Fixed Italian camera derp\n
+- Updated SuperSU to v2.00\n
+- Many under the hood changes\n
+
+
+<b><#selectbg_g>Version 7.7 Features</#></b></@>
+
+- Updated the ASCII art for flashing\n
+- Added Theme chooser\n
+- Added Heads up\n
+- Added Ability to disable immersive messages\n
+- Added Blacklist/configurable timeout for heads up\n
+- Added New sound recorder\n
+- Changed Roboto Fonts to match Android L\n
+- Updated SuperSU to v2.01\n
+
+
+<b><#selectbg_g>Version 7.8 Features</#></b></@>
+
+- Update to android-4.4.4_r2\n
+- Added New Bootanimation\n
+- Added Left handed navbar during landscape mode\n
+- Added CPUFreq Tile\n
+- Fixed hot reboot\n
+- Added fake Id vulnerability fix\n
+- Allow changing theme to Holo.Light without crashing\n
+- Themes: Make notification list bg themeable\n
+- Move LCD density from build.prop to it's own category\n
+- Fixed holo dark background\n
+- DU about app: Maintainer/Devs and General Cleanup\n
+- Moar Double tap to sleep options\n
+- Added Back to kill app mod\n
+- Fixed crash when set .gif as wallpaper\n
+- Fixed themes not sticking on reboot if using Xposed framework\n
+- Added EOS Weather panel\n
+- Fixed SwiftKey disappearing issue\n
+- Fixed QS layout for camera tile\n
+
+
+<b><#selectbg_g>Version 7.8 Features</#></b></@>
+
+- MIUI Style carrier text in the statusbar\n
+- Bring Slim Recents up-to-date with SlimROM\n
+- Show notification when charging\n
+- Modify Location Tile\n
+- Filter spam notifications\n
+- Theme chooser fixes\n
+- Toggle boot audio on and off\n
+- Add ability to play audio to Boot Animation\n
+- New shutdown animation and busy dialog\n
+- Option to disable heads up in lockscreen\n
+- 6-bar signal icon style\n
+- Overscroll effects\n
+- Add moar Gapps to the Download Center\n
+- Camera2: Make navigation bar and status bar transparent\n
+- User defined wifi/usb tether network\n
+- Option to always show heads up in expanded mode\n
+- Toggle nav bar through power menu\n
+- Add hardware tunables for some devices\n
+- Show plugged type (AC / USB) on QS battery tile\n
+- Option to always show heads up in expanded mode\n
+- Option to disable heads up in lockscreen\n
+- G+ system ui f/c fix\n
+- DU Neon Clock\n
+- Move Dark UI into themes\n
+- Add option for setting device phone number\n
+- Removed redundant features from tablets\n
+
+
+<#selectbg_g>->></#> still to come 
+<#selectbg_g>->></#> Thank You All :)
+
+<b><#selectbg_g>End of Changelog n Basic Info</#></b>

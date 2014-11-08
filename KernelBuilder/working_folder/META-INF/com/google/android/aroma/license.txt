@@ -1,0 +1,21 @@
+
+
+
+
+
+<@center><b><#selectbg_g>THIS INSTALLATION WILL FORMAT THE FOLLOWING PARTITIONS AUTOMATICALY !...</#></b>
+
+
+
+
+
+/CACHE  - EXT4 Format
+
+- Also DALVIK-CACHE will be formatted !
+
+
+THE INSTALLATION WILL THEN FLASH THE 'FONZinator™ Kernel - Sabermod' AND INSTALL THE KERNEL MODULES
+
+
+
+<@center><b><#selectbg_g> AFTER THIS IS DONE, THE ROM WILL BE INSTALLED! </#></b>

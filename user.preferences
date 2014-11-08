@@ -38,11 +38,34 @@ SaberLinuxSource="https://github.com/SmokeyMcBong/Linux-manifest.git"
 # SaberMod Android Kernel Toolchain Repo
 ToolchainSource="https://github.com/SmokeyMcBong/sabermod-arm-eabi-4.9.git"
 
-# Temp Directory For Downloads
-TempDir="downloads"
-
 # Repo sync command # of jobs
 sync="repo sync -j16"
 
+# Compile Rom Commands
+buildenv=". build/envsetup.sh"
+compilerom="brunch du_m7gsm-userdebug"
 
-### END OF CONFIG FILE ###
+# Compiled Rom Location
+outdir=${DesiredRomName}/out/target/product/m7gsm
+
+# Local grabbed_files Directories
+DIR1=${projectlocation}/RomBuilder/grabbed_files/Gapps
+#DIR2=${projectlocation}/RomBuilder/grabbed_files/BootAnim - removed for now, as tracking own vender_du repo
+DIR3=${projectlocation}/RomBuilder/grabbed_files/Busybox
+DIR4=${projectlocation}/RomBuilder/grabbed_files/IconPack
+DIR5=${projectlocation}/RomBuilder/grabbed_files/Launcher
+DIR6=${projectlocation}/RomBuilder/grabbed_files/TitaniumBackup
+DIR7=${projectlocation}/RomBuilder/grabbed_files/xFramework
+DIR8=${projectlocation}/RomBuilder/grabbed_files/xModules
+
+# Target Additions working_folder Directories
+TDIR1=${projectlocation}/RomBuilder/working_folder/AROMA/Additions/Gapps
+#TDIR2=${projectlocation}/RomBuilder/working_folder/AROMA/Additions/BootAnim - removed for now, as tracking own vender_du repo
+TDIR3=${projectlocation}/RomBuilder/working_folder/AROMA/Additions/Busybox
+TDIR4=${projectlocation}/RomBuilder/working_folder/AROMA/Additions/IconPack
+TDIR5=${projectlocation}/RomBuilder/working_folder/AROMA/Additions/Launcher
+TDIR6=${projectlocation}/RomBuilder/working_folder/AROMA/Additions/TitaniumBackup
+TDIR7=${projectlocation}/RomBuilder/working_folder/AROMA/Additions/xFramework
+TDIR8=${projectlocation}/RomBuilder/working_folder/AROMA/Additions/xModules
+
+### END OF USER CONFIG FILE ###

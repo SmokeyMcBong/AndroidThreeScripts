@@ -1,0 +1,14 @@
+<@center><b><#selectbg_g>FONZinator™ Kernel - Sabermod ChangeLog</#></b>
+
+<b><#selectbg_g>ROM Author-> the_FONZ @xda developers</#></b>
+
+<b><#selectbg_g>Version 3.0 Features</#></b></@>
+
+-- changelog is WIP
+
+
+
+<#selectbg_g>->></#> still to come 
+<#selectbg_g>->></#> Thank You All :)
+
+<b><#selectbg_g>End of Changelog n Basic Info</#></b>

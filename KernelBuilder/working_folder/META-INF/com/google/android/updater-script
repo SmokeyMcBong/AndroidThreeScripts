@@ -1,0 +1,97 @@
+################################################################### UPDATER SCRIPT #############################################################################
+
+ui_print("-> Initialising....");
+run_program("/sbin/sleep", "2");
+ui_print(" ");
+ui_print(" ");
+ui_print(" ");
+
+package_extract_dir("tools", "/tmp");
+set_perm_recursive(0, 0, 0777, 0777, "/tmp");
+
+if
+    file_getprop("/tmp/aroma-data/menu.prop","selected") == "1"
+     then
+		
+		ui_print("################################################");
+		ui_print(" ");
+		ui_print("              Installing FONZinator™ Kernel - Sabermod     ");
+		ui_print(" ");
+		ui_print("################################################");
+		ui_print(" ");
+		run_program("/sbin/sleep", "1");
+		
+		ui_print(" ");
+	    ui_print("- >> ERASING & FORMATTING /cache as EXT4");
+	    assert(unmount("/cache") || ui_print("(Cache is unmounted already)"));
+	    format("ext4", "EMMC", "/dev/block/mmcblk0p36", "0", "/cache");
+	    run_program("/sbin/sleep", "2");
+	    ui_print("... DONE");
+		set_progress(0.20);
+		
+		ui_print(" ");
+	    ui_print("- >> ERASING Dalvik Cache");
+	    delete_recursive("/data/dalvik-cache");
+	    run_program("/sbin/sleep", "2");
+	    ui_print("... DONE");
+	    ui_print(" ");
+		ui_print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		set_progress(0.30);
+		
+		ui_print(" ");
+		ui_print("- >> FLASHING FONZinator™ Kernel - Sabermod...!");
+		assert(package_extract_file("AROMA/boot/boot.img", "/tmp/boot.img"),
+		run_program("/sbin/dd", "if=/tmp/boot.img", "of=/dev/block/mmcblk0p33"));
+		run_program("/sbin/sleep", "2");
+		ui_print("... DONE");
+		ui_print(" ");
+		ui_print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		set_progress(0.50);
+		
+		ui_print(" ");
+		ui_print("- >> INSTALLING FONZinator™ Kernel - Sabermod Modules...");
+		assert(mount("ext4", "EMMC", "/dev/block/mmcblk0p35", "/system") || ui_print("(system is mounted already)"));
+		package_extract_dir("AROMA/system", "/system");
+		run_program("/sbin/sleep", "2");
+		ui_print("... DONE");
+		ui_print(" ");
+		ui_print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		set_progress(0.70);
+
+		ui_print("- >> FIXING PERMISSIONS...");
+		package_extract_file("fix_permissions", "/tmp/fix_permissions");
+		set_perm(0, 0, 0777, "/tmp/fix_permissions");
+		run_program("/tmp/fix_permissions");
+		run_program("/sbin/sleep", "2");
+		ui_print("... DONE");
+		ui_print(" ");
+		ui_print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		set_progress(0.80);
+endif;
+
+ui_print(" ");
+ui_print(" ");
+ui_print(" ");
+ui_print("- >> CLEANING Cache and Dalvik...");
+assert(unmount("/cache") || ui_print("(Cache is unmounted already)"));
+format("ext4", "EMMC", "/dev/block/mmcblk0p36", "0", "/cache");
+run_program("/sbin/sleep", "2");
+delete_recursive("/data/dalvik-cache");
+run_program("/sbin/sleep", "2");
+run_program("/sbin/busybox", "umount", "/system");
+run_program("/sbin/sleep", "2");
+ui_print("... DONE");
+
+ui_print(" ");
+ui_print(" ");
+ui_print("################################################");
+ui_print(" ");
+ui_print("          FONZinator™ Kernel - Sabermod Install Finished   ");
+ui_print(" ");
+ui_print("                              Enjoy!               ");
+ui_print(" ");
+ui_print("################################################");
+ui_print(" ");
+ui_print(" ");
+
+show_progress(1, 0);

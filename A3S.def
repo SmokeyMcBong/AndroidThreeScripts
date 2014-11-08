@@ -6,7 +6,7 @@
 # 
 
 # Script Version/Date
-scriptbuild="(v1.1 - 07/11/2014)"
+scriptbuild="(v1.2 - 08/11/2014)"
 
 # Color Codes (blue,red,white,green,cyan,normal,underlined)
 b=$(tput setaf 4)
@@ -47,8 +47,23 @@ ccompile='export CCOMPILE=$CROSS_COMPILE'
 ccompilearm='export CROSS_COMPILE=arm-eabi'
 toolchainpath='export PATH=$PATH:/home/thefonz/Android/KernelDevelopment/Toolchain/sabermod-arm-eabi-4.9/bin'
 
+# Use System Default Application For Openning Files etc
 sysdefapp="xdg-open "
 
+# Temp Directory For Downloads
+TempDir="downloads"
+
+# 'aroma-config' & 'updater-script' Location
+aromadir=${projectlocation}/RomBuilder/working_folder/META-INF/com/google/android
+
+# build.prop Location
+buildprop=${projectlocation}/RomBuilder/working_folder/system/build.prop
+
+# Target Additions working_folder Root Dir
+Additionsdir=${projectlocation}/RomBuilder/working_folder/AROMA/Additions
+
+# Final Output Folder
+finalout=${projectlocation}/Final_Products
 
 
 

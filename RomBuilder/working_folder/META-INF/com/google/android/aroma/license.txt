@@ -1,0 +1,24 @@
+
+
+
+
+
+<@center><b><#selectbg_g>THIS INSTALLATION WILL FORMAT THE FOLLOWING PARTITIONS AUTOMATICALY !...</#></b>
+
+
+
+
+/SYSTEM - EXT4 Format
+/DATA   - EXT4 Format
+/CACHE  - EXT4 Format
+
+- Also DALVIK-CACHE & RESOURCE-CACHE will be formatted !
+
+
+You will also have the option to add/remove certain features, Modules and apks.
+
+Make your choice's during the Aroma Install.
+
+
+
+<@center><b><#selectbg_g> AFTER THIS IS DONE, THE ROM WILL BE INSTALLED! </#></b>
