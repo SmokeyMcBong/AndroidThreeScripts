@@ -1,6 +1,6 @@
 #!/bin/bash
-source A3S.def			# import Default Script Settings
-source user.preferences	# import User Configurable Settings
+source A3S.def          # import Default Script Settings
+source user.preferences # import User Configurable Settings
 mainmenu()
 {
 	startup_checks && clear
@@ -216,7 +216,9 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 			  sudo apt-get purge -y openjdk-\* icedtea-\* icedtea6-\* && sudo add-apt-repository -y ppa:webupd8team/java && sudo apt-get update && sudo apt-get install -y oracle-java6-installer && sudo apt-get install -y git gnupg ccache lzop flex bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 libc6-dev lib32bz2-1.0 lib32ncurses5-dev x11proto-core-dev libx11-dev:i386 libreadline6-dev:i386 lib32z1-dev libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown libxml2-utils xsltproc libreadline6-dev lib32readline-gplv2-dev libncurses5-dev bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev lib32bz2-dev squashfs-tools pngcrush schedtool dpkg-dev libcloog-isl-dev libcap-dev liblz4* abootimg android-tools-adb android-tools-fastboot && sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so && mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo && 
 			  printf '%s\n'  ""
 			  printf '%s\n'  "Adding Paths and Variables to .bashrc file..."
-			  cleanbash &&
+			  if [ -f ~/.bashrc ]; then
+ 					cleanbash 
+			  fi
 			  sleep 2
 			  echo ${pathheader} >> ~/.bashrc &&
 			  echo ${path} "# A3S Path Settings" >> ~/.bashrc && 
@@ -464,7 +466,9 @@ setuprenv() # Setup ROM Build Environment
 		printf '%s\n'  ""
 		printf '%s\n'  "Creating Folders, Adding Paths and Variables to .bashrc file..."
 		showPreProgress
-		cleanbash &&
+		if [ -f ~/.bashrc ]; then
+ 					cleanbash 
+			  fi
 		sleep 2
 		cd && 
 		  echo '' >> ~/.bashrc &&
@@ -612,7 +616,9 @@ setupkenv() # Setup Kernel Build Environment
 		printf '%s\n'  ""
 		printf '%s\n'  "Creating Folders, Adding Paths and Variables to .bashrc file..."
 		showPreProgress
-		cleanbash &&		
+		if [ -f ~/.bashrc ]; then
+ 					cleanbash 
+			  fi		
 		sleep 2
 		cd && 
 		  echo '' >> ~/.bashrc &&
