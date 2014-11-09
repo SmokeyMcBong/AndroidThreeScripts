@@ -36,7 +36,7 @@ mainmenu()
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r9${b})  Edit 'aroma-config' file                                            ${c}k8${b})  Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' "     ${b}Android Kernel Development Setup                                         ${c}r10${b}) Edit 'updater-script' file"
 	printf '%s\n' "     ${c}7${b})  Setup Build Environment for Kernel Development                       ${c}r11${b}) Edit 'build.prop' file"
-	printf '%s\n' "     ${c}8${b})  Download Sabermod 4.9.2 Toolchain For Kernel Compile                 -------------------------------------------------------------"
+	printf '%s\n' "     ${c}8${b})  Download Sabermod ${ToolchainName} Toolchain For Kernel Compile                 -------------------------------------------------------------"
 	printf '%s\n' "     ${c}9${b})  Download Kernel Source Code (Current Source = ${g}${DesiredKernelName}${b})          ${c}r12${b}) Edit 'Additions.links' file"
 	printf '%s\n' "                                                                              ${c}r13${b}) Edit 'Xposed.links' file"
 	printf '%s\n' "      -------------------------------------------------------------           -------------------------------------------------------------"
@@ -649,7 +649,7 @@ setupkenv() # Setup Kernel Build Environment
 		setupkenv
 	fi
 }
-downloadktoolchain() # Download SaberMod 4.9.2 Kernel Toolchain
+downloadktoolchain() # Download SaberMod 4.9.3 Kernel Toolchain
 {
 	clear
 	Function="downloadktoolchain"
@@ -669,7 +669,7 @@ downloadktoolchain() # Download SaberMod 4.9.2 Kernel Toolchain
 		(
 		Stagenumber="8"
 		show_stage_header
-		printf '%s\n'  "      ${b}-> Downloading SaberMod 4.9.2 Toolchain... <-${n}             "
+		printf '%s\n'  "      ${b}-> Downloading ${ToolchainName} Toolchain... <-${n}             "
 		cd && 
 			if [ ! -d Android ]; then
  				mkdir Android
@@ -679,11 +679,11 @@ downloadktoolchain() # Download SaberMod 4.9.2 Kernel Toolchain
  				mkdir KernelDevelopment
 			fi
 		cd KernelDevelopment &&
-			if [ ! -d Toolchain ]; then
- 				mkdir Toolchain
+			if [ -d Toolchain ]; then
+ 				rm -rf Toolchain
 			fi
-		 cd Toolchain &&
-			git clone ${ToolchainSource} &&
+		 mkdir Toolchain &&  cd Toolchain &&
+			git clone -v ${ToolchainSource} &&
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
@@ -730,7 +730,7 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
  				rm -rf ${DesiredKernelName}
 			fi
 		mkdir ${DesiredKernelName} && cd ${DesiredKernelName} &&
-			git clone ${DesiredKernelSource} &&
+			git clone -v ${DesiredKernelSource} &&
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log

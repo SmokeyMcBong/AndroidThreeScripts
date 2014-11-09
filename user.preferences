@@ -36,6 +36,7 @@ UtweakSource="https://launchpad.net/ubuntu-tweak/0.8.x/0.8.7/+download/ubuntu-tw
 SaberLinuxSource="https://github.com/SmokeyMcBong/Linux-manifest.git"
 
 # SaberMod Android Kernel Toolchain Repo
+ToolchainName="SaberMod 4.9.3"
 ToolchainSource="https://github.com/SmokeyMcBong/sabermod-arm-eabi-4.9.git"
 
 # Repo sync command # of jobs
