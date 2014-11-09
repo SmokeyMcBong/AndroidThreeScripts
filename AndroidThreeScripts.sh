@@ -222,14 +222,15 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 			  sleep 2
 			  echo ${pathheader} >> ~/.bashrc &&
 			  echo ${path} "# A3S Path Settings" >> ~/.bashrc && 
-				source ~/.bashrc &&
+				#source ~/.bashrc &&
 			showPostProgress && sleep 2
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
-		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+		restartpc
+		#cd ${projectlocation} &
+			#exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$installDependenciesopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$installDependenciesopt0" != 1 ] && [ "$installDependenciesopt0" != 2 ] ; then
@@ -475,7 +476,7 @@ setuprenv() # Setup ROM Build Environment
 		  echo ${romdevheader} >> ~/.bashrc &&
 		  echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
 		  echo ${ccache} "# A3S Ccache Settings" >> ~/.bashrc &&
-		  source ~/.bashrc
+		  #source ~/.bashrc
 		cd && 
 			if [ ! -d Android ]; then
  				mkdir Android
@@ -493,8 +494,9 @@ setuprenv() # Setup ROM Build Environment
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
-		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+		restartpc
+		#cd ${projectlocation} &
+			#exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$setuprenvopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$setuprenvopt0" != 1 ] && [ "$setuprenvopt0" != 2 ] ; then
@@ -628,7 +630,7 @@ setupkenv() # Setup Kernel Build Environment
 		  echo ${ccompile} "# A3S Ccompile Settings" >> ~/.bashrc &&
 		  echo ${ccompilearm} "# A3S Ccompile Arm Settings" >> ~/.bashrc &&
 		  echo ${toolchainpath} "# A3S ToolchainPath Settings" >> ~/.bashrc &&
-		  source ~/.bashrc
+		  #source ~/.bashrc
 		cd && 
 			if [ ! -d Android ]; then
  				mkdir Android
@@ -647,8 +649,9 @@ setupkenv() # Setup Kernel Build Environment
 	) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
-		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+		restartpc
+		#cd ${projectlocation} &
+			#exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$setupkenvopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$setupkenvopt0" != 1 ] && [ "$setupkenvopt0" !=2 ] ; then
