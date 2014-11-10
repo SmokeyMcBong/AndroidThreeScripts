@@ -47,7 +47,7 @@ buildenv=". build/envsetup.sh"
 compilerom="brunch du_m7gsm-userdebug"
 
 # Compiled Rom Location
-outdir=${DesiredRomName}/out/target/product/m7gsm
+outdir=Android/RomDevelopment/${DesiredRomName}/out/target/product/m7gsm
 
 # Default Compile Kernel Command (Depending on Toolchain Setup)
 compilekernel="make ARCH=arm CROSS_COMPILE=arm-eabi-"

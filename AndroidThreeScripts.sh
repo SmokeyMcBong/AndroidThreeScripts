@@ -143,6 +143,7 @@ mainmenu()
 		 [ "$mainmen" != r1 ] && [ "$mainmen" != r2 ] && [ "$mainmen" != r3 ] && [ "$mainmen" != r4 ] && 
 		 [ "$mainmen" != r5 ] && [ "$mainmen" != r6 ] && [ "$mainmen" != r7 ] && [ "$mainmen" != r8 ] && 
 		 [ "$mainmen" != r9 ] && [ "$mainmen" != r10 ] && [ "$mainmen" != r11 ] && [ "$mainmen" != r12 ] &&
+		 [ "$mainmen" != r13 ] && [ "$mainmen" != r14 ] &&
 		 # KernelBuilder Menu
 		 [ "$mainmen" != k1 ] && [ "$mainmen" != k2 ] && [ "$mainmen" != k3 ] && [ "$mainmen" != k4 ] && 
 		 [ "$mainmen" != k5 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k8 ] &&
@@ -440,7 +441,7 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
 	elif [ "$installappsopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$installappsopt0" != 1 ] && [ "$installappsopt0" != 2 ] ; then
-		installappsopt0
+		installapps
 	fi
 }
 setuprenv() # Setup ROM Build Environment
@@ -942,6 +943,7 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 		show_stage_header
 		printf '%s\n'  "  ${b}-> Checking if Newly Compiled Rom Exists... <-${n}  " 
 		sleep 3
+		cd &&
 		if [ -d ${outdir} ]; then
 			clear
 			(
@@ -992,7 +994,7 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 			showPreProgress
 				for filename in *; do
 					case "${filename}" in
-						${ComiledRomAlias}*) cp "$filename" "${projectlocation}/RomBuilder/working_folder/temp" ;;
+						${ComiledRomAlias}*.zip) cp "$filename" "${projectlocation}/RomBuilder/working_folder/temp" ;;
 					esac
 				done &&
 			showPostProgress
@@ -1016,13 +1018,13 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 			cd && cd ${projectlocation}/RomBuilder/working_folder
 			printf '%s\n' " - Removing temp Folder..."
 			showPreProgress
-				rm -rf temp 
+				rm -rf temp &&
 			showPostProgress
 			show_stage_completed
 			) 2>&1 | tee ${logfile} 
 				mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 			sleep 2.5
-			cd ${projectlocation} &
+			cd && cd ${projectlocation} &&
 				exec ${projectlocation}/AndroidThreeScripts.sh
 		else 
 			sleep 1 
@@ -1430,7 +1432,7 @@ rbeditaroma() # Edit 'aroma-config' File
 }
 rbeditupdaterscript() # Edit 'updater-script' File
 {
-	${sysdefapp} ${aromadir}/updater-script &&
+	${sysdefapp} ${rbaromadir}/updater-script &&
 	printf '%s\n'  ""
 	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'updater-script' ??"
 	printf '%s\n'  ""

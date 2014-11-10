@@ -1,14 +1,11 @@
   ############### Xposed Framework & Modules Download Links and Target Download Directory ###############
                               # << GROUP 1 - XPOSED FRAMEWORK >> #
-http://dl-count.xposed.info/modules/de.robv.android.xposed.installer_v33_36570c.apk grabbed_files/xFramework/app
+http://dl-xda.xposed.info/modules/de.robv.android.xposed.installer_v33_36570c.apk grabbed_files/xFramework/app
                                # << GROUP 2 - XPOSED MODULES >> #
-http://dl-count.xposed.info/modules/hk.valenta.completeactionplus_v73_50daf8.apk grabbed_files/xModules/app
-http://dl-count.xposed.info/modules/ds.cpuoverlay_v66_471f2e.apk grabbed_files/xModules/app
-http://dl-count.xposed.info/modules/info.mzimmermann.xposed.cputempstatusbar_v5_6e1310.apk grabbed_files/xModules/app
-http://apk.defim.de/sideload/HideNoPasswords-100.apk grabbed_files/xModules/app
-http://dl-count.xposed.info/modules/com.dhm47.nativeclipboard_v27_fb864c.apk grabbed_files/xModules/app 
-http://dl-count.xposed.info/modules/tw.fatminmin.xposed.networkspeedindicator_v14_2f5e7f.apk grabbed_files/xModules/app
-http://dl-count.xposed.info/modules/com.h0rn3t.performanceprofile_v22_959f2a.apk grabbed_files/xModules/app
-http://dl-count.xposed.info/modules/com.mohammadag.screenshotdelayremover_v1_c77ee2.apk grabbed_files/xModules/app
-http://dl-count.xposed.info/modules/com.mohammadag.statusbarscrolltotop_v2_46f829.apk grabbed_files/xModules/app
-http://dl-count.xposed.info/modules/com.vikas.toaststyler_v5_d5cc53.apk grabbed_files/xModules/app
+http://dl-xda.xposed.info/modules/hk.valenta.completeactionplus_v75_874c95.apk grabbed_files/xModules/app
+http://dl-xda.xposed.info/modules/ds.cpuoverlay_v66_471f2e.apk grabbed_files/xModules/app
+http://dl-xda.xposed.info/modules/info.mzimmermann.xposed.cputempstatusbar_v5_6e1310.apk grabbed_files/xModules/app
+http://dl-xda.xposed.info/modules/tora.mamma.xclip_v9_ccb1d9.apk grabbed_files/xModules/app 
+http://dl-xda.xposed.info/modules/com.h0rn3t.performanceprofile_v22_959f2a.apk grabbed_files/xModules/app
+http://dl-xda.xposed.info/modules/com.mohammadag.statusbarscrolltotop_v2_46f829.apk grabbed_files/xModules/app
+http://dl-xda.xposed.info/modules/com.vikas.toaststyler_v5_d5cc53.apk grabbed_files/xModules/app
