@@ -228,7 +228,7 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
-		restartpc
+		mate-session-save --logout-dialog
 		#cd ${projectlocation} &
 			#exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$installDependenciesopt0" == 2 ] ; then
@@ -494,7 +494,7 @@ setuprenv() # Setup ROM Build Environment
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
-		restartpc
+		mate-session-save --logout-dialog
 		#cd ${projectlocation} &
 			#exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$setuprenvopt0" == 2 ] ; then
@@ -649,7 +649,7 @@ setupkenv() # Setup Kernel Build Environment
 	) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
-		restartpc
+		mate-session-save --logout-dialog
 		#cd ${projectlocation} &
 			#exec ${projectlocation}/AndroidThreeScripts.sh
 	elif [ "$setupkenvopt0" == 2 ] ; then
