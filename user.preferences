@@ -50,7 +50,7 @@ compilerom="brunch du_m7gsm-userdebug"
 outdir=Android/RomDevelopment/${DesiredRomName}/out/target/product/m7gsm
 
 # Default Compile Kernel Command (Depending on Toolchain Setup)
-compilekernel="make ARCH=arm CROSS_COMPILE=arm-eabi-"
+compilekernel='make ARCH=arm CROSS_COMPILE=arm-eabi-'
 
 # Default Kernel 'defconfig' File
 dconfig=m7_defconfig

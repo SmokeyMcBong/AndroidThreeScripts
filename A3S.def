@@ -56,7 +56,7 @@ TempDir="downloads"
 # RomBuilder 'aroma-config' & 'updater-script' Location
 rbaromadir=${projectlocation}/RomBuilder/working_folder/META-INF/com/google/android
 
-# RomBuilder 'aroma-config' & 'updater-script' Location
+# KernelBuilder 'aroma-config' & 'updater-script' Location
 kbaromadir=${projectlocation}/KernelBuilder/working_folder/META-INF/com/google/android
 
 # build.prop Location

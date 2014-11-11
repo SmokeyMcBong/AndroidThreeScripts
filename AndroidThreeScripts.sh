@@ -736,8 +736,8 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 			if [ -d ${DesiredKernelName} ]; then
  				rm -rf ${DesiredKernelName}
 			fi
-		mkdir ${DesiredKernelName} && cd ${DesiredKernelName} &&
-			git clone -v ${DesiredKernelSource} &&
+		#mkdir ${DesiredKernelName} && cd ${DesiredKernelName} &&
+			git clone -v ${DesiredKernelSource} ${DesiredKernelName} &&
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
@@ -1665,10 +1665,7 @@ kbcompilebuild() # Compile Kernel
 			sleep 1 
 		fi
 		cd && cd Android/KernelDevelopment/${DesiredKernelName} &&
-			exec make ${dconfig} & wait
-				sleep 2
-			exec ${compilekernel} & wait
-				sleep 4
+			make ${dconfig} && sleep 2 && ${compilekernel} && sleep 4
 		# Copy zImage To 'compiled_files' folder
 		printf '%s\n'  ""
 		printf '%s\n'  "      ${b}-> Copying New zImage to 'compiled_files'... <-${n}         "
@@ -1681,14 +1678,14 @@ kbcompilebuild() # Compile Kernel
 				showPostProgress
 				printf '%s\n' " - Copying... (zImage) to ($kdir3)"
 				showPreProgress
-					cp -ar ${zimagedir}/zImage ${kdir3} &&
+					cp -ar Android/KernelDevelopment/${DesiredKernelName}/arch/arm/boot/zImage ${kdir3} &&
 				showPostProgress
 			else 
 				sleep 1 
 				printf '%s\n' " - Copying... (zImage) to ($kdir3)"
 				showPreProgress
 					mkdir ${kdir3} &&
-					cp -ar ${zimagedir}/zImage ${kdir3} &&
+					cp -ar Android/KernelDevelopment/${DesiredKernelName}/arch/arm/boot/zImage ${kdir3} &&
 				showPostProgress
 			fi
 		printf '%s\n'  ""
@@ -1857,13 +1854,13 @@ kbcreateboot()  # Create New boot.img file
 						printf '%s\n'  ""
 						printf '%s\n'  ""
 						if [ -d ${dir1} ]; then
-							printf '%s\n' " - Cleaning... ($dir1)"
+							printf '%s\n' " - Cleaning... ($kdir1)"
 							showPreProgress
 								cd
 								rm -rf ${kdir1} && 
 								mkdir ${kdir1} &&
 							showPostProgress
-							printf '%s\n' " - Copying New 'boot.img' to $dir1..."
+							printf '%s\n' " - Copying New 'boot.img' to $kdir1..."
 							showPreProgress
 								cd && cd ${bootdir}
 								cp boot.img ${kdir1}
@@ -1871,7 +1868,7 @@ kbcreateboot()  # Create New boot.img file
 						else 
 							sleep 1 
 							printf '%s\n' " - Cannot Remove ($dir1), Does Not Exist"
-							printf '%s\n' " - Copying New 'boot.img' to $dir1..."
+							printf '%s\n' " - Copying New 'boot.img' to $kdir1..."
 							showPreProgress
 								cd
 								mkdir ${kdir1} && 
@@ -1993,7 +1990,8 @@ kbeditaroma() # Edit 'aroma-config' File
  		 y|Y ) showPreProgress 
 				showPostProgress
 				sleep 1
-				exec ${projectlocation}/AndroidThreeScripts.sh;;
+				cd ${projectlocation} &
+			exec ${projectlocation}/AndroidThreeScripts.sh;;
  		 n|N ) mainmenu;;
 		 * ) kbeditaroma;;
 	esac	
@@ -2010,7 +2008,8 @@ kbeditupdaterscript() # Edit 'aroma-config' File
  		 y|Y ) showPreProgress 
 				showPostProgress
 				sleep 1
-				exec ${projectlocation}/AndroidThreeScripts.sh;;
+				cd ${projectlocation} &
+			exec ${projectlocation}/AndroidThreeScripts.sh;;
  		 n|N ) mainmenu;;
 		 * ) kbeditupdaterscript;;
 	esac	
@@ -2044,8 +2043,8 @@ kbzip() # Zip working_folder Contents To Make Flashable Zip File
 			mkdir ${finalout}
 		fi
 		printf "" 
-		source ${dconfigdir}/${dconfig}
-		cd ${projectlocation}/KernelBuilder/working_folder
+		cd && source ${dconfigdir}/${dconfig} &&
+		cd && cd ${projectlocation}/KernelBuilder/working_folder
 			exec zip -r ${finalout}/${CONFIG_LOCALVERSION}_${today}.zip * & wait
 		showPostProgress
 		printf ""
