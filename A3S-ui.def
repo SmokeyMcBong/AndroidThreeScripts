@@ -5,6 +5,15 @@
 #------------------------------------------------------------------------------------------------------------
 #
 
+# Color Codes (blue,red,white,green,cyan,normal,underlined)
+b=$(tput setaf 4)
+r=$(tput setaf 1)
+w=$(tput setaf 7)
+g=$(tput setaf 2)
+c=$(tput setaf 6)
+u=$(tput smul)
+n=$(tput sgr0)
+
 # Crude Progress Bar Functions
 function showPreProgress { 
 	printf " >                                                (01%%)\r" 

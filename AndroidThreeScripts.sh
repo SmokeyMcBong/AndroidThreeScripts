@@ -1,6 +1,6 @@
 #!/bin/bash
-source A3S.def          # import Default Script Settings
 source A3S-ui.def		# import Default Menu UI Settings
+source A3S.def          # import Default Script Settings
 source user.preferences # import User Configurable Settings
 mainmenu()
 {
@@ -169,6 +169,20 @@ startup_checks() # make startup checks
 	elif grep -q "$kerneldevheader" "$File"; then
 		currentenvsetup="Kernel Development"
 	fi
+	# check which desktop environment is being used
+    if [ $(pgrep -c cinnamon-panel) -gt 0 ]; then
+    	logout=$cinnamon_logout
+	elif [ $(pgrep -c gnome-panel) -gt 0 ]; then
+    	logout=$gnome_logout
+	elif [ $(pgrep -c kde-panel) -gt 0 ]; then
+    	logout=$kde_logout
+	elif [ $(pgrep -c kde-panel) -gt 0 ]; then
+    	logout=$kde_logout
+	elif [ $(pgrep -c mate-panel) -gt 0 ]; then
+    	logout=$mate_logout
+	elif [ $(pgrep -c xfce4-panel) -gt 0 ]; then
+    	logout=$xfce4_logout
+	fi
 }
 # Fresh-To-Ready Menu >>>
 installDependencies() # Install ALL needed Dependencies before doing anything! 
@@ -211,7 +225,7 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		printf '%s\n'  ""
 		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
 		sleep 2
-		mate-session-save --logout-dialog
+		$logout
 	elif [ "$installDependenciesopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$installDependenciesopt0" != 1 ] && [ "$installDependenciesopt0" != 2 ] ; then
@@ -374,7 +388,7 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 		printf '%s\n'  ""
 		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
 		sleep 2
-		mate-session-save --logout-dialog
+		$logout
 	elif [ "$installstudioopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$installstudioopt0" != 1 ] && [ "$installstudioopt0" != 2 ] ; then
@@ -482,7 +496,7 @@ setuprenv() # Setup ROM Build Environment
 		printf '%s\n'  ""
 		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
 		sleep 2
-		mate-session-save --logout-dialog
+		$logout
 	elif [ "$setuprenvopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$setuprenvopt0" != 1 ] && [ "$setuprenvopt0" != 2 ] ; then
@@ -636,7 +650,7 @@ setupkenv() # Setup Kernel Build Environment
 		printf '%s\n'  ""
 		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
 		sleep 2
-		mate-session-save --logout-dialog
+		$logout
 	elif [ "$setupkenvopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$setupkenvopt0" != 1 ] && [ "$setupkenvopt0" !=2 ] ; then

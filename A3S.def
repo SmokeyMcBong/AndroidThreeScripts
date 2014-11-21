@@ -8,15 +8,6 @@
 # Script Version/Date
 scriptbuild="(v1.4 - 20/11/2014)"
 
-# Color Codes (blue,red,white,green,cyan,normal,underlined)
-b=$(tput setaf 4)
-r=$(tput setaf 1)
-w=$(tput setaf 7)
-g=$(tput setaf 2)
-c=$(tput setaf 6)
-u=$(tput smul)
-n=$(tput sgr0)
-
 # Default Project Location (Let the script find its own directory structure - Now it's portable !)
 projectlocation="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -79,6 +70,13 @@ bootdir=${projectlocation}/KernelBuilder/original_bootimg
 # Target working_folder Directories
 tkdir1=${projectlocation}/KernelBuilder/working_folder/AROMA/boot
 tkdir2=${projectlocation}/KernelBuilder/working_folder/AROMA/system/lib/modules
+
+# Logout Commands
+cinnamon_logout='cinnamon-session-save --logout-dialog'
+gnome_logout='gnome-session-save --logout-dialog'
+kde_logout='kde-session-save --logout-dialog'
+mate_logout='mate-session-save --logout-dialog'
+xfce4_logout='xfce4-session-save --logout-dialog'
 
 
 ### END OF CONFIG FILE ###
