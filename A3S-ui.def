@@ -1,0 +1,64 @@
+### Default Menu UI Configuration file for AndroidThreeScripts.sh script ###
+
+#------------------------------------------------------------------------------------------------------------
+#----->>>> DO NOT EDIT THESE VALUES UNLESS RELEVANT CHANGES TO THE SHELL SCRIPT ARE MADE AS WELL!! <<<<------
+#------------------------------------------------------------------------------------------------------------
+#
+
+# Crude Progress Bar Functions
+function showPreProgress { 
+	printf " >                                                (01%%)\r" 
+	sleep 0.05
+	printf " >>>>>>                                           (10%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>                                       (20%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>                                  (30%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>                             (40%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>                        (50%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>                   (60%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>              (70%%)\r" 
+	sleep 0.5	
+}
+function showPostProgress {
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         (90%%)\r" 
+	sleep 0.05
+	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> (100%%) - ${green}Done\r${normal}"
+	printf "\n"
+}
+
+# Stage Header & Footer
+function show_stage_header {	
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "   ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	printf '%s\n' "   ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	printf '%s\n' ""	
+	printf '%s\n' ""
+	printf '%s\n' "     ${g}                                                                         ################################################################                                                                         "
+	printf '%s\n' "     ${c}                                                                         ####################                        ####################                                                                         "
+	printf '%s\n' "     ${c}                                                                         ####                                                        ####                                                                         "
+	printf '%s\n' "     ${n}                                                                                                     Stage-$Stagenumber"
+	printf '%s\n' "     ${c}                                                                         ####                                                        ####                                                                         "              
+	printf '%s\n' "     ${c}                                                                         ####################                        ####################                                                                         "
+	printf '%s\n' "     ${g}                                                                         ################################################################                                                                         "
+	printf '%s\n' ""	
+	printf '%s\n' ""
+	printf '%s\n' ""	
+	printf '%s\n' ""
+	printf '%s\n' ""
+}
+function show_stage_completed {	
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  "      ${g}+++ Stage-$Stagenumber Complete !, Moving to MainMenu ... +++${n}       "
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+}
+
+### END OF CONFIG FILE ###

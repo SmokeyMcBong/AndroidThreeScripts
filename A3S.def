@@ -6,7 +6,7 @@
 # 
 
 # Script Version/Date
-scriptbuild="(v1.3 - 08/11/2014)"
+scriptbuild="(v1.4 - 20/11/2014)"
 
 # Color Codes (blue,red,white,green,cyan,normal,underlined)
 b=$(tput setaf 4)
@@ -79,45 +79,6 @@ bootdir=${projectlocation}/KernelBuilder/original_bootimg
 # Target working_folder Directories
 tkdir1=${projectlocation}/KernelBuilder/working_folder/AROMA/boot
 tkdir2=${projectlocation}/KernelBuilder/working_folder/AROMA/system/lib/modules
-
-
-
-
-#############################################################################################################
-
-
-#------------------------------------------------------------------------------------------------------------
-#-------------->>>> PROGRESS BAR FUNCTION, EDIT THE SLEEP AND BAR LENGTH VALUES AS NEEDED <<<<---------------
-#------------------------------------------------------------------------------------------------------------
-# 
-
-# Crude Progress Bar Functions
-function showPreProgress { 
-	printf " >                                                (01%%)\r" 
-	sleep 0.05
-	printf " >>>>>>                                           (10%%)\r" 
-	sleep 0.05
-	printf " >>>>>>>>>>                                       (20%%)\r" 
-	sleep 0.05
-	printf " >>>>>>>>>>>>>>>                                  (30%%)\r" 
-	sleep 0.05
-	printf " >>>>>>>>>>>>>>>>>>>>                             (40%%)\r" 
-	sleep 0.05
-	printf " >>>>>>>>>>>>>>>>>>>>>>>>>                        (50%%)\r" 
-	sleep 0.05
-	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>                   (60%%)\r" 
-	sleep 0.05
-	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>              (70%%)\r" 
-	sleep 0.5	
-}
-function showPostProgress {
-	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         (90%%)\r" 
-	sleep 0.05
-	printf " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> (100%%) - ${green}Done\r${normal}"
-	printf "\n"
-}
-
-#############################################################################################################
 
 
 ### END OF CONFIG FILE ###

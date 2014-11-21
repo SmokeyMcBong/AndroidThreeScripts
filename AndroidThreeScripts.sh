@@ -1,5 +1,6 @@
 #!/bin/bash
 source A3S.def          # import Default Script Settings
+source A3S-ui.def		# import Default Menu UI Settings
 source user.preferences # import User Configurable Settings
 mainmenu()
 {
@@ -169,28 +170,6 @@ startup_checks() # make startup checks
 		currentenvsetup="Kernel Development"
 	fi
 }
-show_stage_header() # menu ui : show_stage_header.
-{	
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n'  " ${g}################################################################"
-	printf '%s\n'  " ####                     ${n}   Stage-$Stagenumber                         ${g}####"
-	printf '%s\n'  " ################################################################"
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-}
-show_stage_completed() # menu ui : show_stage_completed.
-{	
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n'  "      ${g}+++ Stage-$Stagenumber Complete !, Moving to MainMenu ... +++${n}       "
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-}
 # Fresh-To-Ready Menu >>>
 installDependencies() # Install ALL needed Dependencies before doing anything! 
 {
@@ -198,12 +177,13 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 	Function="InstallDependencies"
 	Stagenumber="0"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) INSTALL Dependencies"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) INSTALL Dependencies"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read installDependenciesopt0
@@ -244,13 +224,14 @@ saberinstall() # Download, Compile & Install Latest SaberMod Linux Kernel
 	Function="saberinstall"
 	Stagenumber="1"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) Download Latest SaberMod Linux Kernel Source (home/'user'/Linux/)"
-	printf '%s\n' "   2) Compile & Install Latest SaberMod Linux Kernel (If Already Downloaded)"
-	printf '%s\n' "   3) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) Download Latest SaberMod Linux Kernel Source (home/'user'/Linux/)"
+	printf '%s\n' "    2) Compile & Install Latest SaberMod Linux Kernel (If Already Downloaded)"
+	printf '%s\n' "    3) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read saberinstallopt0
@@ -310,12 +291,13 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 	Stagenumber="2"
 	StudioAlias="android-studio-bundle"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) Install ${AstudioName} "
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) Install ${AstudioName} "
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read installstudioopt0
@@ -405,12 +387,13 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
 	Function="installapps"
 	Stagenumber="3"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) Download & Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Apps"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) Download & Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Apps"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read installappsopt0
@@ -451,12 +434,13 @@ setuprenv() # Setup ROM Build Environment
 	Function="setuprenv"
 	Stagenumber="4"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) SETUP ROM BUILD ENVIRONMENT"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) SETUP ROM BUILD ENVIRONMENT"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read setuprenvopt0
@@ -511,12 +495,13 @@ downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
 	Function="downloadpresonalrrepos"
 	Stagenumber="5"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) DOWNLOAD PERSONAL ROM DEVEOLPMENT RELATED REPOS"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD PERSONAL ROM DEVEOLPMENT RELATED REPOS"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read downloadpresonalrreposopt0
@@ -555,12 +540,13 @@ downloadrsource()  # Download Desired ROM Source Code
 	Function="downloadrsource"
 	Stagenumber="6"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) DOWNLOAD ${DesiredRomName} ROM SOURCE CODE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD ${DesiredRomName} ROM SOURCE CODE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read downloadrsourceopt0
@@ -602,12 +588,13 @@ setupkenv() # Setup Kernel Build Environment
 	Function="setupkenv"
 	Stagenumber="7"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) SETUP KERNEL BUILD ENVIRONMENT"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) SETUP KERNEL BUILD ENVIRONMENT"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read setupkenvopt0
@@ -662,12 +649,13 @@ downloadktoolchain() # Download SaberMod 4.9.3 Kernel Toolchain
 	Function="downloadktoolchain"
 	Stagenumber="8"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) DOWNLOAD LATEST SABERMOD KERNEL TOOLCHAIN"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD LATEST SABERMOD KERNEL TOOLCHAIN"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read downloadktoolchainopt0
@@ -709,12 +697,13 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 	Function="downloadksource"
 	Stagenumber="9"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) DOWNLOAD ${DesiredKernelName} ROM SOURCE CODE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD ${DesiredKernelName} ROM SOURCE CODE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read downloadksourceopt0
@@ -757,12 +746,13 @@ rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands
 	Function="rbcleanbuild"
 	Stagenumber="r1"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) CLEAN ROM BUILD FOLDERS"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) CLEAN ROM BUILD FOLDERS"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbcleanbuildopt0
@@ -815,12 +805,13 @@ rbsyncbuild() # Invoke 'repo sync -j5' Command to sync repos
 	Function="rbsyncbuild"
 	Stagenumber="r2"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) SYNC REPO'S"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) SYNC REPO'S"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbsyncbuildopt0
@@ -870,12 +861,13 @@ rbcompilebuild() # Compile Rom From Source
 	Function="rbcompilebuild"
 	Stagenumber="r3"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) COMPILE ROM USING BRUNCH COMMAND"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COMPILE ROM USING BRUNCH COMMAND"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbcompilebuildopt0
@@ -925,12 +917,13 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 	Stagenumber="r4"
 	ComiledRomAlias="DU_m7gsm_"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) COPY NEWLY COMPILED ROM TO working_folder STRUCTURE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COPY NEWLY COMPILED ROM TO working_folder STRUCTURE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbcopyopt0
@@ -1042,12 +1035,13 @@ rbgapps() # Pull Gapps Files From Device
 	Function="rbgapps"
 	Stagenumber="r5"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) PULL GAPPS FILES FROM THE DEVICE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) PULL GAPPS FILES FROM THE DEVICE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbgappsopt0
@@ -1105,12 +1099,13 @@ rbadditions() # Download Additional Apps Using 'additions.links' File
 	Function="rbadditions"
 	Stagenumber="r6"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) DOWNLOAD ADDITIONAL APPS USING 'additions.links' FILE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD ADDITIONAL APPS USING 'additions.links' FILE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbadditionsopt0
@@ -1192,12 +1187,13 @@ rbxposed() # Download Additional Apps Using 'additions.links' File
 	Function="rbxposed"
 	Stagenumber="r7"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) DOWNLOAD XPOSED FRAMEWORK/MODULES USING 'xposed.links' FILE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD XPOSED FRAMEWORK/MODULES USING 'xposed.links' FILE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbxposedopt0
@@ -1254,12 +1250,13 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 	Function="rbcopy2"
 	Stagenumber="r8"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) COPY GRABBED_FILES TO WORKING_FOLDER"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COPY GRABBED_FILES TO WORKING_FOLDER"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbcopy2opt0
@@ -1506,12 +1503,13 @@ rbzip()   # Zip working_folder Contents To Make Flashable Zip File
 	Function="rbzip"
 	Stagenumber="r14"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) ZIP WORKING_FOLDER CONTENTS READY TO FLASH ON DEVICE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) ZIP WORKING_FOLDER CONTENTS READY TO FLASH ON DEVICE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read rbzipopt0
@@ -1572,12 +1570,13 @@ kbcleanbuild() # Invoke the 'make clean' Command and remove '.config' file
 	Function="kbcleanbuild"
 	Stagenumber="k2"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) CLEAN KERNEL BUILD FOLDERS"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) CLEAN KERNEL BUILD FOLDERS"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read kbcleanbuildopt0
@@ -1629,12 +1628,13 @@ kbcompilebuild() # Compile Kernel
 	Function="kbcompilebuild"
 	Stagenumber="k3"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) COMPILE KERNEL & MODULES"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COMPILE KERNEL & MODULES"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read kbcompilebuildopt0
@@ -1744,12 +1744,13 @@ kbcreateboot()  # Create New boot.img file
 	Function="kbcreateboot"
 	Stagenumber="k4"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) CREATE NEW 'boot.img' FILE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) CREATE NEW 'boot.img' FILE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read kbcreatebootopt0
@@ -1906,12 +1907,13 @@ kbcopy()  # Copy compiled_files To working_folder, Ready To Be Zipped Up
 	Function="kbcopy"
 	Stagenumber="k5"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) COPY 'COMPILED_FILES' TO WORKING_FOLDER"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COPY 'COMPILED_FILES' TO WORKING_FOLDER"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read kbcopyopt0
@@ -2020,12 +2022,13 @@ kbzip() # Zip working_folder Contents To Make Flashable Zip File
 	Function="kbzip"
 	Stagenumber="k8"
 	show_stage_header
-	printf " ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "   1) ZIP WORKING_FOLDER CONTENTS READY TO FLASH ON DEVICE"
-	printf '%s\n' "   2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n' "    1) ZIP WORKING_FOLDER CONTENTS READY TO FLASH ON DEVICE"
+	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read kbzipopt0
