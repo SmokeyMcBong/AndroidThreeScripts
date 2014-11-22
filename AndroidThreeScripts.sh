@@ -1,7 +1,7 @@
 #!/bin/bash
-source A3S-ui.def		# import Default Menu UI Settings
-source A3S.def          # import Default Script Settings
-source user.preferences # import User Configurable Settings
+source A3S-ui.cfg			# import Default Menu UI Settings
+source A3S.cfg				# import Default Script Settings
+source user.preferences		# import User Configurable Settings
 mainmenu()
 {
 	startup_checks && clear
@@ -174,8 +174,6 @@ startup_checks() # make startup checks
     	logout=$cinnamon_logout
 	elif [ $(pgrep -c gnome-panel) -gt 0 ]; then
     	logout=$gnome_logout
-	elif [ $(pgrep -c kde-panel) -gt 0 ]; then
-    	logout=$kde_logout
 	elif [ $(pgrep -c kde-panel) -gt 0 ]; then
     	logout=$kde_logout
 	elif [ $(pgrep -c mate-panel) -gt 0 ]; then
@@ -1736,8 +1734,9 @@ kbcompilebuild() # Compile Kernel
 			n|N ) 
 				sleep 2
 				show_stage_completed
-				sleep 4
-				mainmenu
+				sleep 2.5
+				cd ${projectlocation} &
+					exec ${projectlocation}/AndroidThreeScripts.sh
 		esac
 	sleep 2
 	show_stage_completed
@@ -1821,87 +1820,95 @@ kbcreateboot()  # Create New boot.img file
 				printf '%s\n'  ""
 				printf '%s\n'  ""
 				printf '%s\n'  ""
-				printf "          ${b}Editing 'default.prop' file...\r          "
-				exec ${sysdefapp} default.prop & wait
+				printf '%s\n'  "        ${b}Editing 'bootimg.cfg' & 'default.prop' files...\r          "
 				printf '%s\n'  ""
 				printf '%s\n'  ""
-				read -p "Finished editing 'default.prop'? .. Continue?? (y/n)" choice
-				case "$choice" in 
-					y|Y ) printf "Finished Editing 'default.prop' file.${n}\r "
-						printf "\n"
-						sleep 4
-						clear
-						Stagenumber="k4"
-						show_stage_header
-						printf '%s\n'  "        ${b}-> Cleaning Folder Structure... <-${n}         "
-						printf '%s\n'  ""
-						printf '%s\n' " - Removing Files..."
-						showPreProgress
-							cd && cd ${bootdir}
-								rm -f boot.img && 
-								rm -f initrd.img && 
-								rm -f zImage && 
-						showPostProgress
-						printf '%s\n'  ""
-						printf '%s\n' " - Copying... (zImage) to (${bootdir})"
-						showPreProgress
-							cd
-							cp ${kdir3}/zImage ${bootdir}
-						showPostProgress
-						printf '%s\n'  ""
-						printf '%s\n'  ""
-						printf '%s\n' " - Creating 'initrd.img'..."
-						cd && cd ${bootdir}/initrd
-							find . | cpio -o -H newc | gzip > ../initrd.img &&
-						sleep 2
-						showPostProgress
-						printf "\n"
-						printf '%s\n'  ""
-						printf '%s\n'  ""
-						printf '%s\n' " - Creating New 'boot.img'..."
+				printf '%s\n'  ""
+				showPreProgress
+				cd && cd ${bootdir}
+					TargetFileA=bootimg.cfg
+					TargetStringA=bootsize
+					if grep -q "$TargetStringA" "$TargetFileA"; then
+  						sed -i '/'"$TargetStringA"'/d' $TargetFileA	
+					fi
+				cd initrd &&
+					TargetFileB=default.prop
+					TargetStringB="ro.secure=1"
+					if grep -q "$TargetStringB" "$TargetFileB"; then
+  						sed -i 's|'"$TargetStringB"'|'"ro.secure=0"'|g' $TargetFileB	
+					fi
+					TargetStringC="ro.debuggable=0"
+					if grep -q "$TargetStringC" "$TargetFileB"; then
+  						sed -i 's|'"$TargetStringC"'|'"ro.debuggable=1"'|g' $TargetFileB	
+					fi
+				showPostProgress
+				sleep 2.5
+				clear
+				Stagenumber="k4"
+				show_stage_header
+				printf '%s\n'  "        ${b}-> Cleaning Folder Structure... <-${n}         "
+				printf '%s\n'  ""
+				printf '%s\n' " - Removing Files..."
+				showPreProgress
+				cd && cd ${bootdir}
+					rm -f boot.img && 
+					rm -f initrd.img && 
+					rm -f zImage && 
+				showPostProgress
+				printf '%s\n'  ""
+				printf '%s\n' " - Copying... (zImage) to (${bootdir})"
+				showPreProgress
+				cd &&
+				cp ${kdir3}/zImage ${bootdir}
+				showPostProgress
+				printf '%s\n'  ""
+				printf '%s\n'  ""
+				printf '%s\n' " - Creating 'initrd.img'..."
+				cd && cd ${bootdir}/initrd
+					find . | cpio -o -H newc | gzip > ../initrd.img &&
+				sleep 2
+				showPostProgress
+				printf "\n"
+				printf '%s\n'  ""
+				printf '%s\n'  ""
+				printf '%s\n' " - Creating New 'boot.img'..."
+				cd && cd ${bootdir}
+					abootimg --create boot.img -k zImage -r initrd.img &&
+					sleep 0.5
+					abootimg --create boot.img -f bootimg.cfg -k zImage -r initrd.img &&
+					sleep 2
+				showPostProgress
+				printf "\n"
+				printf '%s\n'  ""
+				printf '%s\n'  ""
+				if [ -d ${dir1} ]; then
+					printf '%s\n' " - Cleaning... ($kdir1)"
+					showPreProgress
+						cd
+						rm -rf ${kdir1} && 
+						mkdir ${kdir1} &&
+					showPostProgress
+					printf '%s\n' " - Copying New 'boot.img' to $kdir1..."
+					showPreProgress
 						cd && cd ${bootdir}
-							abootimg --create boot.img -k zImage -r initrd.img &&
-							sleep 0.5
-							abootimg --create boot.img -f bootimg.cfg -k zImage -r initrd.img &&
-							sleep 2
-						showPostProgress
-						printf "\n"
-						printf '%s\n'  ""
-						printf '%s\n'  ""
-						if [ -d ${dir1} ]; then
-							printf '%s\n' " - Cleaning... ($kdir1)"
-							showPreProgress
-								cd
-								rm -rf ${kdir1} && 
-								mkdir ${kdir1} &&
-							showPostProgress
-							printf '%s\n' " - Copying New 'boot.img' to $kdir1..."
-							showPreProgress
-								cd && cd ${bootdir}
-								cp boot.img ${kdir1}
-							showPostProgress
-						else 
-							sleep 1 
-							printf '%s\n' " - Cannot Remove ($dir1), Does Not Exist"
-							printf '%s\n' " - Copying New 'boot.img' to $kdir1..."
-							showPreProgress
-								cd
-								mkdir ${kdir1} && 
-								cd && cd ${bootdir}
-								cp boot.img ${kdir1}
-							showPostProgress
-						fi
-				;;
-					n|N ) 
-						mainmenu;;
-					* ) printf '%s\n'  "cancelled"
-						createboot;;
-				esac
+						cp boot.img ${kdir1}
+					showPostProgress
+				else 
+					sleep 1 
+					printf '%s\n' " - Cannot Remove ($dir1), Does Not Exist"
+					printf '%s\n' " - Copying New 'boot.img' to $kdir1..."
+					showPreProgress
+						cd
+						mkdir ${kdir1} && 
+						cd && cd ${bootdir}
+						cp boot.img ${kdir1}
+					showPostProgress
+				fi				
 		;;
 			n|N ) 
 				mainmenu;;
 			* ) printf '%s\n'  "invalid response"
-				createboot;;
+				kbcreateboot;;
 		esac
 	show_stage_completed
 	) 2>&1 | tee ${logfile} 
