@@ -24,11 +24,11 @@ mainmenu()
 	printf '%s\n' "     ${b}                    Setup Build Environment...                                        Compile Rom, Add Features & AROMA...                                     Compile Kernel, Add Features & AROMA..."
 	printf '%s\n' ""
 	printf '%s\n' ""
-	printf '%s\n' "     ${c}0${b})  Install ALL Dependencies (${r}<-Important!${b})"    
+	printf '%s\n' "     ${c}0${b})  Install ALL Dependencies (${dependencystatus})"    
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r1${b})  Clean ROM Build Folder Structure                                    ${c}k1${b})  Edit Kernel 'defconfig' File"
 	printf '%s\n' "     ${b}Linux Setup                                                              ${c}r2${b})  Sync ROM Repo's                                                     ${c}k2${b})  Clean Kernel Folder And Remove '.config' file"
 	printf '%s\n' "     ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source                                             ${c}k3${b})  Compile Kernel & Modules" 
-	printf '%s\n' "     ${c}2${b})  Download & Install ${AstudioName}                 ${c}r4${b})  Copy New 'system Folder' & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
+	printf '%s\n' "     ${c}2${b})  Download & Install ${AstudioName}                 ${c}r4${b})  Copy New 'system' Folder & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
 	printf '%s\n' "     ${c}3${b})  Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Apps               -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r5${b})  Pull Gapps From Device                                               -------------------------------------------------------------"
 	printf '%s\n' "     ${b}Android ROM Development Setup                                            ${c}r6${b})  Download Additional App's Using 'Additions.links' file              ${c}k6${b})  Edit 'aroma-config' file in working_folder"
@@ -163,6 +163,13 @@ startup_checks() # make startup checks
 	# check for log directory size and show result
 	DIRSIZE=`du -s $LogLocation | cut -f 1`
 		logsize=$DIRSIZE
+	# check to see if dependencies have been installed yet
+	DependencyCheck=d.s
+	if [ ! -f "$DependencyCheck" ]; then
+		dependencystatus="${r}<-Important!${b}"
+	else
+		dependencystatus="${g}<-Done!${b}"
+	fi
 	# check for bash.rc entries and show result
 	File=~/.bashrc
 	if grep -q "$romdevheader" "$File"; then
@@ -216,7 +223,8 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 			  sleep 2
 			  echo ${pathheader} >> ~/.bashrc &&
 			  echo ${path} "# A3S Path Settings" >> ~/.bashrc && 
-			showPostProgress && sleep 2
+			showPostProgress 
+			echo dependencies have been satisfied >> d.s && sleep 2
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
