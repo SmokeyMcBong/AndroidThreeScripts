@@ -2127,9 +2127,9 @@ cleanbash() # check 'bash.rc' for conflicting entries before adding new ones
 }
 editprefs() # open 'user.preferences'  
 {
-	${sysdefapp} ${projectlocation}/user.preferences  &&
+	#${sysdefapp} ${projectlocation}/user.preferences  &&
 	printf '%s\n'  ""
-	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'user.preferences' ??"
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND $user 'user.preferences' ??"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
