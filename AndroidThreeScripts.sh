@@ -381,11 +381,16 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 			fi
 		echo ${studiopathheader} >> ~/.bashrc &&
 		echo ${studiopath} "# A3S Android Studio Path Settings" >> ~/.bashrc && 
-		sleep 2
+		# create symlink on desktop
+		symlink=/home/$user/Desktop/AndroidStudio.start		
+		if [ -f ${symlink} ]; then
+ 					rm -f ${symlink}
+				fi				
+		ln -s /home/$user/Android/android-studio/bin/studio.sh ${symlink} &&	 
 		clear
 		Stagenumber="2"
 		show_stage_header
-		printf '%s\n'  "${b}-> All done ! Type 'studio.sh' in terminal to start Android-Studio <-${n}          "
+		printf '%s\n'  "${b}-> All done ! use desktop shortcut to start Android-Studio (or type studio.sh from terminal)<-${n}          "
 		sleep 2 
 		showPostProgress && sleep 2
 		show_stage_completed

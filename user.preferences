@@ -21,8 +21,8 @@ PersonalRepo4="https://github.com/SmokeyMcBong/vendor_du.git"
 PersonalRepo5="https://github.com/SmokeyMcBong/packages_apps_Settings.git"
 
 # Android Studio & SDK Bundle Location
-AstudioName="Android Studio 0.8.6 & SDK Bundle"
-AstudioSource="https://dl.dropboxusercontent.com/u/18271886/Fresh-To-Ready/android-studio-bundle-135.1339820-linux.tgz"
+AstudioName="Android Studio 0.8.14 & SDK Bundle"
+AstudioSource="http://downloads.puresoftware.org/files/android/studio-bundle/android-studio-bundle-135.1339820-linux.tgz"
 
 # 3rd Party Application Location
 SunflowerFilename="sunflower-0.2.59-1.all.deb"
