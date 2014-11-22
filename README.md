@@ -10,34 +10,34 @@ Complete Android Build Helper
  This script will give the following options upon executing it
 
 0. Install ALL Dependencies
--- This will... 
+-- This will download ALL dependencies for the Linux System 
 
 1. Download,Compile & Install Latest SaberMod Linux Kernel
--- This will...
+-- This will download the Sabermod Linux Kernel, Compile and install the Kernel
 
 2. Download & Install Android Studio 0.8.6 & SDK Bundle
--- This will...
+-- This will download and install the Android Studio SDK bundle and set path variables for it
 
 3. Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Linux Apps
--- This will... 
+-- This will download and install the above applications
 
 4. Setup Build Environment for ROM Development
--- This will...
+-- This will add the specific path variables to the bash.rc file
 
 5. Download Personal ROM Development Repo's
--- This will...
+-- This will download the personal repo's (defined in user.preferences)
 
 6. Download ROM Source Code
--- This will...
+-- This will download the desired ROM source code (defined in user.preferences)
 
 7. Setup Build Environment for Kernel Development
--- This will...
+-- This will add the specific path variables to the bash.rc file
 
-8. Download Sabermod 4.9.2 Toolchain For Kernel Compile
--- This will... 
+8. Download Sabermod 4.9.3 Toolchain For Kernel Compile
+-- This will download the Latest Sabermod Kernel Toolchain 
 
 9. Download Kernel Source Code
--- This Will...
+-- This will download the desired Kernel source code (defined in user.preferences)
 
 r1. Clean ROM Build Folder Structure
  -- This will invoke both 'make clean' & 'make Clobber' commands
