@@ -1,0 +1,35 @@
+#!/bin/bash
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#	This file is part of the 'AndroidThreeScripts' project  				#						
+#	Copyright (C) 2014  'theFONZ'											#
+#																			#
+#    This program is free software: you can redistribute it and/or modify	#
+#    it under the terms of the GNU General Public License as published by	#
+#    the Free Software Foundation, either version 2 of the License, or		#
+#    any later version.														#
+#																			#
+#	This program is distributed in the hope that it will be useful,  		#
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of  		#
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  					#
+#	See the GNU General Public License for more details.  					#
+#																			#
+#	You should have received a copy of the GNU General Public License		#
+#	along with this program.  If not, see COPYING.txt in project root       #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# check which desktop environment is being used
+    if [ $(pgrep -c cinnamon-panel) -gt 0 ]; then
+    	cinnamon-terminal -x ./A3S.base
+		cinnamon-terminal -x ./A3S.Monitor
+	elif [ $(pgrep -c gnome-panel) -gt 0 ]; then
+    	gnome-terminal -x ./A3S.base
+		gnome-terminal -x ./A3S.Monitor
+	elif [ $(pgrep -c kde-panel) -gt 0 ]; then
+    	kde-terminal -x ./A3S.base
+		kde-terminal -x ./A3S.Monitor
+	elif [ $(pgrep -c mate-panel) -gt 0 ]; then
+    	mate-terminal -x ./A3S.base
+		mate-terminal -x ./A3S.Monitor
+	elif [ $(pgrep -c xfce4-panel) -gt 0 ]; then
+    	xfce4--terminal -x ./A3S.base
+		xfce4--terminal -x ./A3S.Monitor
+	fi

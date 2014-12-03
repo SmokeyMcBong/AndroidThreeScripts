@@ -16,13 +16,13 @@
 #	You should have received a copy of the GNU General Public License		#
 #	along with this program.  If not, see COPYING.txt in project root       #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 source A3S-ui.cfg			# import Default Menu UI Settings
 source A3S.cfg				# import Default Script Settings
 source user.preferences		# import User Configurable Settings
 mainmenu()
 {
 	startup_checks && clear
+	echo -en "\033]0;AndroidThreeScripts\a"
 	printf '\033[8;49;221t'
 	printf '%s\n' ""
 	printf '%s\n' ""
@@ -334,7 +334,7 @@ saberinstall() # Download, Sync Repo, Compile & Install Latest SaberMod Linux Ke
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$saberinstallopt0" == 3 ] ; then
 		mainmenu
 	elif [ "$saberinstallopt0" != 1 ] && [ "$saberinstallopt0" != 2 ] && [ "$saberinstallopt0" != 3 ] ; then
@@ -483,7 +483,7 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$installappsopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$installappsopt0" != 1 ] && [ "$installappsopt0" != 2 ] ; then
@@ -589,7 +589,7 @@ downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$downloadpresonalrreposopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$downloadpresonalrreposopt0" != 1 ] && [ "$downloadpresonalrreposopt0" != 2 ] ; then
@@ -637,7 +637,7 @@ downloadrsource()  # Download Desired ROM Source Code
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$downloadrsourceopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$downloadrsourceopt0" != 1 ] && [ "$downloadrsourceopt0" !=2 ] ; then
@@ -746,7 +746,7 @@ downloadktoolchain() # Download SaberMod 4.9.3 Kernel Toolchain
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$downloadktoolchainopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$downloadktoolchainopt0" != 1 ] && [ "$downloadktoolchainopt0" != 2 ] ; then
@@ -794,7 +794,7 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$downloadksourceopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$downloadksourceopt0" != 1 ] && [ "$downloadksourceopt0" !=2 ] ; then
@@ -854,7 +854,7 @@ rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$rbcleanbuildopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$rbcleanbuildopt0" != 1 ] && [ "$rbcleanbuildopt0" != 2 ] ; then
@@ -910,7 +910,7 @@ rbsyncbuild() # Invoke 'repo sync -j5' Command to sync repos
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$rbsyncbuildopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$rbsyncbuildopt0" != 1 ] && [ "$rbsyncbuildopt0" != 2 ] ; then
@@ -965,7 +965,7 @@ rbcompilebuild() # Compile Rom From Source
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$rbcompilebuildopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$rbcompilebuildopt0" != 1 ] && [ "$rbcompilebuildopt0" != 2 ] ; then
@@ -1077,7 +1077,7 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 				mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 			sleep 2.5
 			cd && cd ${projectlocation} &&
-				exec ${projectlocation}/AndroidThreeScripts.sh
+				exec ${projectlocation}/A3S.base
 		else 
 			sleep 1 
 			printf '%s\n' ""
@@ -1148,7 +1148,7 @@ rbgapps() # Pull Gapps Files From Device
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$rbgappsopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$rbgappsopt0" != 1 ] && [ "$rbgappsopt0" != 2 ] ; then
@@ -1236,7 +1236,7 @@ rbadditions() # Download Additional Apps Using 'additions.links' File
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$rbadditionsopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$rbadditionsopt0" != 1 ] && [ "$rbadditionsopt0" != 2 ] ; then
@@ -1299,7 +1299,7 @@ rbxposed() # Download Additional Apps Using 'additions.links' File
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$rbxposedopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$rbxposedopt0" != 1 ] && [ "$rbxposedopt0" != 2 ] ; then
@@ -1462,7 +1462,7 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$rbcopy2opt0" == 2 ] ; then
 		mainmenu
 	elif [ "$rbcopy2opt0" != 1 ] && [ "$rbcopy2opt0" !=2 ] ; then
@@ -1481,7 +1481,7 @@ rbeditaroma() # Edit 'aroma-config' File
  		 y|Y ) showPreProgress 
 				showPostProgress
 				sleep 1
-				exec ${projectlocation}/AndroidThreeScripts.sh;;
+				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) rbeditaroma;;
 	esac	
@@ -1498,7 +1498,7 @@ rbeditupdaterscript() # Edit 'updater-script' File
  		 y|Y ) showPreProgress 
 				showPostProgress
 				sleep 1
-				exec ${projectlocation}/AndroidThreeScripts.sh;;
+				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) rbeditupdaterscript;;
 	esac	
@@ -1516,7 +1516,7 @@ rbeditbuildprop() # Edit 'build.prop' File
  			 y|Y ) showPreProgress 
 					showPostProgress
 					sleep 1
-					exec ${projectlocation}/AndroidThreeScripts.sh;;
+					exec ${projectlocation}/A3S.base;;
  			 n|N ) mainmenu;;
 			 * ) rbeditbuildprop;;
 		esac
@@ -1537,7 +1537,7 @@ rbeditadditions() # Edit 'Additions.links' File
  		 y|Y ) showPreProgress 
 				showPostProgress
 				sleep 1
-				exec ${projectlocation}/AndroidThreeScripts.sh;;
+				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) rbeditadditions;;
 	esac	
@@ -1554,7 +1554,7 @@ rbeditxposed() # Edit 'Xposed.links' File
  		 y|Y ) showPreProgress 
 				showPostProgress
 				sleep 1
-				exec ${projectlocation}/AndroidThreeScripts.sh;;
+				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) rbeditxposed;;
 	esac	
@@ -1601,7 +1601,7 @@ rbzip()   # Zip working_folder Contents To Make Flashable Zip File
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$rbzipopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$rbzipopt0" != 1 ] && [ "$rbzipopt0" != 2 ] ; then
@@ -1621,7 +1621,7 @@ kbdefconfig() # Edit '${dconfig}' File
  		 y|Y ) showPreProgress 
 				showPostProgress
 				sleep 1 && cd ${projectlocation}
-				exec ${projectlocation}/AndroidThreeScripts.sh;;
+				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) kbdefconfig;;
 	esac	
@@ -1677,7 +1677,7 @@ kbcleanbuild() # Invoke the 'make clean' Command and remove '.config' file
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$kbcleanbuildopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$kbcleanbuildopt0" != 1 ] && [ "$kbcleanbuildopt0" != 2 ] ; then
@@ -1786,7 +1786,7 @@ kbcompilebuild() # Compile Kernel
 				show_stage_completed
 				sleep 2.5
 				cd ${projectlocation} &
-					exec ${projectlocation}/AndroidThreeScripts.sh
+					exec ${projectlocation}/A3S.base
 		esac
 	sleep 2
 	show_stage_completed
@@ -1794,7 +1794,7 @@ kbcompilebuild() # Compile Kernel
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$kbcompilebuildopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$kbcompilebuildopt0" != 1 ] && [ "$kbcompilebuildopt0" != 2 ] ; then
@@ -1965,7 +1965,7 @@ kbcreateboot()  # Create New boot.img file
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$kbcreatebootopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$kbcreatebootopt0" != 1 ] && [ "$kbcreatebootopt0" !=2 ] ; then
@@ -2044,7 +2044,7 @@ kbcopy()  # Copy compiled_files To working_folder, Ready To Be Zipped Up
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$kbcopyopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$kbcopyopt0" != 1 ] && [ "$kbcopyopt0" !=2 ] ; then
@@ -2064,7 +2064,7 @@ kbeditaroma() # Edit 'aroma-config' File
 				showPostProgress
 				sleep 1
 				cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh;;
+			exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) kbeditaroma;;
 	esac	
@@ -2082,7 +2082,7 @@ kbeditupdaterscript() # Edit 'aroma-config' File
 				showPostProgress
 				sleep 1
 				cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh;;
+			exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) kbeditupdaterscript;;
 	esac	
@@ -2128,7 +2128,7 @@ kbzip() # Zip working_folder Contents To Make Flashable Zip File
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh
+			exec ${projectlocation}/A3S.base
 	elif [ "$kbzipopt0" == 2 ] ; then
 		mainmenu
 	elif [ "$kbzipopt0" != 1 ] && [ "$kbzipopt0" != 2 ] ; then
@@ -2187,7 +2187,7 @@ editprefs() # open 'user.preferences'
  		 y|Y ) showPreProgress 
 				showPostProgress
 				sleep 1
-				exec ${projectlocation}/AndroidThreeScripts.sh;;
+				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) editprefs;;
 	esac
@@ -2204,9 +2204,9 @@ deletelogs() # Delete logs if they exist
 				showPostProgress
 				sleep 1
 			   fi
-			exec ${projectlocation}/AndroidThreeScripts.sh;;
+			exec ${projectlocation}/A3S.base;;
  		 n|N ) cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh;;
+			exec ${projectlocation}/A3S.base;;
  		 * ) deletelogs;;
 	esac
 }
@@ -2232,7 +2232,7 @@ restartpc()   # Restart PC
 	case "$choice" in 
  		 y|Y ) sudo reboot;;
  		 n|N ) cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh;;
+			exec ${projectlocation}/A3S.base;;
  		 * ) restartpc;;
 	esac
 }
@@ -2244,7 +2244,7 @@ shutdownpc()   # Shutdown PC
 	case "$choice" in 
  		 y|Y ) sudo poweroff;;
  		 n|N ) cd ${projectlocation} &
-			exec ${projectlocation}/AndroidThreeScripts.sh;;
+			exec ${projectlocation}/A3S.base;;
  		 * )  shutdownpc;;
 	esac
 }
