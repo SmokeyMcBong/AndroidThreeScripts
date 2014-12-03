@@ -14,7 +14,7 @@
 #	See the GNU General Public License for more details.  					#
 #																			#
 #	You should have received a copy of the GNU General Public License		#
-#	along with this program.  If not, see COPYING.txt in project root       #
+#	along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 source A3S-ui.cfg			# import Default Menu UI Settings
 source A3S.cfg				# import Default Script Settings

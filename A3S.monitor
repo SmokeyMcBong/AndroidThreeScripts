@@ -14,7 +14,7 @@
 #	See the GNU General Public License for more details.  					#
 #																			#
 #	You should have received a copy of the GNU General Public License		#
-#	along with this program.  If not, see COPYING.txt in project root       #
+#	along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 echo -en "\033]0;A3S Monitor\a"
 printf '\033[8;5;44t'
