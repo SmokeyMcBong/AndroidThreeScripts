@@ -1,20 +1,20 @@
 #!/bin/bash
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#	This file is part of the 'AndroidThreeScripts' project  				#						
-#	Copyright (C) 2014  'theFONZ'											#
-#																			#
-#    This program is free software: you can redistribute it and/or modify	#
-#    it under the terms of the GNU General Public License as published by	#
-#    the Free Software Foundation, either version 2 of the License, or		#
-#    any later version.														#
-#																			#
-#	This program is distributed in the hope that it will be useful,  		#
-#	but WITHOUT ANY WARRANTY; without even the implied warranty of  		#
-#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  					#
-#	See the GNU General Public License for more details.  					#
-#																			#
-#	You should have received a copy of the GNU General Public License		#
-#	along with this program.  If not, see 'license' in project root         #
+#   This file is part of the 'AndroidThreeScripts' project                  #
+#   Copyright (C) 2014  'theFONZ'                                           #
+#                                                                           #
+#   This program is free software: you can redistribute it and/or modify    #
+#   it under the terms of the GNU General Public License as published by    #
+#   the Free Software Foundation, either version 2 of the License, or       #
+#   any later version.                                                      #
+#                                                                           #
+#   This program is distributed in the hope that it will be useful,         #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    #
+#   See the GNU General Public License for more details.                    #
+#                                                                           #
+#   You should have received a copy of the GNU General Public license       #
+#   along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 source A3S-ui.cfg			# import Default Menu UI Settings
 source A3S.cfg				# import Default Script Settings
@@ -249,6 +249,7 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		sleep 2.5
 		printf '%s\n'  ""
 		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+		notify-send "Please Logout and Log back in again"
 		sleep 2
 		$logout
 	elif [ "$installDependenciesopt0" == 2 ] ; then
@@ -315,6 +316,7 @@ saberinstall() # Download, Sync Repo, Compile & Install Latest SaberMod Linux Ke
 			sleep 2	
 			printf '%s\n'  ""
 			printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+			notify-send "Please Logout and Log back in again"
 			sleep 2
 			$logout
 		else
@@ -435,6 +437,7 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 		sleep 2.5
 		printf '%s\n'  ""
 		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+		notify-send "Please Logout and Log back in again"
 		sleep 2
 		$logout
 	elif [ "$installstudioopt0" == 2 ] ; then
@@ -543,6 +546,7 @@ setuprenv() # Setup ROM Build Environment
 		sleep 2.5
 		printf '%s\n'  ""
 		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+		notify-send "Please Logout and Log back in again"
 		sleep 2
 		$logout
 	elif [ "$setuprenvopt0" == 2 ] ; then
@@ -697,6 +701,7 @@ setupkenv() # Setup Kernel Build Environment
 		sleep 2.5
 		printf '%s\n'  ""
 		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+		notify-send "Please Logout and Log back in again"
 		sleep 2
 		$logout
 	elif [ "$setupkenvopt0" == 2 ] ; then
@@ -961,6 +966,7 @@ rbcompilebuild() # Compile Rom From Source
 			fi
 			${buildenv} && sleep 2 && ${compilerom} && sleep 4
 		show_stage_completed
+		notify-send "Android Rom Compile Completed"
 		) 2>&1 | tee ${logfile} 
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
@@ -1728,6 +1734,7 @@ kbcompilebuild() # Compile Kernel
 		fi
 		cd && cd Android/KernelDevelopment/${DesiredKernelName} &&
 			make ${dconfig} && sleep 2 && ${compilekernel} && sleep 4
+			notify-send "Android Kernel Compile Completed"
 		# Copy zImage To 'compiled_files' folder
 		printf '%s\n'  ""
 		printf '%s\n'  "      ${b}-> Copying New zImage to 'compiled_files'... <-${n}         "
@@ -2214,13 +2221,14 @@ exitscript() # Exit Script
 {
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "    - Exiting 'AndroidThreeScripts' ...   "
+	printf '%s\n' "    - Exiting 'AndroidThreeScripts and Monitor' ...   "
 	showPreProgress
 	showPostProgress
 	printf '%s\n'  ""
 	printf '%s\n'  "                    ${g}GoodBye!!${n}                    "
 	printf '%s\n'  ""
-	sleep 2
+	ps -ef | awk '/A3S.monitor/{print $2}' | xargs kill
+	sleep 1.5
 	clear
 	exit
 }

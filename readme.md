@@ -89,7 +89,15 @@ Change log's..
 ------------
 ### 03/12/2014 ...
 
+* Added seperate simple system load monitor to run alongside AndroidThreeScripts
+* Added proper script loader to start the system load monitor and main script together
 * Added PATH conflict checks before attempting to compile SaberMod Linux Kernel
+* Colorized system load monitor
+* Added kill system load monitor when exiting AndroidThreeScripts
+* Added 'notify-send' ubuntu desktop notifications upon completion of some functions 
+* Formatting and syntax changes
+* Changed filenames for accessability
+* Bumped to v1.6 - 03/12/2014
 
 ### 22/11/2014 ...
 
