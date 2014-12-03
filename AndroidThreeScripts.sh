@@ -46,7 +46,7 @@ mainmenu()
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r1${b})  Clean ROM Build Folder Structure                                    ${c}k1${b})  Edit Kernel 'defconfig' File"
 	printf '%s\n' "     ${b}Linux Setup                                                              ${c}r2${b})  Sync ROM Repo's                                                     ${c}k2${b})  Clean Kernel Folder And Remove '.config' file"
 	printf '%s\n' "     ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source                                             ${c}k3${b})  Compile Kernel & Modules" 
-	printf '%s\n' "     ${c}2${b})  Download & Install ${AstudioName}                 ${c}r4${b})  Copy New 'system' Folder & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
+	printf '%s\n' "     ${c}2${b})  Download & Install ${AstudioName}                ${c}r4${b})  Copy New 'system' Folder & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
 	printf '%s\n' "     ${c}3${b})  Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Apps               -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r5${b})  Pull Gapps From Device                                               -------------------------------------------------------------"
 	printf '%s\n' "     ${b}Android ROM Development Setup                                            ${c}r6${b})  Download Additional App's Using 'Additions.links' file              ${c}k6${b})  Edit 'aroma-config' file in working_folder"
@@ -257,7 +257,7 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		installDependencies
 	fi 
 }
-saberinstall() # Download, Compile & Install Latest SaberMod Linux Kernel
+saberinstall() # Download, Sync Repo, Compile & Install Latest SaberMod Linux Kernel
 {
 	clear
 	Function="saberinstall"
@@ -269,7 +269,7 @@ saberinstall() # Download, Compile & Install Latest SaberMod Linux Kernel
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n' "    1) Download Latest SaberMod Linux Kernel Source (home/'user'/Linux/)"
-	printf '%s\n' "    2) Compile & Install Latest SaberMod Linux Kernel (If Already Downloaded)"
+	printf '%s\n' "    2) Sync Repo, Compile & Install Latest SaberMod Linux Kernel (If Already Downloaded)"
 	printf '%s\n' "    3) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
@@ -301,7 +301,24 @@ saberinstall() # Download, Compile & Install Latest SaberMod Linux Kernel
 		(
 		Stagenumber="1"
 		show_stage_header
-		printf '%s\n'  "        ${b}-> Compiling & Installing Newest SaberMod Linux Kernel... <-${n}             "
+		# check to see if conflicting Android Kernel Dev PATH's exist in bash.rc, if so run the cleanbash function, add basic PATH and logout
+		KernelDevHeader=$kerneldevheader
+		if grep -q "$kerneldevheader" "$File"; then
+			printf '%s\n'  "        ${b}-> Current PATH settings are not setup correctly, Changing them now... <-${n}             "
+			if [ -f ~/.bashrc ]; then
+ 				cleanbash 
+			fi
+			sleep 2
+			echo ${pathheader} >> ~/.bashrc &&
+			echo ${path} "# A3S Path Settings" >> ~/.bashrc && 
+			showPostProgress
+			sleep 2	
+			printf '%s\n'  ""
+			printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+			sleep 2
+			$logout
+		else
+			printf '%s\n'  "        ${b}-> Compiling & Installing Newest SaberMod Linux Kernel... <-${n}             "
 			cd && cd Linux && 
 				if [ -f ubuntu ]; then
 					. ubuntu & wait
@@ -309,7 +326,8 @@ saberinstall() # Download, Compile & Install Latest SaberMod Linux Kernel
 					printf '%s\n'  "Sabermod 'ubuntu' script NOT found!"
 				sleep 2.5
 				mainmenu
-				fi		
+				fi
+		fi		
 		showPostProgress && sleep 2
 		show_stage_completed
 		) 2>&1 | tee ${logfile} 
