@@ -19,7 +19,6 @@
 b=$(tput setaf 4) # Color Code (blue)
 c=$(tput setaf 6) # Color Code (cyan)
 w=$(tput setaf 7) # Color Code (white)
-tput cup 0 0   # Move cursor to screen location X,Y (top left is 0,0)
 echo -en "\033]0;A3S Monitor\a"
 printf '\033[8;8;44t'
 clear
