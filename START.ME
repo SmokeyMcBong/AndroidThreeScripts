@@ -20,21 +20,21 @@
 if [ $(pgrep -c cinnamon-panel) -gt 0 ]; then
 	cinnamon-terminal -x ./A3S.base
 	cinnamon-terminal -x ./A3S.monitor
-	notify-send "AndroidThreeScripts is running"
+	notify-send "AndroidThreeScripts is running..."
 elif [ $(pgrep -c gnome-panel) -gt 0 ]; then
 	gnome-terminal -x ./A3S.base
 	gnome-terminal -x ./A3S.monitor
-	notify-send "AndroidThreeScripts is running"
+	notify-send "AndroidThreeScripts is running..."
 elif [ $(pgrep -c kde-panel) -gt 0 ]; then
 	kde-terminal -x ./A3S.base
 	kde-terminal -x ./A3S.monitor
-	notify-send "AndroidThreeScripts is running"
+	notify-send "AndroidThreeScripts is running..."
 elif [ $(pgrep -c mate-panel) -gt 0 ]; then
 	mate-terminal -x ./A3S.base
 	mate-terminal -x ./A3S.monitor
-	notify-send "AndroidThreeScripts is running"
+	notify-send "AndroidThreeScripts is running..."
 elif [ $(pgrep -c xfce4-panel) -gt 0 ]; then
 	xfce4--terminal -x ./A3S.base
 	xfce4--terminal -x ./A3S.monitor
-	notify-send "AndroidThreeScripts is running"
+	notify-send "AndroidThreeScripts is running..."
 fi
