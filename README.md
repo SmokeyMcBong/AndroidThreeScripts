@@ -87,6 +87,10 @@ Planned Feature's..
 
 Change log's..
 ------------
+### 03/12/2014 ...
+
+* Added PATH conflict checks before attempting to compile SaberMod Linux Kernel
+
 ### 22/11/2014 ...
 
 * Renamed config files to .cfg extension 
