@@ -19,8 +19,8 @@
 b=$(tput setaf 4) # Color Code (blue)
 c=$(tput setaf 6) # Color Code (cyan)
 w=$(tput setaf 7) # Color Code (white)
-echo -en "\033]0;A3S Monitor\a"
-printf '\033[8;8;44t'
+printf '\033]0;A3S Monitor\a'
+printf '\033[8;9;44t'
 clear
 while true
 	do 
@@ -28,10 +28,12 @@ while true
 		printf '%s\n' "            ${w}Usage & Load Monitor"
 		printf '%s\n' "        ${b}----------------------------     "
 		printf "   ${b}Memory Usage: ${c}"
-			free -m | awk 'NR==2{printf "%s/%sMB (%.2f%)\n", $3,$2,$3*100/$2 }' 
+			free -m | awk 'NR==2{printf "%s/%s MB (%.2f%)\n", $3,$2,$3*100/$2 }'
+		printf "   ${b}Swap Usage: ${c}"
+			free -t -m | grep "Swap" | awk '{printf "%s/%s MB (%.2f%)\n", $3,$4,$3*100/$4 }'
 		printf "   ${b}Disk Usage: ${c}"
-			df -h | awk '$NF=="/"{printf "%d/%dGB (%s)\n", $3,$2,$5}' 
-		printf "   ${b}CPU Load: ${c}" 
+			df -h | awk '$NF=="/"{printf "%d/%d GB (%s)\n", $3,$2,$5}'
+		printf "   ${b}CPU Load: ${c}"
 			grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}'
 		printf '%s\n' "        ${b}----------------------------     "
 		sleep 1
