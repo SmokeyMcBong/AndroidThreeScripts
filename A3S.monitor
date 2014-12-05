@@ -20,38 +20,38 @@ b=$(tput setaf 4) # Color Code (blue)
 c=$(tput setaf 6) # Color Code (cyan)
 w=$(tput setaf 7) # Color Code (white)
 printf '\033]0;A3S Monitor\a'
-printf '\033[8;15;50t'
+printf '\033[8;15;49t'
 clear
 function Monitor {
 	while true
 		do
-			printf '%s\n' "         ${b}---------------------------------     "
-			printf '%s\n' "               ${w}Usage & Load Monitor"
-			printf '%s\n' "         ${b}---------------------------------     "
-			printf "   ${b}CPU: ${c}"
+			printf '%s\n' "        ${b}---------------------------------     "
+			printf '%s\n' "              ${w}Usage & Load Monitor"
+			printf '%s\n' "        ${b}---------------------------------     "
+			printf "  ${b}CPU: ${c}"
 				grep -m 1 "model name" /proc/cpuinfo | cut -d: -f2 | sed -e 's/^ *//' | sed -e 's/$//'
-			printf "   ${b}No. of CPU Cores: ${c}"
+			printf "  ${b}No. of CPU Cores: ${c}"
 				nproc | awk '{ printf $0 }'
 			printf '%s\n' ""
-			printf "   ${b}Linux Version: ${c}"
+			printf "  ${b}Linux Version: ${c}"
 				. /etc/lsb-release
 				OS=$DISTRIB_DESCRIPTION
 				printf "${OS}"
-			printf '%s\n'"   ${b}Current Kernel: ${c}"
+			printf '%s\n'"  ${b}Current Kernel: ${c}"
 				uname -r | awk '{ printf $0 }'
 			printf '%s\n' ""
 			printf '%s\n' "         ${b}---------------------------------     "
-			printf "   ${b}Memory Usage: ${c}"
+			printf "  ${b}Memory Usage: ${c}"
 				free -m | awk 'NR==2{printf "%s/%s MB (%.2f%)\n", $3,$2,$3*100/$2 }'
-			printf "   ${b}Swap Usage: ${c}"
+			printf "  ${b}Swap Usage: ${c}"
 				free -t -m | grep "Swap" | awk '{printf "%s/%s MB (%.2f%)\n", $3,$4,$3*100/$4 }'
-			printf "   ${b}Disk Usage: ${c}"
+			printf "  ${b}Disk Usage: ${c}"
 				df -h | awk '$NF=="/"{printf "%d/%d GB (%s)\n", $3,$2,$5}'
-			printf "   ${b}CPU Load (avg): ${c}"
+			printf "  ${b}CPU Load (avg): ${c}"
 				grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}'
-			printf "   ${b}No. of Processes: ${c}"
+			printf "  ${b}No. of Processes: ${c}"
 				ps ax | wc -l | awk '{print $1}'
-			printf "   ${b}System Uptime: ${c}"
+			printf "  ${b}System Uptime: ${c}"
 				upSeconds=`cat /proc/uptime`;
 				upSeconds=${upSeconds%%.*};
 				secs=$((${upSeconds}%60))
