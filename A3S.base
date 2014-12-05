@@ -2182,11 +2182,11 @@ cleanbash() # check 'bash.rc' for conflicting entries before adding new ones
 		sed -i '/'"$ToolchainPath"'/d' $File
 	fi
 }
-editprefs() # open 'user.preferences'
+editprefs() # open 'UserPrefs.conf'
 {
-	${sysdefapp} ${projectlocation}/user.preferences  &&
+	${sysdefapp} ${projectlocation}/UserPrefs.conf  &&
 	printf '%s\n'  ""
-	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'user.preferences' ??"
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'UserPrefs.conf' ??"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
