@@ -44,7 +44,7 @@ AstudioName="Android Studio 0.8.14 & SDK Bundle"
 AstudioSource="http://downloads.puresoftware.org/files/android/studio-bundle/android-studio-bundle-135.1339820-linux.tgz"
 
 # 3rd Party Application Location
-App1Name="Github's ATOM text editor"
+App1Name="Github's ATOM Text Editor"
 App1Source="https://github.com/atom/atom/releases/download/v0.152.0/atom-amd64.deb"
 
 # SaberMod Linux Kernel

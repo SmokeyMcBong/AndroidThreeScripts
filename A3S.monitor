@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #   This file is part of the 'AndroidThreeScripts' project                  #
 #   Copyright (C) 2014  'theFONZ'                                           #
@@ -16,9 +16,7 @@
 #   You should have received a copy of the GNU General Public license       #
 #   along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-b=$(tput setaf 4) # Color Code (blue)
-c=$(tput setaf 6) # Color Code (cyan)
-w=$(tput setaf 7) # Color Code (white)
+source A3S-ui.cfg		# Import Default Menu UI Variables
 printf '\033]0;A3S Monitor\a'
 printf '\033[8;15;49t'
 clear
