@@ -16,8 +16,8 @@
 #   You should have received a copy of the GNU General Public license       #
 #   along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-source A3S-ui.cfg			# import Default Menu UI Settings
-source A3S.cfg				# import Default Script Settings
+source A3S-ui.cfg					# import Default Menu UI Settings
+source A3S.cfg						# import Default Script Settings
 source user.preferences		# import User Configurable Settings
 mainmenu()
 {
@@ -47,7 +47,7 @@ mainmenu()
 	printf '%s\n' "     ${b}Linux Setup                                                              ${c}r2${b})  Sync ROM Repo's                                                     ${c}k2${b})  Clean Kernel Folder And Remove '.config' file"
 	printf '%s\n' "     ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source                                             ${c}k3${b})  Compile Kernel & Modules"
 	printf '%s\n' "     ${c}2${b})  Download & Install ${AstudioName}                ${c}r4${b})  Copy New 'system' Folder & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
-	printf '%s\n' "     ${c}3${b})  Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Apps               -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
+	printf '%s\n' "     ${c}3${b})  Download & Install ${App1Name}                          -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r5${b})  Pull Gapps From Device                                               -------------------------------------------------------------"
 	printf '%s\n' "     ${b}Android ROM Development Setup                                            ${c}r6${b})  Download Additional App's Using 'Additions.links' file              ${c}k6${b})  Edit 'aroma-config' file in working_folder"
 	printf '%s\n' "     ${c}4${b})  Setup Build Environment for ROM Development                          ${c}r7${b})  Download Xposed Framework/Modules Using 'Xposed.links' file         ${c}k7${b})  Edit 'updater-script' file in working_folder"
@@ -56,10 +56,10 @@ mainmenu()
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r9${b})  Edit 'aroma-config' file                                            ${c}k8${b})  Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' "     ${b}Android Kernel Development Setup                                         ${c}r10${b}) Edit 'updater-script' file"
 	printf '%s\n' "     ${c}7${b})  Setup Build Environment for Kernel Development                       ${c}r11${b}) Edit 'build.prop' file"
-	printf '%s\n' "     ${c}8${b})  Download Sabermod ${ToolchainName} Toolchain For Kernel Compile                 -------------------------------------------------------------"
+	printf '%s\n' "     ${c}8${b})  Download Sabermod ${ToolchainName} Toolchain For Kernel Compile         -------------------------------------------------------------"
 	printf '%s\n' "     ${c}9${b})  Download Kernel Source Code (Current Source = ${g}${DesiredKernelName}${b})          ${c}r12${b}) Edit 'Additions.links' file"
 	printf '%s\n' "                                                                              ${c}r13${b}) Edit 'Xposed.links' file"
-	printf '%s\n' "      -------------------------------------------------------------           -------------------------------------------------------------"
+	printf '%s\n' "      -------------------------------------------------------------            -------------------------------------------------------------"
 	printf '%s\n' "     ${c}Info>${b} Build Environment Currently Set To : ${g}${currentenvsetup}${b}"
 	printf '%s\n' "         (Use Options ${c}4${b} and ${c}7${b} To Switch Build Environments)                   ${c}r14${b}) Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' ""
@@ -446,7 +446,7 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 		installstudio
 	fi
 }
-installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
+installapps() # Download & Install 3rd party Apps
 {
 	clear
 	Function="installapps"
@@ -457,7 +457,7 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "    1) Download & Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Apps"
+	printf '%s\n' "    1) Download & Install ${App1Name}"
 	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
@@ -474,13 +474,13 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
  					rm -rf ${TempDir}
 				fi
 			mkdir ${TempDir} && cd ${TempDir} &&
-		    wget ${SunflowerSource} && wget ${SublimeSource} && wget ${UtweakSource} &&
+		    wget ${App1Source} &&
 			clear
 			Stagenumber="3"
 			show_stage_header
 			printf '%s\n'  "  ${b}-> Installing 3rd Party Apps... <-${n}  "
 			sleep 2
-			  sudo dpkg -i ${SunflowerFilename} && sudo dpkg -i ${SublimeFilename} && sudo gdebi ${UtweakFilename} &&
+			  sudo dpkg -i ${App1Source} &&
             show_stage_completed
 			) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
