@@ -17,27 +17,30 @@
 #   along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # check which desktop environment is being used
+startbase="./A3S.base"
+startmonitor="./A3S.monitor"
+message="AndroidThreeScripts is running..."
 function StartMe {
 	if [ $(pgrep -c cinnamon-panel) -gt 0 ]; then
-		cinnamon-terminal -x ./A3S.base
-		cinnamon-terminal -x ./A3S.monitor
-		notify-send "AndroidThreeScripts is running..."
+		cinnamon-terminal -x $startbase
+		cinnamon-terminal -x $startmonitor
+		notify-send "$message"
 	elif [ $(pgrep -c gnome-panel) -gt 0 ]; then
-		gnome-terminal -x ./A3S.base
-		gnome-terminal -x ./A3S.monitor
-		notify-send "AndroidThreeScripts is running..."
+		gnome-terminal -x $startbase
+		gnome-terminal -x $startmonitor
+		notify-send "$message"
 	elif [ $(pgrep -c kde-panel) -gt 0 ]; then
-		kde-terminal -x ./A3S.base
-		kde-terminal -x ./A3S.monitor
-		notify-send "AndroidThreeScripts is running..."
+		kde-terminal -x $startbase
+		kde-terminal -x $startmonitor
+		notify-send "$message"
 	elif [ $(pgrep -c mate-panel) -gt 0 ]; then
-		mate-terminal -x ./A3S.base
-		mate-terminal -x ./A3S.monitor
-		notify-send "AndroidThreeScripts is running..."
+		mate-terminal -x $startbase
+		mate-terminal -x $startmonitor
+		notify-send "$message"
 	elif [ $(pgrep -c xfce4-panel) -gt 0 ]; then
-		xfce4--terminal -x ./A3S.base
-		xfce4--terminal -x ./A3S.monitor
-		notify-send "AndroidThreeScripts is running..."
+		xfce4--terminal -x $startbase
+		xfce4--terminal -x $startmonitor
+		notify-send "$message"
 	fi
 }
 StartMe # Run StartMe function
