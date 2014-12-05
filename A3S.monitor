@@ -16,7 +16,7 @@
 #   You should have received a copy of the GNU General Public license       #
 #   along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-source A3S-ui.cfg		# Import Default Menu UI Variables
+source A3S-ui.conf		# Import Default Menu UI Variables
 printf '\033]0;A3S Monitor\a'
 printf '\033[8;15;49t'
 clear
