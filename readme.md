@@ -6,7 +6,7 @@
 
 <center>"***Complete Android Build Helper. With 'Fresh-to-Ready', 'RomBuilder' and 'KernelBuilder'  !...***"</center>
 
-<br /> 
+<br />
 <center>
 ![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/AndroidThreeScripts.png)
 </center>
@@ -89,6 +89,8 @@ Change log's..
 ------------
 ### 05/12/2014 ...
 
+* Removed SunflowerfM, SublimeText3 and UbuntuTweak apps
+* Added Github's ATOM Text Editor
 * Added CPU model name to the system load monitor
 * Added CPU Core count to the system load monitor
 * Added Current Linux version and codename to the system load monitor
@@ -99,6 +101,7 @@ Change log's..
 * Made system load monitor its own function,then call by function name
 * Made START.ME its own function,then call by function name
 
+
 ### 03/12/2014 ...
 
 * Added seperate simple system load monitor to run alongside AndroidThreeScripts
@@ -106,21 +109,21 @@ Change log's..
 * Added PATH conflict checks before attempting to compile SaberMod Linux Kernel
 * Colorized system load monitor
 * Added kill system load monitor when exiting AndroidThreeScripts
-* Added 'notify-send' ubuntu desktop notifications upon completion of some functions 
+* Added 'notify-send' ubuntu desktop notifications upon completion of some functions
 * Formatting and syntax changes
 * Changed filenames for accessability
 * Bumped to v1.6 - 03/12/2014
 
 ### 22/11/2014 ...
 
-* Renamed config files to .cfg extension 
+* Renamed config files to .cfg extension
 * Removed duplicate logout command
 * Changed the way boot.img is created
 * Added quick 'whoami' check to pass username to the set build environment functions
 * Added Auto-resize terminal to fit script perfectly on startup
 * Progress bar update
 * Added creation of file after all dependencies have been satisfied
-* Added a startup check for the dependency satisfied file. 
+* Added a startup check for the dependency satisfied file.
 This will now show if dependencies have been installed
 
 ### 21/11/2014 ...
@@ -172,21 +175,21 @@ This will now show if dependencies have been installed
 * Added Edit preferences and reload new changes when asked
 * Fixed bash.rc echo commands
 * Fixed broken logging for some functions
-* Added checks for files/directories before acting 
+* Added checks for files/directories before acting
 * Externalised more variables to both 'A3S.def' & 'user.preferences'
 * Added mainmenu and function placholders ready for porting RomBuilder & KernelBuilder
 * Added Fix errors/clean broken downloads/copies/directories etc before proceding
-* properly install Android Studio (add path to environment) 
-* bump to v1.1 
- 
+* properly install Android Studio (add path to environment)
+* bump to v1.1
+
 
 ### 06/11/2014 ... [Initial Git commit]
 
 * Added Logging Ability
 * Fixed missing Links
 * Created new Triple menu layout
-* Ported Fresh-to-Ready code over to new codebase 
-* Added Placeholders 
+* Ported Fresh-to-Ready code over to new codebase
+* Added Placeholders
 * Added License and Readme.  
 
 <br />
@@ -209,4 +212,4 @@ This will now show if dependencies have been installed
     See the GNU General Public License for more details.  
 
     You should have received a copy of the GNU General Public License
-    along with this program. See COPYING.txt in project root 
+    along with this program. See COPYING.txt in project root
