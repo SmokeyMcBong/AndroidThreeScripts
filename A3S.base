@@ -22,7 +22,7 @@ source user.preferences		# import User Configurable Settings
 mainmenu()
 {
 	startup_checks && clear
-	echo -en "\033]0;AndroidThreeScripts\a"
+	printf '\033]0;AndroidThreeScripts\a'
 	printf '\033[8;49;221t'
 	printf '%s\n' ""
 	printf '%s\n' ""

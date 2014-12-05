@@ -35,7 +35,7 @@ function Monitor {
 			printf '%s\n' ""	
 			printf "   ${b}Linux Version: ${c}"
 				. /etc/lsb-release
-	    		OS=$DISTRIB_DESCRIPTION
+				OS=$DISTRIB_DESCRIPTION
 				printf "${OS}" 
 			printf '%s\n'"   ${b}Current Kernel: ${c}"
 				uname -r | awk '{ printf $0 }'
@@ -60,9 +60,9 @@ function Monitor {
 				days=$((${upSeconds}/86400))
 				if [ "${days}" -ne "0" ]
 				then
-				   echo -n "${days}d"
+				   printf "${days}d"
 				fi
-				echo -n "${hours}h ${mins}m ${secs}s"
+				printf "${hours}h ${mins}m ${secs}s"
 				printf '%s\n' ""
 			sleep 1
 		clear
