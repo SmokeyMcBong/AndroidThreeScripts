@@ -28,13 +28,13 @@ mainmenu()
 	printf '%s\n' ""
 	printf '%s\n' "   ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 	printf '%s\n' "   ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-	printf '%s\n' ""	
+	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' "     ${g}################################################################         ################################################################         ################################################################"
 	printf '%s\n' "     ${c}####################                        ####################         ####################                        ####################         ####################                        ####################"
 	printf '%s\n' "     ${c}####                                                        ####         ####                                                        ####         ####                                                        ####"
 	printf '%s\n' "     ${n}##                       Fresh-To-Ready                       ##         ##                         RomBuilder                         ##         ##                       KernelBuilder                        ##"
-	printf '%s\n' "     ${c}####                                                        ####         ####                                                        ####         ####                                                        ####"              
+	printf '%s\n' "     ${c}####                                                        ####         ####                                                        ####         ####                                                        ####"
 	printf '%s\n' "     ${c}####################                        ####################         ####################                        ####################         ####################                        ####################"
 	printf '%s\n' "     ${g}################################################################         ################################################################         ################################################################"
 	printf '%s\n' ""
@@ -42,10 +42,10 @@ mainmenu()
 	printf '%s\n' "     ${b}                    Setup Build Environment...                                        Compile Rom, Add Features & AROMA...                                     Compile Kernel, Add Features & AROMA..."
 	printf '%s\n' ""
 	printf '%s\n' ""
-	printf '%s\n' "     ${c}0${b})  Install ALL Dependencies (${dependencystatus})"    
+	printf '%s\n' "     ${c}0${b})  Install ALL Dependencies (${dependencystatus})"
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r1${b})  Clean ROM Build Folder Structure                                    ${c}k1${b})  Edit Kernel 'defconfig' File"
 	printf '%s\n' "     ${b}Linux Setup                                                              ${c}r2${b})  Sync ROM Repo's                                                     ${c}k2${b})  Clean Kernel Folder And Remove '.config' file"
-	printf '%s\n' "     ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source                                             ${c}k3${b})  Compile Kernel & Modules" 
+	printf '%s\n' "     ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source                                             ${c}k3${b})  Compile Kernel & Modules"
 	printf '%s\n' "     ${c}2${b})  Download & Install ${AstudioName}                ${c}r4${b})  Copy New 'system' Folder & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
 	printf '%s\n' "     ${c}3${b})  Install Sunflower-FM, SublimeText 3 & Ubuntu Tweak Apps               -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
 	printf '%s\n' "      -------------------------------------------------------------           ${c}r5${b})  Pull Gapps From Device                                               -------------------------------------------------------------"
@@ -62,16 +62,16 @@ mainmenu()
 	printf '%s\n' "      -------------------------------------------------------------           -------------------------------------------------------------"
 	printf '%s\n' "     ${c}Info>${b} Build Environment Currently Set To : ${g}${currentenvsetup}${b}"
 	printf '%s\n' "         (Use Options ${c}4${b} and ${c}7${b} To Switch Build Environments)                   ${c}r14${b}) Zip working_folder Contents Ready For Flashing on Device"
-	printf '%s\n' ""	
+	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' "   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 	printf '%s\n' "   ${c}p${b} )  Edit Preferences   ${c}d${b} )  Delete Logs [Current = ${g}${logsize}kb${b}]                                                                                                                             'AndroidThreeScripts'"
-	printf '%s\n' "   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"	
+	printf '%s\n' "   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 	printf '%s\n' "   ${c}e${b} )  Exit Script        ${c}r${b} )  Restart PC        ${c}s${b} )  Shutdown PC                                                                                                            Written by 'theFONZ' ${scriptbuild}"
 	printf '%s\n' "   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------${n}"
-	printf '%s\n' ""	
+	printf '%s\n' ""
 	read mainmen
 	# Fresh-To-Ready Menu
 	if [ "$mainmen" == 0 ] ; then
@@ -92,37 +92,37 @@ mainmenu()
 		setupkenv
 	elif [ "$mainmen" == 8 ] ; then
 		downloadktoolchain
-	elif [ "$mainmen" == 9 ] ; then 
+	elif [ "$mainmen" == 9 ] ; then
 		downloadksource
 
 	# RomBuilder Menu
 	elif [ "$mainmen" == r1 ] ; then
 		rbcleanbuild
 	elif [ "$mainmen" == r2 ] ; then
-		rbsyncbuild	
+		rbsyncbuild
 	elif [ "$mainmen" == r3 ] ; then
-		rbcompilebuild	
+		rbcompilebuild
 	elif [ "$mainmen" == r4 ] ; then
-		rbcopy	
+		rbcopy
 	elif [ "$mainmen" == r5 ] ; then
 		rbgapps
 	elif [ "$mainmen" == r6 ] ; then
 		rbadditions
 	elif [ "$mainmen" == r7 ] ; then
-		rbxposed	
+		rbxposed
 	elif [ "$mainmen" == r8 ] ; then
-		rbcopy2	
-	elif [ "$mainmen" == r9 ] ; then 
-		rbeditaroma	
+		rbcopy2
+	elif [ "$mainmen" == r9 ] ; then
+		rbeditaroma
 	elif [ "$mainmen" == r10 ] ; then
 		rbeditupdaterscript
 	elif [ "$mainmen" == r11 ] ; then
 		rbeditbuildprop
-	elif [ "$mainmen" == r12 ] ; then 
+	elif [ "$mainmen" == r12 ] ; then
 		rbeditadditions
-	elif [ "$mainmen" == r13 ] ; then 
+	elif [ "$mainmen" == r13 ] ; then
 		rbeditxposed
-	elif [ "$mainmen" == r14 ] ; then 
+	elif [ "$mainmen" == r14 ] ; then
 		rbzip
 
 	# KernelBuilder Menu
@@ -133,16 +133,16 @@ mainmenu()
 	elif [ "$mainmen" == k3 ] ; then
 		kbcompilebuild
 	elif [ "$mainmen" == k4 ] ; then
-		kbcreateboot	
+		kbcreateboot
 	elif [ "$mainmen" == k5 ] ; then
-		kbcopy	
+		kbcopy
 	elif [ "$mainmen" == k6 ] ; then
-		kbeditaroma	
+		kbeditaroma
 	elif [ "$mainmen" == k7 ] ; then
 		kbeditupdaterscript
 	elif [ "$mainmen" == k8 ] ; then
 		kbzip
-		
+
 	# Main Menu Preferences/Exit/Reboot/Shutdown
 	elif [ "$mainmen" == p ] ; then
 		editprefs
@@ -154,18 +154,18 @@ mainmenu()
 		restartpc
 	elif [ "$mainmen" == s ] ; then
 		shutdownpc
-	elif 
+	elif
 		 # Fresh-To-Ready Menu
 		 [ "$mainmen" != 0 ] && [ "$mainmen" != 1 ] && [ "$mainmen" != 2 ] && [ "$mainmen" != 3 ] &&
 		 [ "$mainmen" != 4 ] && [ "$mainmen" != 5 ] && [ "$mainmen" != 6 ] && [ "$mainmen" != 7 ] &&
-		 [ "$mainmen" != 8 ] && [ "$mainmen" != 9 ] && 
+		 [ "$mainmen" != 8 ] && [ "$mainmen" != 9 ] &&
 		 # RomBuilder Menu
-		 [ "$mainmen" != r1 ] && [ "$mainmen" != r2 ] && [ "$mainmen" != r3 ] && [ "$mainmen" != r4 ] && 
-		 [ "$mainmen" != r5 ] && [ "$mainmen" != r6 ] && [ "$mainmen" != r7 ] && [ "$mainmen" != r8 ] && 
+		 [ "$mainmen" != r1 ] && [ "$mainmen" != r2 ] && [ "$mainmen" != r3 ] && [ "$mainmen" != r4 ] &&
+		 [ "$mainmen" != r5 ] && [ "$mainmen" != r6 ] && [ "$mainmen" != r7 ] && [ "$mainmen" != r8 ] &&
 		 [ "$mainmen" != r9 ] && [ "$mainmen" != r10 ] && [ "$mainmen" != r11 ] && [ "$mainmen" != r12 ] &&
 		 [ "$mainmen" != r13 ] && [ "$mainmen" != r14 ] &&
 		 # KernelBuilder Menu
-		 [ "$mainmen" != k1 ] && [ "$mainmen" != k2 ] && [ "$mainmen" != k3 ] && [ "$mainmen" != k4 ] && 
+		 [ "$mainmen" != k1 ] && [ "$mainmen" != k2 ] && [ "$mainmen" != k3 ] && [ "$mainmen" != k4 ] &&
 		 [ "$mainmen" != k5 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k8 ] &&
 		 # Main Menu Preferences/Exit/Reboot/Shutdown
 		 [ "$mainmen" != p ] && [ "$mainmen" != d ] && [ "$mainmen" != e ] && [ "$mainmen" != r ] && [ "$mainmen" != s ]; then
@@ -209,7 +209,7 @@ startup_checks() # make startup checks
 	fi
 }
 # Fresh-To-Ready Menu >>>
-installDependencies() # Install ALL needed Dependencies before doing anything! 
+installDependencies() # Install ALL needed Dependencies before doing anything!
 {
 	clear
 	Function="InstallDependencies"
@@ -232,19 +232,19 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		show_stage_header
 		printf '%s\n'  "      ${b}-> Downloading Dependencies... <-${n}             "
 			showPreProgress
-			  sudo apt-get purge -y openjdk-\* icedtea-\* icedtea6-\* && sudo add-apt-repository -y ppa:webupd8team/java && sudo apt-get update && sudo apt-get install -y oracle-java6-installer && sudo apt-get install -y git gnupg ccache lzop flex bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 libc6-dev lib32bz2-1.0 lib32ncurses5-dev x11proto-core-dev libx11-dev:i386 libreadline6-dev:i386 lib32z1-dev libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown libxml2-utils xsltproc libreadline6-dev lib32readline-gplv2-dev libncurses5-dev bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev lib32bz2-dev squashfs-tools pngcrush schedtool dpkg-dev libcloog-isl-dev libcap-dev liblz4* abootimg android-tools-adb android-tools-fastboot && sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so && mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo && 
+			  sudo apt-get purge -y openjdk-\* icedtea-\* icedtea6-\* && sudo add-apt-repository -y ppa:webupd8team/java && sudo apt-get update && sudo apt-get install -y oracle-java6-installer && sudo apt-get install -y git gnupg ccache lzop flex bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 libc6-dev lib32bz2-1.0 lib32ncurses5-dev x11proto-core-dev libx11-dev:i386 libreadline6-dev:i386 lib32z1-dev libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown libxml2-utils xsltproc libreadline6-dev lib32readline-gplv2-dev libncurses5-dev bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev lib32bz2-dev squashfs-tools pngcrush schedtool dpkg-dev libcloog-isl-dev libcap-dev liblz4* abootimg android-tools-adb android-tools-fastboot && sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so && mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo &&
 			  printf '%s\n'  ""
 			  printf '%s\n'  "Adding Paths and Variables to .bashrc file..."
 			  if [ -f ~/.bashrc ]; then
- 					cleanbash 
+ 					cleanbash
 			  fi
 			  sleep 2
 			  echo ${pathheader} >> ~/.bashrc &&
-			  echo ${path} "# A3S Path Settings" >> ~/.bashrc && 
-			showPostProgress 
+			  echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
+			showPostProgress
 			echo dependencies have been satisfied >> d.s && sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		printf '%s\n'  ""
@@ -256,7 +256,7 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		mainmenu
 	elif [ "$installDependenciesopt0" != 1 ] && [ "$installDependenciesopt0" != 2 ] ; then
 		installDependencies
-	fi 
+	fi
 }
 saberinstall() # Download, Sync Repo, Compile & Install Latest SaberMod Linux Kernel
 {
@@ -282,17 +282,17 @@ saberinstall() # Download, Sync Repo, Compile & Install Latest SaberMod Linux Ke
 		Stagenumber="1"
 		show_stage_header
 		printf '%s\n'  "      ${b}-> Downloading Newest SaberMod Linux Kernel Source... <-${n}             "
-			cd && 
+			cd &&
 				if [ ! -d Linux ]; then
  					mkdir Linux
-				else 
-					rm -rf Linux && mkdir Linux 
-				fi		
+				else
+					rm -rf Linux && mkdir Linux
+				fi
 			cd Linux && sleep 1
 			  repo init -u ${SaberLinuxSource} && exec ${sync} & wait
 			showPostProgress && sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		saberinstall
@@ -307,13 +307,13 @@ saberinstall() # Download, Sync Repo, Compile & Install Latest SaberMod Linux Ke
 		if grep -q "$kerneldevheader" "$File"; then
 			printf '%s\n'  "        ${b}-> Current PATH settings are not setup correctly, Changing them now... <-${n}             "
 			if [ -f ~/.bashrc ]; then
- 				cleanbash 
+ 				cleanbash
 			fi
 			sleep 2
 			echo ${pathheader} >> ~/.bashrc &&
-			echo ${path} "# A3S Path Settings" >> ~/.bashrc && 
+			echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
 			showPostProgress
-			sleep 2	
+			sleep 2
 			printf '%s\n'  ""
 			printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
 			notify-send "Please Logout and Log back in again"
@@ -321,7 +321,7 @@ saberinstall() # Download, Sync Repo, Compile & Install Latest SaberMod Linux Ke
 			$logout
 		else
 			printf '%s\n'  "        ${b}-> Compiling & Installing Newest SaberMod Linux Kernel... <-${n}             "
-			cd && cd Linux && 
+			cd && cd Linux &&
 				if [ -f ubuntu ]; then
 					. ubuntu & wait
 				else
@@ -329,10 +329,10 @@ saberinstall() # Download, Sync Repo, Compile & Install Latest SaberMod Linux Ke
 				sleep 2.5
 				mainmenu
 				fi
-		fi		
+		fi
 		showPostProgress && sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -370,18 +370,18 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 		cd &&
 			if [ ! -d Android ]; then
  					mkdir Android
-				fi		
+				fi
 			cd Android &&
 			if [ -d android-studio ]; then
  					rm -rf android-studio
-				fi	
+				fi
 			for filename in *; do
 				case "${filename}" in
 					${StudioAlias}*) rm -f "$filename";;
 				esac
-			done &&	
+			done &&
 		wget ${AstudioSource} &&
-		sleep 2		
+		sleep 2
 		clear
 		Stagenumber="2"
 		show_stage_header
@@ -391,48 +391,48 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 				case "${filename}" in
 					${StudioAlias}*) tar -zxvf "$filename";;
 				esac
-			done &&	
+			done &&
 		sleep 2
 		clear
 		Stagenumber="2"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Cleaning Up ... <-${n}          "
-		sleep 2 
+		sleep 2
 			for filename in *; do
 				case "${filename}" in
 					${StudioAlias}*) rm -f "$filename";;
 				esac
-			done &&	
+			done &&
 		sleep 2
 		clear
 		Stagenumber="2"
 		show_stage_header
 		printf '%s\n'  "      ${b}-> Adding Android Studio Path Environment... <-${n}          "
-		sleep 2 
+		sleep 2
 		StudioPathHeader=$studiopathheader
 			if grep -q "$StudioPathHeader" "$File"; then
-  				sed -i '/'"$StudioPathHeader"'/d' $File	
+  				sed -i '/'"$StudioPathHeader"'/d' $File
 			fi
 		StudioPath="# A3S Android Studio Path Settings"
 			if grep -q "$StudioPath" "$File"; then
-				sed -i '/'"${StudioPath}"'/d' $File	
+				sed -i '/'"${StudioPath}"'/d' $File
 			fi
 		echo ${studiopathheader} >> ~/.bashrc &&
-		echo ${studiopath} "# A3S Android Studio Path Settings" >> ~/.bashrc && 
+		echo ${studiopath} "# A3S Android Studio Path Settings" >> ~/.bashrc &&
 		# create symlink on desktop
-		symlink=/home/$user/Desktop/AndroidStudio.start		
+		symlink=/home/$user/Desktop/AndroidStudio.start
 		if [ -f ${symlink} ]; then
  					rm -f ${symlink}
-				fi				
-		ln -s /home/$user/Android/android-studio/bin/studio.sh ${symlink} &&	 
+				fi
+		ln -s /home/$user/Android/android-studio/bin/studio.sh ${symlink} &&
 		clear
 		Stagenumber="2"
 		show_stage_header
 		printf '%s\n'  "${b}-> All done ! use desktop shortcut to start Android-Studio (or type studio.sh from terminal)<-${n}          "
-		sleep 2 
+		sleep 2
 		showPostProgress && sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		printf '%s\n'  ""
@@ -447,7 +447,7 @@ installstudio() # install Android Studio 0.8.6 & SDK Bundle
 	fi
 }
 installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
-{       
+{
 	clear
 	Function="installapps"
 	Stagenumber="3"
@@ -467,9 +467,9 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
 		(
 		Stagenumber="3"
 		show_stage_header
-		printf '%s\n'  "  ${b}-> Downloading 3rd Party Apps... <-${n}  " 
+		printf '%s\n'  "  ${b}-> Downloading 3rd Party Apps... <-${n}  "
 		sleep 1
-			cd ${projectlocation} && 
+			cd ${projectlocation} &&
 				if [ -d ${TempDir} ]; then
  					rm -rf ${TempDir}
 				fi
@@ -478,11 +478,11 @@ installapps() # Install Sunflower FM, Sublime Text 3 & Ubuntu Tweak Apps
 			clear
 			Stagenumber="3"
 			show_stage_header
-			printf '%s\n'  "  ${b}-> Installing 3rd Party Apps... <-${n}  " 
+			printf '%s\n'  "  ${b}-> Installing 3rd Party Apps... <-${n}  "
 			sleep 2
-			  sudo dpkg -i ${SunflowerFilename} && sudo dpkg -i ${SublimeFilename} && sudo gdebi ${UtweakFilename} && 
+			  sudo dpkg -i ${SunflowerFilename} && sudo dpkg -i ${SublimeFilename} && sudo gdebi ${UtweakFilename} &&
             show_stage_completed
-			) 2>&1 | tee ${logfile} 
+			) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -519,29 +519,29 @@ setuprenv() # Setup ROM Build Environment
 		printf '%s\n'  "Creating Folders, Adding Paths and Variables to .bashrc file..."
 		showPreProgress
 		if [ -f ~/.bashrc ]; then
- 					cleanbash 
+ 					cleanbash
 			  fi
 		sleep 2
-		cd && 
+		cd &&
 		  echo '' >> ~/.bashrc &&
 		  echo ${romdevheader} >> ~/.bashrc &&
 		  echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
 		  echo ${ccache} "# A3S Ccache Settings" >> ~/.bashrc &&
-		cd && 
+		cd &&
 			if [ ! -d Android ]; then
  				mkdir Android
-			fi		
-		cd Android && 
+			fi
+		cd Android &&
 			if [ ! -d MyRepositories ]; then
  				mkdir MyRepositories
 			fi
 			if [ ! -d RomDevelopment ]; then
  				mkdir RomDevelopment
-			fi	
+			fi
 		showPostProgress
 		sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		printf '%s\n'  ""
@@ -577,19 +577,19 @@ downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
 		Stagenumber="5"
 		show_stage_header
 		printf '%s\n'  "      ${b}-> Downloading Personal ROM-Related Repos... <-${n}             "
-		cd && 
+		cd &&
 			if [ ! -d Android ]; then
  				mkdir Android
-			fi		
-		cd Android && 
+			fi
+		cd Android &&
 			if [ ! -d MyRepositories ]; then
  				mkdir MyRepositories
 			fi
 		cd MyRepositories &&
-			git clone -v ${PersonalRepo1} && git clone -v ${PersonalRepo2} && git clone -v ${PersonalRepo3} &&		
-			git clone -v ${PersonalRepo4} && git clone -v ${PersonalRepo5} && 
+			git clone -v ${PersonalRepo1} && git clone -v ${PersonalRepo2} && git clone -v ${PersonalRepo3} &&
+			git clone -v ${PersonalRepo4} && git clone -v ${PersonalRepo5} &&
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -622,22 +622,22 @@ downloadrsource()  # Download Desired ROM Source Code
 		Stagenumber="6"
 		show_stage_header
 		printf '%s\n'  "   ${b}-> Downloading ${DesiredRomName} Source Code ... <-${n}       "
-		cd && 
+		cd &&
 			if [ ! -d Android ]; then
  				mkdir Android
-			fi		
-		cd Android && 
+			fi
+		cd Android &&
 			if [ ! -d RomDevelopment ]; then
  				mkdir RomDevelopment
-			fi	
-		cd RomDevelopment && 
+			fi
+		cd RomDevelopment &&
 			if [ -d ${DesiredRomName} ]; then
  				rm -rf ${DesiredRomName}
 			fi
 		mkdir ${DesiredRomName} && cd ${DesiredRomName} &&
 			repo init -u ${DesiredRomSource} -b du44 && ${sync} & wait
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -648,7 +648,7 @@ downloadrsource()  # Download Desired ROM Source Code
 		downloadrsource
 	fi
 }
-setupkenv() # Setup Kernel Build Environment 
+setupkenv() # Setup Kernel Build Environment
 {
 	clear
 	Function="setupkenv"
@@ -674,10 +674,10 @@ setupkenv() # Setup Kernel Build Environment
 		printf '%s\n'  "Creating Folders, Adding Paths and Variables to .bashrc file..."
 		showPreProgress
 		if [ -f ~/.bashrc ]; then
- 					cleanbash 
-			  fi		
+ 					cleanbash
+			  fi
 		sleep 2
-		cd && 
+		cd &&
 		  echo '' >> ~/.bashrc &&
 		  echo ${kerneldevheader} >> ~/.bashrc &&
 		  echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
@@ -685,18 +685,18 @@ setupkenv() # Setup Kernel Build Environment
 		  echo ${ccompile} "# A3S Ccompile Settings" >> ~/.bashrc &&
 		  echo ${ccompilearm} "# A3S Ccompile Arm Settings" >> ~/.bashrc &&
 		  echo ${toolchainpath} "# A3S ToolchainPath Settings" >> ~/.bashrc &&
-		cd && 
+		cd &&
 			if [ ! -d Android ]; then
  				mkdir Android
-			fi		
-		cd Android && 
+			fi
+		cd Android &&
 			if [ ! -d KernelDevelopment ]; then
  				mkdir KernelDevelopment
 			fi
 	showPostProgress
 	sleep 2
 	show_stage_completed
-	) 2>&1 | tee ${logfile} 
+	) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		printf '%s\n'  ""
@@ -732,11 +732,11 @@ downloadktoolchain() # Download SaberMod 4.9.3 Kernel Toolchain
 		Stagenumber="8"
 		show_stage_header
 		printf '%s\n'  "      ${b}-> Downloading ${ToolchainName} Toolchain... <-${n}             "
-		cd && 
+		cd &&
 			if [ ! -d Android ]; then
  				mkdir Android
-			fi		
-		cd Android && 
+			fi
+		cd Android &&
 			if [ ! -d KernelDevelopment ]; then
  				mkdir KernelDevelopment
 			fi
@@ -747,7 +747,7 @@ downloadktoolchain() # Download SaberMod 4.9.3 Kernel Toolchain
 		 mkdir Toolchain &&  cd Toolchain &&
 			git clone -v ${ToolchainSource} &&
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -757,9 +757,9 @@ downloadktoolchain() # Download SaberMod 4.9.3 Kernel Toolchain
 	elif [ "$downloadktoolchainopt0" != 1 ] && [ "$downloadktoolchainopt0" != 2 ] ; then
 		downloadktoolchain
 	fi
-}	
+}
 downloadksource()   # Download Kernel Source Code (specified in .config)
-{       
+{
 	clear
 	Function="downloadksource"
 	Stagenumber="9"
@@ -780,22 +780,22 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 		Stagenumber="9"
 		show_stage_header
 		printf '%s\n'  "   ${b}-> Downloading ${DesiredKernelName} Source Code ... <-${n}       "
-		cd && 
+		cd &&
 			if [ ! -d Android ]; then
  				mkdir Android
-			fi		
-		cd Android && 
+			fi
+		cd Android &&
 			if [ ! -d KernelDevelopment ]; then
  				mkdir KernelDevelopment
-			fi	
-		cd KernelDevelopment && 
+			fi
+		cd KernelDevelopment &&
 			if [ -d ${DesiredKernelName} ]; then
  				rm -rf ${DesiredKernelName}
 			fi
 		#mkdir ${DesiredKernelName} && cd ${DesiredKernelName} &&
 			git clone -v ${DesiredKernelSource} ${DesiredKernelName} &&
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -807,7 +807,7 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 	fi
 }
 # RomBuilder Menu >>>
-rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands 
+rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands
 {
 	clear
 	Function="rbcleanbuild"
@@ -829,7 +829,7 @@ rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands
 		Stagenumber="r1"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Cleaning Previous Folder Structure... <-${n}             "
-		cd && 
+		cd &&
 			if [ -d Android ]; then
  				cd Android
 			else
@@ -841,7 +841,7 @@ rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands
 			else
 				printf '%s\n'  " No Root 'RomDevelopment' Folder Found !, Have You Downloaded The Source ??  "
 				sleep 3 && mainmenu
-			fi		
+			fi
 			if [ -d ${DesiredRomName} ]; then
  				cd ${DesiredRomName}
 			else
@@ -851,11 +851,11 @@ rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands
 		 	showPreProgress
 				clean="make clean"
 				clobber="make clobber"
-					exec ${clean} & wait			
+					exec ${clean} & wait
 					exec ${clobber} & wait
 			showPostProgress && sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -888,7 +888,7 @@ rbsyncbuild() # Invoke 'repo sync -j5' Command to sync repos
 		Stagenumber="r2"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Syncing Rom Repo's... <-${n}             "
-		cd && 
+		cd &&
 			if [ -d Android ]; then
  				cd Android
 			else
@@ -900,7 +900,7 @@ rbsyncbuild() # Invoke 'repo sync -j5' Command to sync repos
 			else
 				printf '%s\n'  " No Root 'RomDevelopment' Folder Found !, Have You Downloaded The Source ??  "
 				sleep 3 && mainmenu
-			fi		
+			fi
 			if [ -d ${DesiredRomName} ]; then
  				cd ${DesiredRomName}
 			else
@@ -911,7 +911,7 @@ rbsyncbuild() # Invoke 'repo sync -j5' Command to sync repos
 				exec ${sync} & wait
 			showPostProgress && sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -945,7 +945,7 @@ rbcompilebuild() # Compile Rom From Source
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Compiling New Complete Rom ... <-${n}          "
 		sleep 2
-		cd && 
+		cd &&
 			if [ -d Android ]; then
  				cd Android
 			else
@@ -957,7 +957,7 @@ rbcompilebuild() # Compile Rom From Source
 			else
 				printf '%s\n'  " No Root 'RomDevelopment' Folder Found !, Have You Downloaded The Source ??  "
 				sleep 3 && mainmenu
-			fi		
+			fi
 			if [ -d ${DesiredRomName} ]; then
  				cd ${DesiredRomName}
 			else
@@ -967,7 +967,7 @@ rbcompilebuild() # Compile Rom From Source
 			${buildenv} && sleep 2 && ${compilerom} && sleep 4
 		show_stage_completed
 		notify-send "Android Rom Compile Completed"
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -979,7 +979,7 @@ rbcompilebuild() # Compile Rom From Source
 	fi
 }
 rbcopy() # Copy newly compiled system and boot.img to working_folder
-{       
+{
 	clear
 	Function="rbcopy"
 	Stagenumber="r4"
@@ -999,7 +999,7 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 		clear
 		Stagenumber="r4"
 		show_stage_header
-		printf '%s\n'  "  ${b}-> Checking if Newly Compiled Rom Exists... <-${n}  " 
+		printf '%s\n'  "  ${b}-> Checking if Newly Compiled Rom Exists... <-${n}  "
 		sleep 3
 		cd &&
 		if [ -d ${outdir} ]; then
@@ -1007,7 +1007,7 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 			(
 			Stagenumber="r4"
 			show_stage_header
-			printf '%s\n'  "  ${b}-> Cleaning Previous system Folder and boot.img... <-${n}  " 
+			printf '%s\n'  "  ${b}-> Cleaning Previous system Folder and boot.img... <-${n}  "
 			cd && cd ${projectlocation}
 				if [ ! -d RomBuilder ]; then
 					mkdir RomBuilder && cd RomBuilder
@@ -1037,13 +1037,13 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 				showPostProgress
 				printf '%s\n' " - Creating Temp Folder..."
 				showPreProgress
-					mkdir ${projectlocation}/RomBuilder/working_folder/temp && 
+					mkdir ${projectlocation}/RomBuilder/working_folder/temp &&
 				showPostProgress
-			else 
-				sleep 1 
+			else
+				sleep 1
 				printf '%s\n' " - Creating Temp Folder..."
 				showPreProgress
-					mkdir ${projectlocation}/RomBuilder/working_folder/temp && 
+					mkdir ${projectlocation}/RomBuilder/working_folder/temp &&
 				showPostProgress
 			fi
 			# Copy Compiled Rom to working_folder
@@ -1079,13 +1079,13 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 				rm -rf temp &&
 			showPostProgress
 			show_stage_completed
-			) 2>&1 | tee ${logfile} 
+			) 2>&1 | tee ${logfile}
 				mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 			sleep 2.5
 			cd && cd ${projectlocation} &&
 				exec ${projectlocation}/A3S.base
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' ""
 			printf '%s\n' " - Doesnt Look Like New Rom Has Been Compiled Yet, Compile New ROM First !!    "
 			sleep 2.5
@@ -1097,7 +1097,7 @@ rbcopy() # Copy newly compiled system and boot.img to working_folder
 		rbcopy
 	fi
 }
-rbgapps() # Pull Gapps Files From Device 
+rbgapps() # Pull Gapps Files From Device
 {
 	clear
 	Function="rbgapps"
@@ -1121,36 +1121,36 @@ rbgapps() # Pull Gapps Files From Device
 		printf '%s\n'  "        ${b}-> Cleaning Previous Folder Structure... <-${n}             "
 		cd RomBuilder &&
 		if [ ! -d grabbed_files ]; then
-			mkdir grabbed_files 
-		fi		
+			mkdir grabbed_files
+		fi
 		if [ -d ${DIR1} ]; then
 			printf '%s\n' " - Removing... ($DIR1)"
 			showPreProgress
 				rm -rf ${DIR1} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
-		mkdir ${DIR1} && mkdir ${DIR1}/priv-app && 
-		printf '%s\n'  "" 
+		mkdir ${DIR1} && mkdir ${DIR1}/priv-app &&
+		printf '%s\n'  ""
 		printf '%s\n'  ""
 		printf '%s\n'  "        ${b}-> Extracting Gapps File's From Device... <-${n}        "
 		printf ""
 		printf ""
 		adb start-server &&
 		printf ""
-		printf " >>                                               (01%%)\r" 
+		printf " >>                                               (01%%)\r"
 		adb pull /system/priv-app/GoogleLoginService.apk ${DIR1}/priv-app &&
-		printf "                                                  (25%%)\r" 
+		printf "                                                  (25%%)\r"
 		adb pull /system/priv-app/GoogleServicesFramework.apk ${DIR1}/priv-app &&
-		printf "                                                  (50%%)\r" 
+		printf "                                                  (50%%)\r"
 		adb pull /system/priv-app/Phonesky.apk ${DIR1}/priv-app &&
-		printf "                                                  (75%%)\r" 
+		printf "                                                  (75%%)\r"
 		adb pull /system/priv-app/PrebuiltGmsCore.apk ${DIR1}/priv-app &&
-		showPostProgress 
+		showPostProgress
 		adb kill-server
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -1183,62 +1183,62 @@ rbadditions() # Download Additional Apps Using 'additions.links' File
 		Stagenumber="r6"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Cleaning Previous Folder Structure... <-${n}             "
-		cd RomBuilder &&		
+		cd RomBuilder &&
 		if [ ! -d grabbed_files ]; then
 			mkdir grabbed_files
-		fi		
+		fi
 		# - removed, as tracking own vender_du repo for time being
 		#if [ -d ${DIR2} ]; then
 			#printf '%s\n' " - Removing... ($DIR2)"
 			#showPreProgress
 				#rm -rf ${DIR2} &&
 			#showPostProgress
-		#else 
-			#sleep 1 
+		#else
+			#sleep 1
 		#fi
 		if [ -d ${DIR3} ]; then
 			printf '%s\n' " - Removing... ($DIR3)"
 			showPreProgress
 				rm -rf ${DIR3} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
 		if [ -d ${DIR4} ]; then
 			printf '%s\n' " - Removing... ($DIR4)"
 			showPreProgress
 				rm -rf ${DIR4} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
 		if [ -d ${DIR5} ]; then
 			printf '%s\n' " - Removing... ($DIR5)"
 			showPreProgress
 				rm -rf ${DIR5} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
 		if [ -d ${DIR6} ]; then
 			printf '%s\n' " - Removing... ($DIR6)"
 			showPreProgress
 				rm -rf ${DIR6} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
-		printf '%s\n'  "" 
+		printf '%s\n'  ""
 		printf '%s\n'  ""
 		printf '%s\n'  "    ${b}-> Downloading Additional Apps Using Additions.links... <-${n}   "
 		printf ""
 		printf ""
 		cd && cd ${projectlocation}/RomBuilder/ &&
-			while read url target; do 
+			while read url target; do
 				wget "$url" -P "$target";
 			done < Additions.links
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -1271,37 +1271,37 @@ rbxposed() # Download Additional Apps Using 'additions.links' File
 		Stagenumber="r7"
 		show_stage_header
 		printf '%s\n'  "        ${b}-> Cleaning Previous Folder Structure... <-${n}             "
-		cd RomBuilder &&		
+		cd RomBuilder &&
 		if [ ! -d grabbed_files ]; then
 			mkdir grabbed_files
-		fi		
+		fi
 		if [ -d ${DIR7} ]; then
 			printf '%s\n' " - Removing... ($DIR7)"
 			showPreProgress
 				rm -rf ${DIR7} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
 		if [ -d ${DIR8} ]; then
 			printf '%s\n' " - Removing... ($DIR8)"
 			showPreProgress
 				rm -rf ${DIR8} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
-		printf '%s\n'  "" 
+		printf '%s\n'  ""
 		printf '%s\n'  ""
 		printf '%s\n'  "    ${b}-> Downloading Additional Apps Using Additions.links... <-${n}   "
 		printf ""
 		printf ""
 		cd && cd ${projectlocation}/RomBuilder &&
-			while read url target; do 
+			while read url target; do
 				wget "$url" -P "$target";
 			done < Xposed.links
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -1337,14 +1337,14 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		if [ -d ${TDIR1} ]; then
 			printf '%s\n' " - Removing... ($TDIR1)"
 			showPreProgress
-				rm -rf ${TDIR1} && 
+				rm -rf ${TDIR1} &&
 			showPostProgress
 			printf '%s\n' " - Copying... ($DIR1) to ($TDIR1)"
 			showPreProgress
 				cp -ar ${DIR1} ${Additionsdir} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' " - Copying... ($DIR1) to ($TDIR1)"
 			showPreProgress
 				cp -ar ${DIR1} ${Additionsdir} &&
@@ -1354,14 +1354,14 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		#if [ -d ${TDIR2} ]; then
 			#printf '%s\n' " - Removing... ($TDIR2)"
 			#showPreProgress
-				#rm -rf ${TDIR2} && 
+				#rm -rf ${TDIR2} &&
 			#showPostProgress
 			#printf '%s\n' " - Copying... ($DIR2) to ($TDIR2)"
 			#showPreProgress
 				#cp -ar ${DIR2} ${Additionsdir} &&
 			#showPostProgress
-		#else 
-			#sleep 1 
+		#else
+			#sleep 1
 			#printf '%s\n' " - Copying... ($DIR2) to ($TDIR2)"
 			#showPreProgress
 				#cp -ar ${DIR2} ${Additionsdir} &&
@@ -1370,14 +1370,14 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		if [ -d ${TDIR3} ]; then
 			printf '%s\n' " - Removing... ($TDIR3)"
 			showPreProgress
-				rm -rf ${TDIR3} && 
+				rm -rf ${TDIR3} &&
 			showPostProgress
 			printf '%s\n' " - Copying... ($DIR3) to ($TDIR3)"
 			showPreProgress
 				cp -ar ${DIR3} ${Additionsdir} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' " - Copying... ($DIR3) to ($TDIR3)"
 			showPreProgress
 				cp -ar ${DIR3} ${Additionsdir} &&
@@ -1386,14 +1386,14 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		if [ -d ${TDIR4} ]; then
 			printf '%s\n' " - Removing... ($TDIR4)"
 			showPreProgress
-				rm -rf ${TDIR4} && 
+				rm -rf ${TDIR4} &&
 			showPostProgress
 			printf '%s\n' " - Copying... ($DIR4) to ($TDIR4)"
 			showPreProgress
 				cp -ar ${DIR4} ${Additionsdir} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' " - Copying... ($DIR4) to ($TDIR4)"
 			showPreProgress
 				cp -ar ${DIR4} ${Additionsdir} &&
@@ -1402,14 +1402,14 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		if [ -d ${TDIR5} ]; then
 			printf '%s\n' " - Removing... ($TDIR5)"
 			showPreProgress
-				rm -rf ${TDIR5} && 
+				rm -rf ${TDIR5} &&
 			showPostProgress
 			printf '%s\n' " - Copying... ($DIR5) to ($TDIR5)"
 			showPreProgress
 				cp -ar ${DIR5} ${Additionsdir} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' " - Copying... ($DIR5) to ($TDIR5)"
 			showPreProgress
 				cp -ar ${DIR5} ${Additionsdir} &&
@@ -1418,14 +1418,14 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		if [ -d ${TDIR6} ]; then
 			printf '%s\n' " - Removing... ($TDIR6)"
 			showPreProgress
-				rm -rf ${TDIR6} && 
+				rm -rf ${TDIR6} &&
 			showPostProgress
 			printf '%s\n' " - Copying... ($DIR6) to ($TDIR6)"
 			showPreProgress
 				cp -ar ${DIR6} ${Additionsdir} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' " - Copying... ($DIR6) to ($TDIR6)"
 			showPreProgress
 				cp -ar ${DIR6} ${Additionsdir} &&
@@ -1434,14 +1434,14 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		if [ -d ${TDIR7} ]; then
 			printf '%s\n' " - Removing... ($TDIR7)"
 			showPreProgress
-				rm -rf ${TDIR7} && 
+				rm -rf ${TDIR7} &&
 			showPostProgress
 			printf '%s\n' " - Copying... ($DIR7) to ($TDIR7)"
 			showPreProgress
 				cp -ar ${DIR7} ${Additionsdir} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' " - Copying... ($DIR7) to ($TDIR7)"
 			showPreProgress
 				cp -ar ${DIR7} ${Additionsdir} &&
@@ -1450,21 +1450,21 @@ rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
 		if [ -d ${TDIR8} ]; then
 			printf '%s\n' " - Removing... ($TDIR8)"
 			showPreProgress
-				rm -rf ${TDIR8} && 
+				rm -rf ${TDIR8} &&
 			showPostProgress
 			printf '%s\n' " - Copying... ($DIR8) to ($TDIR8)"
 			showPreProgress
 				cp -ar ${DIR8} ${Additionsdir} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' " - Copying... ($DIR8) to ($TDIR8)"
 			showPreProgress
 				cp -ar ${DIR8} ${Additionsdir} &&
 			showPostProgress
 		fi
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -1483,14 +1483,14 @@ rbeditaroma() # Edit 'aroma-config' File
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
-	case "$choice" in 
- 		 y|Y ) showPreProgress 
+	case "$choice" in
+ 		 y|Y ) showPreProgress
 				showPostProgress
 				sleep 1
 				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) rbeditaroma;;
-	esac	
+	esac
 }
 rbeditupdaterscript() # Edit 'updater-script' File
 {
@@ -1500,14 +1500,14 @@ rbeditupdaterscript() # Edit 'updater-script' File
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
-	case "$choice" in 
- 		 y|Y ) showPreProgress 
+	case "$choice" in
+ 		 y|Y ) showPreProgress
 				showPostProgress
 				sleep 1
 				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) rbeditupdaterscript;;
-	esac	
+	esac
 }
 rbeditbuildprop() # Edit 'build.prop' File
 {
@@ -1518,8 +1518,8 @@ rbeditbuildprop() # Edit 'build.prop' File
 		printf '%s\n'  ""
 		printf '%s\n'  ""
 		read -p "		Load New Changes Now ?? (y/n)?" choice
-		case "$choice" in 
- 			 y|Y ) showPreProgress 
+		case "$choice" in
+ 			 y|Y ) showPreProgress
 					showPostProgress
 					sleep 1
 					exec ${projectlocation}/A3S.base;;
@@ -1528,7 +1528,7 @@ rbeditbuildprop() # Edit 'build.prop' File
 		esac
 	else
 		printf '%s\n'  " No 'build.prop' File Found !, Have You Copied The Compiled Rom Yet ??  "
-		sleep 3 && mainmenu	
+		sleep 3 && mainmenu
 	fi
 }
 rbeditadditions() # Edit 'Additions.links' File
@@ -1539,14 +1539,14 @@ rbeditadditions() # Edit 'Additions.links' File
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
-	case "$choice" in 
- 		 y|Y ) showPreProgress 
+	case "$choice" in
+ 		 y|Y ) showPreProgress
 				showPostProgress
 				sleep 1
 				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) rbeditadditions;;
-	esac	
+	esac
 }
 rbeditxposed() # Edit 'Xposed.links' File
 {
@@ -1556,17 +1556,17 @@ rbeditxposed() # Edit 'Xposed.links' File
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
-	case "$choice" in 
- 		 y|Y ) showPreProgress 
+	case "$choice" in
+ 		 y|Y ) showPreProgress
 				showPostProgress
 				sleep 1
 				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) rbeditxposed;;
-	esac	
+	esac
 }
 rbzip()   # Zip working_folder Contents To Make Flashable Zip File
-{       
+{
 	clear
 	Function="rbzip"
 	Stagenumber="r14"
@@ -1586,11 +1586,11 @@ rbzip()   # Zip working_folder Contents To Make Flashable Zip File
 		(
 		Stagenumber="r14"
 		show_stage_header
-		printf '%s\n'  "  ${b}-> Cleaning Previous Zip Structure & Zipping New Files... <-${n}  " 
+		printf '%s\n'  "  ${b}-> Cleaning Previous Zip Structure & Zipping New Files... <-${n}  "
 		printf '%s\n'  ""
 		showPreProgress
-		sleep 2 
-		printf "" 
+		sleep 2
+		printf ""
 		if [ ! -d ${finalout} ]; then
 			mkdir ${finalout}
 		fi
@@ -1603,7 +1603,7 @@ rbzip()   # Zip working_folder Contents To Make Flashable Zip File
 		printf ""
 		sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -1623,14 +1623,14 @@ kbdefconfig() # Edit '${dconfig}' File
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
-	case "$choice" in 
- 		 y|Y ) showPreProgress 
+	case "$choice" in
+ 		 y|Y ) showPreProgress
 				showPostProgress
 				sleep 1 && cd ${projectlocation}
 				exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) kbdefconfig;;
-	esac	
+	esac
 }
 kbcleanbuild() # Invoke the 'make clean' Command and remove '.config' file
 {
@@ -1654,7 +1654,7 @@ kbcleanbuild() # Invoke the 'make clean' Command and remove '.config' file
 		Stagenumber="k2"
 		show_stage_header
 		printf '%s\n'  "      ${b}-> Cleaning Previous Folder Structure... <-${n}             "
-		cd && 
+		cd &&
 			if [ -d Android ]; then
  				cd Android
 			else
@@ -1666,7 +1666,7 @@ kbcleanbuild() # Invoke the 'make clean' Command and remove '.config' file
 			else
 				printf '%s\n'  " No Root 'KernelDevelopment' Folder Found !, Have You Downloaded The Source ??  "
 				sleep 3 && mainmenu
-			fi		
+			fi
 			if [ -d ${DesiredKernelName} ]; then
  				cd ${DesiredKernelName}
 			else
@@ -1679,7 +1679,7 @@ kbcleanbuild() # Invoke the 'make clean' Command and remove '.config' file
 					rm -f .config &&
 			showPostProgress && sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -1716,21 +1716,21 @@ kbcompilebuild() # Compile Kernel
 		if [ ! -d ${projectlocation}/KernelBuilder/compiled_files ]; then
 			mkdir ${projectlocation}/KernelBuilder/compiled_files
 		fi
-		if [ -d ${kdir3} ]; then	
+		if [ -d ${kdir3} ]; then
 			printf '%s\n' " - Cleaning... ($kdir3)"
 			showPreProgress
-				rm -rf ${kdir3} && 
+				rm -rf ${kdir3} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
 		if [ -d ${kdir2} ]; then
 			printf '%s\n' " - Cleaning... ($kdir2)"
 			showPreProgress
-				rm -rf ${kdir2} && 
+				rm -rf ${kdir2} &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 		fi
 		cd && cd Android/KernelDevelopment/${DesiredKernelName} &&
 			make ${dconfig} && sleep 2 && ${compilekernel} && sleep 4
@@ -1739,18 +1739,18 @@ kbcompilebuild() # Compile Kernel
 		printf '%s\n'  ""
 		printf '%s\n'  "      ${b}-> Copying New zImage to 'compiled_files'... <-${n}         "
 		cd
-			if [ -d ${kdir3} ]; then	
+			if [ -d ${kdir3} ]; then
 				printf '%s\n' " - Cleaning... ($kdir3)"
 				showPreProgress
-					rm -rf ${kdir3} && 
-					mkdir ${kdir3} && 
+					rm -rf ${kdir3} &&
+					mkdir ${kdir3} &&
 				showPostProgress
 				printf '%s\n' " - Copying... (zImage) to ($kdir3)"
 				showPreProgress
 					cp -ar Android/KernelDevelopment/${DesiredKernelName}/arch/arm/boot/zImage ${kdir3} &&
 				showPostProgress
-			else 
-				sleep 1 
+			else
+				sleep 1
 				printf '%s\n' " - Copying... (zImage) to ($kdir3)"
 				showPreProgress
 					mkdir ${kdir3} &&
@@ -1760,15 +1760,15 @@ kbcompilebuild() # Compile Kernel
 		printf '%s\n'  ""
 		printf '%s\n'  ""
 		read -p "Copy kernel Modules to compiled_files too? .. Continue?? (y/n)" choice
-		case "$choice" in 
+		case "$choice" in
 			y|Y ) printf '%s\n'  "      ${b}-> Copying New Modules to 'compiled_files'... <-${n}         "
 				# Copy Modules To 'compiled_files' folder
 				cd && cd Android/KernelDevelopment/${DesiredKernelName} &&
 					if [ -d ${kdir2} ]; then
 						printf '%s\n' " - Cleaning... ($kdir2)"
 						showPreProgress
-							rm -rf ${kdir2} && 
-							mkdir ${kdir2} && 
+							rm -rf ${kdir2} &&
+							mkdir ${kdir2} &&
 						showPostProgress
 						printf '%s\n' " - Copying... (Modules) to ($kdir2)"
 						showPreProgress
@@ -1776,11 +1776,11 @@ kbcompilebuild() # Compile Kernel
 							cd ${kdir2}
 							rm -f modules.order &&
 						showPostProgress
-					else 
-						sleep 1 
+					else
+						sleep 1
 						printf '%s\n' " - Copying... (Modules) to ($kdir2)"
 						showPreProgress
-							mkdir ${kdir2} && 
+							mkdir ${kdir2} &&
 							cp `find ./ | grep .ko$` modules.order ${kdir2}/ &&
 							cd ${kdir2}
 							rm -f modules.order &&
@@ -1788,7 +1788,7 @@ kbcompilebuild() # Compile Kernel
 					fi
 
 		;;
-			n|N ) 
+			n|N )
 				sleep 2
 				show_stage_completed
 				sleep 2.5
@@ -1797,7 +1797,7 @@ kbcompilebuild() # Compile Kernel
 		esac
 	sleep 2
 	show_stage_completed
-	) 2>&1 | tee ${logfile} 
+	) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -1834,12 +1834,12 @@ kbcreateboot()  # Create New boot.img file
 			if [ -d ${bootdir} ]; then
 				printf '%s\n' " - Cleaning... ($bootdir)"
 				showPreProgress
-					rm -rf ${bootdir} && 
+					rm -rf ${bootdir} &&
 					mkdir ${bootdir} &&
 				showPostProgress
 				sleep 2
-			else 
-				sleep 1 
+			else
+				sleep 1
 				printf '%s\n' " - Creating... ($bootdir)"
 				showPreProgress
 					mkdir ${bootdir} &&
@@ -1860,14 +1860,14 @@ kbcreateboot()  # Create New boot.img file
 		printf '%s\n'  ""
 		printf '%s\n'  ""
 		read -p "${b}Placed stock 'boot.img' file in directory? .. Continue?? (y/n)${n} " choice
-		case "$choice" in 
+		case "$choice" in
 			y|Y ) printf '%s\n'  "Extracting 'boot.img'..."
 				cd && cd ${bootdir}
-					abootimg -x boot.img 
+					abootimg -x boot.img
 						sleep 4
 					mkdir initrd &&
 						sleep 4
-					cd initrd 
+					cd initrd
 						zcat ../initrd.img | cpio -i &&
 				showPostProgress
 				sleep 4
@@ -1886,17 +1886,17 @@ kbcreateboot()  # Create New boot.img file
 					TargetFileA=bootimg.cfg
 					TargetStringA=bootsize
 					if grep -q "$TargetStringA" "$TargetFileA"; then
-  						sed -i '/'"$TargetStringA"'/d' $TargetFileA	
+  						sed -i '/'"$TargetStringA"'/d' $TargetFileA
 					fi
 				cd initrd &&
 					TargetFileB=default.prop
 					TargetStringB="ro.secure=1"
 					if grep -q "$TargetStringB" "$TargetFileB"; then
-  						sed -i 's|'"$TargetStringB"'|'"ro.secure=0"'|g' $TargetFileB	
+  						sed -i 's|'"$TargetStringB"'|'"ro.secure=0"'|g' $TargetFileB
 					fi
 					TargetStringC="ro.debuggable=0"
 					if grep -q "$TargetStringC" "$TargetFileB"; then
-  						sed -i 's|'"$TargetStringC"'|'"ro.debuggable=1"'|g' $TargetFileB	
+  						sed -i 's|'"$TargetStringC"'|'"ro.debuggable=1"'|g' $TargetFileB
 					fi
 				showPostProgress
 				sleep 2.5
@@ -1908,9 +1908,9 @@ kbcreateboot()  # Create New boot.img file
 				printf '%s\n' " - Removing Files..."
 				showPreProgress
 				cd && cd ${bootdir}
-					rm -f boot.img && 
-					rm -f initrd.img && 
-					rm -f zImage && 
+					rm -f boot.img &&
+					rm -f initrd.img &&
+					rm -f zImage &&
 				showPostProgress
 				printf '%s\n'  ""
 				printf '%s\n' " - Copying... (zImage) to (${bootdir})"
@@ -1942,7 +1942,7 @@ kbcreateboot()  # Create New boot.img file
 					printf '%s\n' " - Cleaning... ($kdir1)"
 					showPreProgress
 						cd
-						rm -rf ${kdir1} && 
+						rm -rf ${kdir1} &&
 						mkdir ${kdir1} &&
 					showPostProgress
 					printf '%s\n' " - Copying New 'boot.img' to $kdir1..."
@@ -1950,25 +1950,25 @@ kbcreateboot()  # Create New boot.img file
 						cd && cd ${bootdir}
 						cp boot.img ${kdir1}
 					showPostProgress
-				else 
-					sleep 1 
+				else
+					sleep 1
 					printf '%s\n' " - Cannot Remove ($dir1), Does Not Exist"
 					printf '%s\n' " - Copying New 'boot.img' to $kdir1..."
 					showPreProgress
 						cd
-						mkdir ${kdir1} && 
+						mkdir ${kdir1} &&
 						cd && cd ${bootdir}
 						cp boot.img ${kdir1}
 					showPostProgress
-				fi				
+				fi
 		;;
-			n|N ) 
+			n|N )
 				mainmenu;;
 			* ) printf '%s\n'  "invalid response"
 				kbcreateboot;;
 		esac
 	show_stage_completed
-	) 2>&1 | tee ${logfile} 
+	) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -2005,14 +2005,14 @@ kbcopy()  # Copy compiled_files To working_folder, Ready To Be Zipped Up
 		if [ -d ${tkdir1} ]; then
 			printf '%s\n' " - Removing... ($tkdir1)"
 			showPreProgress
-				rm -rf ${tkdir1} && 
+				rm -rf ${tkdir1} &&
 			showPostProgress
 			printf '%s\n' " - Copying... ($kdir1) to ($tkdir1)"
 			showPreProgress
 				cp -ar ${kdir1} ${projectlocation}/KernelBuilder/working_folder/AROMA &&
 			showPostProgress
-		else 
-			sleep 1 
+		else
+			sleep 1
 			printf '%s\n' " - Copying... ($kdir1) to ($tdir1)"
 			showPreProgress
 				cp -ar ${kdir1} ${projectlocation}/KernelBuilder/working_folder/AROMA &&
@@ -2021,33 +2021,33 @@ kbcopy()  # Copy compiled_files To working_folder, Ready To Be Zipped Up
 		printf '%s\n'  ""
 		printf '%s\n'  ""
 		read -p "Copy kernel Modules to 'working_folder' too? .. Continue?? (y/n)" choice
-		case "$choice" in 
+		case "$choice" in
 			y|Y ) printf '%s\n'  "        ${b}-> Copying New Modules to 'working_folder'... <-${n}         "
-				# Copy Modules To 'working_folder' 
+				# Copy Modules To 'working_folder'
 				if [ -d ${tkdir2} ]; then
 					printf '%s\n' " - Removing... ($tkdir2)"
 					showPreProgress
-						rm -rf ${tkdir2} && 
+						rm -rf ${tkdir2} &&
 					showPostProgress
 					printf '%s\n' " - Copying... ($kdir2) to ($tkdir2)"
 					showPreProgress
 						cp -ar ${kdir2} ${projectlocation}/KernelBuilder/working_folder/AROMA/system/lib &&
 					showPostProgress
-				else 
-					sleep 1 
+				else
+					sleep 1
 					printf '%s\n' " - Copying... ($kdir2) to ($tkdir2)"
 					showPreProgress
 						cp -ar ${kdir2} ${projectlocation}/KernelBuilder/working_folder/AROMA/system/lib &&
 					showPostProgress
 				fi
 		;;
-			n|N ) 
+			n|N )
 			show_stage_completed
 			sleep 4
 			mainmenu
 		esac
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -2066,15 +2066,15 @@ kbeditaroma() # Edit 'aroma-config' File
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
-	case "$choice" in 
- 		 y|Y ) showPreProgress 
+	case "$choice" in
+ 		 y|Y ) showPreProgress
 				showPostProgress
 				sleep 1
 				cd ${projectlocation} &
 			exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) kbeditaroma;;
-	esac	
+	esac
 }
 kbeditupdaterscript() # Edit 'aroma-config' File
 {
@@ -2084,18 +2084,18 @@ kbeditupdaterscript() # Edit 'aroma-config' File
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
-	case "$choice" in 
- 		 y|Y ) showPreProgress 
+	case "$choice" in
+ 		 y|Y ) showPreProgress
 				showPostProgress
 				sleep 1
 				cd ${projectlocation} &
 			exec ${projectlocation}/A3S.base;;
  		 n|N ) mainmenu;;
 		 * ) kbeditupdaterscript;;
-	esac	
+	esac
 }
 kbzip() # Zip working_folder Contents To Make Flashable Zip File
-{       
+{
 	clear
 	Function="kbzip"
 	Stagenumber="k8"
@@ -2115,15 +2115,15 @@ kbzip() # Zip working_folder Contents To Make Flashable Zip File
 		(
 		Stagenumber="k8"
 		show_stage_header
-		printf '%s\n'  "  ${b}-> Cleaning Previous Zip Structure & Zipping New Files... <-${n}  " 
+		printf '%s\n'  "  ${b}-> Cleaning Previous Zip Structure & Zipping New Files... <-${n}  "
 		printf '%s\n'  ""
-		printf '%s\n' " - Zipping Working_Folder Structure Ready For Flash" 
+		printf '%s\n' " - Zipping Working_Folder Structure Ready For Flash"
 		showPreProgress
-		sleep 2 
+		sleep 2
 		if [ ! -d ${finalout} ]; then
 			mkdir ${finalout}
 		fi
-		printf "" 
+		printf ""
 		cd && source ${dconfigdir}/${dconfig} &&
 		cd && cd ${projectlocation}/KernelBuilder/working_folder
 			exec zip -r ${finalout}/${CONFIG_LOCALVERSION}_${today}.zip * & wait
@@ -2131,7 +2131,7 @@ kbzip() # Zip working_folder Contents To Make Flashable Zip File
 		printf ""
 		sleep 2
 		show_stage_completed
-		) 2>&1 | tee ${logfile} 
+		) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
 		sleep 2.5
 		cd ${projectlocation} &
@@ -2147,11 +2147,11 @@ cleanbash() # check 'bash.rc' for conflicting entries before adding new ones
 {
 	PathHeader=$pathheader
 	if grep -q "$PathHeader" "$File"; then
-  		sed -i '/'"$PathHeader"'/d' $File	
+  		sed -i '/'"$PathHeader"'/d' $File
 	fi
 	Path="# A3S Path Settings"
 	if grep -q "$Path" "$File"; then
-		sed -i '/'"${Path}"'/d' $File	
+		sed -i '/'"${Path}"'/d' $File
 	fi
 	RomDevHeader=$romdevheader
 	if grep -q "$RomDevHeader" "$File"; then
@@ -2182,7 +2182,7 @@ cleanbash() # check 'bash.rc' for conflicting entries before adding new ones
 		sed -i '/'"$ToolchainPath"'/d' $File
 	fi
 }
-editprefs() # open 'user.preferences'  
+editprefs() # open 'user.preferences'
 {
 	${sysdefapp} ${projectlocation}/user.preferences  &&
 	printf '%s\n'  ""
@@ -2190,8 +2190,8 @@ editprefs() # open 'user.preferences'
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Load New Changes Now ?? (y/n)?" choice
-	case "$choice" in 
- 		 y|Y ) showPreProgress 
+	case "$choice" in
+ 		 y|Y ) showPreProgress
 				showPostProgress
 				sleep 1
 				exec ${projectlocation}/A3S.base;;
@@ -2204,9 +2204,9 @@ deletelogs() # Delete logs if they exist
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Delete All Logs ?? (y/n)?" choice
-	case "$choice" in 
+	case "$choice" in
  		 y|Y ) if [ -d ${projectlocation}/${LogLocation} ]; then
-				showPreProgress 
+				showPreProgress
 					rm -rf ${projectlocation}/${LogLocation}
 				showPostProgress
 				sleep 1
@@ -2233,11 +2233,11 @@ exitscript() # Exit Script
 	exit
 }
 restartpc()   # Restart PC
-{       
+{
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Restart PC ?? (y/n)?" choice
-	case "$choice" in 
+	case "$choice" in
  		 y|Y ) sudo reboot;;
  		 n|N ) cd ${projectlocation} &
 			exec ${projectlocation}/A3S.base;;
@@ -2245,11 +2245,11 @@ restartpc()   # Restart PC
 	esac
 }
 shutdownpc()   # Shutdown PC
-{       
+{
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	read -p "		Shutdown PC ?? (y/n)?" choice
-	case "$choice" in 
+	case "$choice" in
  		 y|Y ) sudo poweroff;;
  		 n|N ) cd ${projectlocation} &
 			exec ${projectlocation}/A3S.base;;

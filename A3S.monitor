@@ -24,7 +24,7 @@ printf '\033[8;15;50t'
 clear
 function Monitor {
 	while true
-		do 
+		do
 			printf '%s\n' "         ${b}---------------------------------     "
 			printf '%s\n' "               ${w}Usage & Load Monitor"
 			printf '%s\n' "         ${b}---------------------------------     "
@@ -32,11 +32,11 @@ function Monitor {
 				grep -m 1 "model name" /proc/cpuinfo | cut -d: -f2 | sed -e 's/^ *//' | sed -e 's/$//'
 			printf "   ${b}No. of CPU Cores: ${c}"
 				nproc | awk '{ printf $0 }'
-			printf '%s\n' ""	
+			printf '%s\n' ""
 			printf "   ${b}Linux Version: ${c}"
 				. /etc/lsb-release
 				OS=$DISTRIB_DESCRIPTION
-				printf "${OS}" 
+				printf "${OS}"
 			printf '%s\n'"   ${b}Current Kernel: ${c}"
 				uname -r | awk '{ printf $0 }'
 			printf '%s\n' ""

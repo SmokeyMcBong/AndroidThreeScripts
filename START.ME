@@ -17,7 +17,7 @@
 #   along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # check which desktop environment is being used
-function StartMe { 
+function StartMe {
 	if [ $(pgrep -c cinnamon-panel) -gt 0 ]; then
 		cinnamon-terminal -x ./A3S.base
 		cinnamon-terminal -x ./A3S.monitor
