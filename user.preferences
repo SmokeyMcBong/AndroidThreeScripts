@@ -22,13 +22,13 @@
 #------------------------------------------------------------------------------------------------------------
 #----------------------------------->>>> EDIT THESE VALUES AS NEEDED <<<<------------------------------------
 #------------------------------------------------------------------------------------------------------------
-# 
+#
 
 # Set Desired Rom Source To Download (AOSP/AOKP/MIUI etc)
 DesiredRomName="DirtyUnicorns"
 DesiredRomSource="https://github.com/SmokeyMcBong/manifest.git"
 
-# Set Desired Kernel Source To Download 
+# Set Desired Kernel Source To Download
 DesiredKernelName="FONZinatorM7"
 DesiredKernelSource="https://github.com/SmokeyMcBong/android_kernel_htc_msm8960.git"
 
@@ -44,12 +44,8 @@ AstudioName="Android Studio 0.8.14 & SDK Bundle"
 AstudioSource="http://downloads.puresoftware.org/files/android/studio-bundle/android-studio-bundle-135.1339820-linux.tgz"
 
 # 3rd Party Application Location
-SunflowerFilename="sunflower-0.2.59-1.all.deb"
-SunflowerSource="http://sunflower-fm.org/pub/sunflower-0.2.59-1.all.deb"
-SublimeFilename="sublime-text_build-3065_amd64.deb"
-SublimeSource="http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3065_amd64.deb"
-UtweakFilename="ubuntu-tweak_0.8.7-1~trusty2_all.deb"
-UtweakSource="https://launchpad.net/ubuntu-tweak/0.8.x/0.8.7/+download/ubuntu-tweak_0.8.7-1~trusty2_all.deb"
+App1Name="Github's ATOM text editor"
+App1Source="https://github.com/atom/atom/releases/download/v0.152.0/atom-amd64.deb"
 
 # SaberMod Linux Kernel
 SaberLinuxSource="https://github.com/SmokeyMcBong/Linux-manifest.git"
