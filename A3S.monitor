@@ -22,47 +22,50 @@ w=$(tput setaf 7) # Color Code (white)
 printf '\033]0;A3S Monitor\a'
 printf '\033[8;15;50t'
 clear
-while true
-	do 
-		printf '%s\n' "         ${b}---------------------------------     "
-		printf '%s\n' "               ${w}Usage & Load Monitor"
-		printf '%s\n' "         ${b}---------------------------------     "
-		printf "   ${b}CPU: ${c}"
-			grep -m 1 "model name" /proc/cpuinfo | cut -d: -f2 | sed -e 's/^ *//' | sed -e 's/$//'
-		printf "   ${b}No. of CPU Cores: ${c}"
-			nproc | awk '{ printf $0 }'
-		printf '%s\n' ""	
-		printf "   ${b}Linux Version: ${c}"
-			. /etc/lsb-release
-    		OS=$DISTRIB_DESCRIPTION
-			printf "${OS}" 
-		printf '%s\n'"   ${b}Current Kernel: ${c}"
-			uname -r | awk '{ printf $0 }'
-		printf '%s\n' ""
-		printf '%s\n' "         ${b}---------------------------------     "
-		printf "   ${b}Memory Usage: ${c}"
-			free -m | awk 'NR==2{printf "%s/%s MB (%.2f%)\n", $3,$2,$3*100/$2 }'
-		printf "   ${b}Swap Usage: ${c}"
-			free -t -m | grep "Swap" | awk '{printf "%s/%s MB (%.2f%)\n", $3,$4,$3*100/$4 }'
-		printf "   ${b}Disk Usage: ${c}"
-			df -h | awk '$NF=="/"{printf "%d/%d GB (%s)\n", $3,$2,$5}'
-		printf "   ${b}CPU Load (avg): ${c}"
-			grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}'
-		printf "   ${b}No. of Processes: ${c}"
-			ps ax | wc -l | awk '{print $1}'
-		printf "   ${b}System Uptime: ${c}"
-			upSeconds=`cat /proc/uptime`;
-			upSeconds=${upSeconds%%.*};
-			secs=$((${upSeconds}%60))
-			mins=$((${upSeconds}/60%60))
-			hours=$((${upSeconds}/3600%24))
-			days=$((${upSeconds}/86400))
-			if [ "${days}" -ne "0" ]
-			then
-			   echo -n "${days}d"
-			fi
-			echo -n "${hours}h ${mins}m ${secs}s"
+function Monitor {
+	while true
+		do 
+			printf '%s\n' "         ${b}---------------------------------     "
+			printf '%s\n' "               ${w}Usage & Load Monitor"
+			printf '%s\n' "         ${b}---------------------------------     "
+			printf "   ${b}CPU: ${c}"
+				grep -m 1 "model name" /proc/cpuinfo | cut -d: -f2 | sed -e 's/^ *//' | sed -e 's/$//'
+			printf "   ${b}No. of CPU Cores: ${c}"
+				nproc | awk '{ printf $0 }'
+			printf '%s\n' ""	
+			printf "   ${b}Linux Version: ${c}"
+				. /etc/lsb-release
+	    		OS=$DISTRIB_DESCRIPTION
+				printf "${OS}" 
+			printf '%s\n'"   ${b}Current Kernel: ${c}"
+				uname -r | awk '{ printf $0 }'
 			printf '%s\n' ""
-		sleep 1
-	clear
-done
+			printf '%s\n' "         ${b}---------------------------------     "
+			printf "   ${b}Memory Usage: ${c}"
+				free -m | awk 'NR==2{printf "%s/%s MB (%.2f%)\n", $3,$2,$3*100/$2 }'
+			printf "   ${b}Swap Usage: ${c}"
+				free -t -m | grep "Swap" | awk '{printf "%s/%s MB (%.2f%)\n", $3,$4,$3*100/$4 }'
+			printf "   ${b}Disk Usage: ${c}"
+				df -h | awk '$NF=="/"{printf "%d/%d GB (%s)\n", $3,$2,$5}'
+			printf "   ${b}CPU Load (avg): ${c}"
+				grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}'
+			printf "   ${b}No. of Processes: ${c}"
+				ps ax | wc -l | awk '{print $1}'
+			printf "   ${b}System Uptime: ${c}"
+				upSeconds=`cat /proc/uptime`;
+				upSeconds=${upSeconds%%.*};
+				secs=$((${upSeconds}%60))
+				mins=$((${upSeconds}/60%60))
+				hours=$((${upSeconds}/3600%24))
+				days=$((${upSeconds}/86400))
+				if [ "${days}" -ne "0" ]
+				then
+				   echo -n "${days}d"
+				fi
+				echo -n "${hours}h ${mins}m ${secs}s"
+				printf '%s\n' ""
+			sleep 1
+		clear
+	done
+}
+Monitor # Run Monitor function
