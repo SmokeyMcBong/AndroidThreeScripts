@@ -87,6 +87,18 @@ Planned Feature's..
 
 Change log's..
 ------------
+### 05/12/2014 ...
+
+* Added CPU model name to the system load monitor
+* Added CPU Core count to the system load monitor
+* Added Current Linux version and codename to the system load monitor
+* Added Current Linux Kernel version to the system load monitor
+* Added Number of current processes to the system load monitor
+* Added Total system uptime to the system load monitor
+* Small layout change to the system load monitor
+* Made system load monitor its own function,then call by function name
+* Made START.ME its own function,then call by function name
+
 ### 03/12/2014 ...
 
 * Added seperate simple system load monitor to run alongside AndroidThreeScripts
