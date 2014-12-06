@@ -87,7 +87,7 @@ Planned Feature's..
 
 Change log's..
 ------------
-### 05/12/2014 ...
+### 06/12/2014 ...
 
 * Added running procceses to monito
 * Changed the way system uptime is displayed, now dynamically changes views
