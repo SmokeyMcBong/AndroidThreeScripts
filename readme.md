@@ -41,11 +41,11 @@ Fresh-to-Ready...
 * Install all necessary Dependencies and Paths.
 * Download, Compile and install Newest SaberMod Linux Kernel from source.
 * Download and install Android Studio & SDK bundle.
-* Install SublimeText3.
+* Install Github's ATOM Text Editor.
 * Setup Build Environment and Switch between the two with ease.
 * Creates required folder structures
 * Download personal repo's.
-* Download Desired android ROM and/or Kernel source code.
+* Download Desired Android ROM and/or Kernel source code.
 * Download latest SaberMod android Kernel Toolchain.
 
 RomBuilder...
@@ -91,6 +91,7 @@ Change log's..
 
 * Added running procceses to system load monitor
 * Changed the way system uptime is displayed, now dynamically changes views
+* Small formatting changes
 
 ### 05/12/2014 ...
 
