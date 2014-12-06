@@ -89,6 +89,11 @@ Change log's..
 ------------
 ### 05/12/2014 ...
 
+* Added running procceses to monito
+* Changed the way system uptime is displayed, now dynamically changes views
+
+### 05/12/2014 ...
+
 * Removed SunflowerfM, SublimeText3 and UbuntuTweak apps
 * Added Github's ATOM Text Editor
 * Added CPU model name to the system load monitor
@@ -100,6 +105,7 @@ Change log's..
 * Small layout change to the system load monitor
 * Made system load monitor its own function,then call by function name
 * Made START.ME its own function,then call by function name
+* Renamed all config file extensions to .conf to allow simple syntax highlighting
 
 
 ### 03/12/2014 ...
