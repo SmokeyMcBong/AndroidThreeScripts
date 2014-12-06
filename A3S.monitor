@@ -51,17 +51,17 @@ function Monitor {
 				totalUptimeDays=""
 				if [ "${mins}" -gt "0" ]
 					then
-					totalUptimeMins="${mins}m"
+					totalUptimeMins="${mins}m "
 				fi
 				if [ "${hours}" -gt "0" ]
 					then
-					totalUptimeHours="${hours}h"
+					totalUptimeHours="${hours}h "
 				fi
 				if [ "${days}" -gt "0" ]
 					then
-					totalUptimeDays="${days}d"
+					totalUptimeDays="${days}d "
 				fi
-				finalUptimeString="${totalUptimeDays} ${totalUptimeHours} ${totalUptimeMins} ${totalUptimeSecs}"
+				finalUptimeString="${totalUptimeDays}${totalUptimeHours}${totalUptimeMins}${totalUptimeSecs}"
 				printf "${finalUptimeString}"
 			printf '%s\n' ""
 			printf '%s\n' "         ${b}---------------------------------     "
