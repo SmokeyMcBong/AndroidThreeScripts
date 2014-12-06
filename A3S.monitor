@@ -18,7 +18,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 source A3S-ui.conf		# Import Default Menu UI Variables
 printf '\033]0;A3S Monitor\a'
-printf '\033[8;15;49t'
+printf '\033[8;16;49t'
 clear
 function Monitor {
 	while true
@@ -38,6 +38,32 @@ function Monitor {
 			printf '%s\n'"  ${b}Current Kernel: ${c}"
 				uname -r | awk '{ printf $0 }'
 			printf '%s\n' ""
+			printf "  ${b}Total System Uptime: ${c}"
+				upSeconds=`cat /proc/uptime`;
+				upSeconds=${upSeconds%%.*};
+				secs=$((${upSeconds}%60))
+				mins=$((${upSeconds}/60%60))
+				hours=$((${upSeconds}/3600%24))
+				days=$((${upSeconds}/86400))
+				totalUptimeSecs="${secs}s"
+				totalUptimeMins=""
+				totalUptimeHours=""
+				totalUptimeDays=""
+				if [ "${mins}" -gt "0" ]
+					then
+					totalUptimeMins="${mins}m"
+				fi
+				if [ "${hours}" -gt "0" ]
+					then
+					totalUptimeHours="${hours}h"
+				fi
+				if [ "${days}" -gt "0" ]
+					then
+					totalUptimeDays="${days}d"
+				fi
+				finalUptimeString="${totalUptimeDays} ${totalUptimeHours} ${totalUptimeMins} ${totalUptimeSecs}"
+				printf "${finalUptimeString}"
+			printf '%s\n' ""
 			printf '%s\n' "         ${b}---------------------------------     "
 			printf "  ${b}Memory Usage: ${c}"
 				free -m | awk 'NR==2{printf "%s/%s MB (%.2f%)\n", $3,$2,$3*100/$2 }'
@@ -45,23 +71,12 @@ function Monitor {
 				free -t -m | grep "Swap" | awk '{printf "%s/%s MB (%.2f%)\n", $3,$4,$3*100/$4 }'
 			printf "  ${b}Disk Usage: ${c}"
 				df -h | awk '$NF=="/"{printf "%d/%d GB (%s)\n", $3,$2,$5}'
+			printf "  ${b}Running Processes: ${c}"
+				ps axr | wc -l | awk '{print $1}'
+			printf "  ${b}Total Processes: ${c}"
+				ps ax | wc -l | awk '{print $1}'
 			printf "  ${b}CPU Load (avg): ${c}"
 				grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}'
-			printf "  ${b}No. of Processes: ${c}"
-				ps ax | wc -l | awk '{print $1}'
-			printf "  ${b}System Uptime: ${c}"
-				upSeconds=`cat /proc/uptime`;
-				upSeconds=${upSeconds%%.*};
-				secs=$((${upSeconds}%60))
-				mins=$((${upSeconds}/60%60))
-				hours=$((${upSeconds}/3600%24))
-				days=$((${upSeconds}/86400))
-				if [ "${days}" -ne "0" ]
-				then
-				   printf "${days}d"
-				fi
-				printf "${hours}h ${mins}m ${secs}s"
-				printf '%s\n' ""
 			sleep 1
 		clear
 	done
