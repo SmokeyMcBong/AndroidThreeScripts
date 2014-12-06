@@ -89,7 +89,7 @@ Change log's..
 ------------
 ### 06/12/2014 ...
 
-* Added running procceses to monito
+* Added running procceses to system load monitor
 * Changed the way system uptime is displayed, now dynamically changes views
 
 ### 05/12/2014 ...
