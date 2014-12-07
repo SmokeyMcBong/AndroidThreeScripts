@@ -8,7 +8,7 @@
 
 <br />
 <center>
-![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/AndroidThreeScripts.png)
+![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/A3S.png)
 </center>
 
 <br />
