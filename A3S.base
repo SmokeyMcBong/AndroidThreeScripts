@@ -485,7 +485,7 @@ installapps() # Download & Install 3rd party Apps
 			show_stage_header
 			printf '%s\n'  "  ${b}-> Installing 3rd Party Apps... <-${n}  "
 			sleep 2
-			  sudo dpkg -i ${App1Source} &&
+			  sudo dpkg -i ${App1Filename} &&
             show_stage_completed
 			) 2>&1 | tee ${logfile}
 			mv ${logfile} ${projectlocation}/${LogLocation}/${today}_${Function}.log
