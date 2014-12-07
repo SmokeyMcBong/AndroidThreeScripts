@@ -17,8 +17,8 @@
 Brief..
 ------------
 
-This Project was started as a means to simplify the process of setting up a freshly installed linux OS for an Android Development OS.  
-After a little time, I had three working scripts to aid with the process of Setting up the Fresh Linux OS for Rom/Kernel Development.  
+This Project was started as a means to simplify the process of setting up a freshly installed Ubuntu (or Debian based) OS for an Android Development OS.  
+After a little time, I had three working scripts to aid with the process of Setting up the Fresh Ubuntu (or Debian based) OS for Rom/Kernel Development.  
 BUT it wasnt long before I thought it would be a great idea to write a 'three column/three script' menu for incorporating my previous  
 'Fresh-to-Ready', 'RomBuilder' and 'KernelBuilder' scripts into one handy menu...
 
