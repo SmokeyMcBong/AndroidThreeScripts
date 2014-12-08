@@ -5,7 +5,7 @@
 | Show all Releases : [ View all Releases ](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases) |
 
 -------
-
+<br />
 <center>![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/cropped-LOGO-A3S-alpha.png)</center>
 <br />  
 
