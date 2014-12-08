@@ -35,9 +35,9 @@ This Project is a continuous work-in-progress, with possibilities of more featur
 
   <br />
 
-  Current Feature's..
+  Current Features..
   ------------
-  
+
   (**NOTE**: >> <u>Almost all options below are editable wthin the '**user.preferences**' file for easy access !</u> )
   <br />
   <br />
