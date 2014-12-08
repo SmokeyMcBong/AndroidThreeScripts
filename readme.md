@@ -1,3 +1,16 @@
+###NEW: Auto-installer .deb file ! ...###
+------------
+
+***[Download Link (v1.7)](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases/download/v1.7/AndroidThreeScripts_1.7_all.deb)***
+
+***Releases Section -
+[https://github.com/SmokeyMcBong/AndroidThreeScripts/releases]***
+
+-------
+
+<br />
+<br />
+
 <center>![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/cropped-LOGO-A3S-alpha.png)</center>
 <br />  
 
