@@ -16,31 +16,39 @@
 #   You should have received a copy of the GNU General Public license       #
 #   along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# Default Project Location (Let the script find its own directory structure - Now it's portable !)
+projectlocation="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # check which desktop environment is being used
-startbase="./A3S.base"
-startmonitor="./A3S.monitor"
+startbase="A3S.base"
+startmonitor="A3S.monitor"
 message="AndroidThreeScripts is running..."
-function StartMe {
-	if [ $(pgrep -c cinnamon-panel) -gt 0 ]; then
-		cinnamon-terminal -x $startbase
-		cinnamon-terminal -x $startmonitor
-		notify-send "$message"
-	elif [ $(pgrep -c gnome-panel) -gt 0 ]; then
-		gnome-terminal -x $startbase
-		gnome-terminal -x $startmonitor
-		notify-send "$message"
-	elif [ $(pgrep -c kde-panel) -gt 0 ]; then
-		kde-terminal -x $startbase
-		kde-terminal -x $startmonitor
-		notify-send "$message"
-	elif [ $(pgrep -c mate-panel) -gt 0 ]; then
-		mate-terminal -x $startbase
-		mate-terminal -x $startmonitor
-		notify-send "$message"
-	elif [ $(pgrep -c xfce4-panel) -gt 0 ]; then
-		xfce4--terminal -x $startbase
-		xfce4--terminal -x $startmonitor
-		notify-send "$message"
-	fi
-}
-StartMe # Run StartMe function
+# function StartMe {
+# 	if [ $(pgrep -c cinnamon-panel) -gt 0 ]; then
+# 		cinnamon-terminal -x $projectlocation/$startbase
+# 		cinnamon-terminal -x $startmonitor
+# 		notify-send "$message"
+# 	elif [ $(pgrep -c gnome-panel) -gt 0 ]; then
+# 		gnome-terminal -x $startbase
+# 		gnome-terminal -x $startmonitor
+# 		notify-send "$message"
+# 	elif [ $(pgrep -c kde-panel) -gt 0 ]; then
+# 		kde-terminal -x $startbase
+# 		kde-terminal -x $startmonitor
+# 		notify-send "$message"
+# 	elif [ $(pgrep -c mate-panel) -gt 0 ]; then
+# 		mate-terminal -x $startbase
+# 		mate-terminal -x $startmonitor
+# 		notify-send "$message"
+# 	elif [ $(pgrep -c xfce4-panel) -gt 0 ]; then
+# 		xfce4--terminal -x $startbase
+# 		xfce4--terminal -x $startmonitor
+# 		notify-send "$message"
+# 	fi
+# }
+# StartMe # Run StartMe function
+
+x-terminal-emulator --working-directory="$projectlocation" -e $projectlocation/$startbase
+x-terminal-emulator --working-directory="$projectlocation" -e $projectlocation/$startmonitor
+
