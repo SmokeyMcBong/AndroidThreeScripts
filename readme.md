@@ -1,10 +1,8 @@
 -------
-####NEW: AndroidThreeScripts Auto-Installer !####
-
-| Type  |  Link |
-| :------------: | :-----:|
-| Download Latest Version | [ AndroidThreeScripts_1.7_all.deb ](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases/download/v1.7/AndroidThreeScripts_1.7_all.deb) |
-| Show all Releases | [ View all Releases ](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases) |
+| BRAND NEW ! : AndroidThreeScripts Auto-Installer |
+| :------------: |
+| Download Latest Version : [ AndroidThreeScripts_1.7_all.deb ](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases/download/v1.7/AndroidThreeScripts_1.7_all.deb) |
+| Show all Releases : [ View all Releases ](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases) |
 
 -------
 
@@ -180,7 +178,7 @@ This Project is a continuous work-in-progress, with possibilities of more featur
   * Fixed broken dependency order
   * Bumped to v1.3
 
-  
+
   ### 07/11/2014 ...
 
   * Added Switchable Environment option
