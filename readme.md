@@ -33,10 +33,10 @@ This Project is a continuous work-in-progress, with possibilities of more featur
 (credits - <br />
   'AROMA INSTALLER' ... A BIG thanks to 'amarullz' @ XDA for creating such a great, powerful Touch Customizable ROM Installer package creator ! )
 
-  <br />
+<br />
 
-  Current Features..
-  ------------
+Current Features..
+------------
 
   (**NOTE**: >> <u>Almost all options below are editable wthin the '**user.preferences**' file for easy access !</u> )
   <br />
@@ -203,7 +203,7 @@ This Project is a continuous work-in-progress, with possibilities of more featur
   * Created new Triple menu layout
   * Ported Fresh-to-Ready code over to new codebase
   * Added Placeholders
-  * Added License and Readme.  
+  * Added License and Readme.
 
   <br />
 
