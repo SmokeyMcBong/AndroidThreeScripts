@@ -1,11 +1,10 @@
 
 ------------
-###<center>NEW: AndroidThreeScripts Auto-installer !</center>###
+####<center>NEW: AndroidThreeScripts Auto-installer !</center>####
 
-<center>>>***[ Download Link (v1.7)](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases/download/v1.7/AndroidThreeScripts_1.7_all.deb)*** <<
+<center>>>***[ Download Link (v1.7)](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases/download/v1.7/AndroidThreeScripts_1.7_all.deb)*** << </center>
 <br />
-<br />
-***Releases Section -
+<center>***Releases Section -
 [https://github.com/SmokeyMcBong/AndroidThreeScripts/releases]***</center>
 
 -------
@@ -13,6 +12,8 @@
 
 <center>![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/cropped-LOGO-A3S-alpha.png)</center>
 <br />  
+
+<center>"*AndroidThreeScripts*"</center> 
 
 <center>"***Complete Android Build Helper. With 'Fresh-to-Ready', 'RomBuilder' and 'KernelBuilder'  !***"</center>
 
