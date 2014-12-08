@@ -14,10 +14,6 @@
 <center>![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/cropped-LOGO-A3S-alpha.png)</center>
 <br />  
 
-
-<center>AndroidThreeScripts</center>
-
-
 <center>"***Complete Android Build Helper. With 'Fresh-to-Ready', 'RomBuilder' and 'KernelBuilder'  !***"</center>
 
 <br />
