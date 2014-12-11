@@ -18,14 +18,14 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 source A3S-ui.conf		# Import Default Menu UI Variables
 printf '\033]0;A3S Monitor\a'
-printf '\033[8;16;49t'
+printf '\033[8;22;54t'
 clear
 function Monitor {
 	while true
 		do
-			printf '%s\n' "        ${b}---------------------------------     "
-			printf '%s\n' "              ${w}Usage & Load Monitor"
-			printf '%s\n' "        ${b}---------------------------------     "
+			printf '%s\n' "           ${b}---------------------------------     "
+			printf '%s\n' "                 ${w}Usage & Load Monitor"
+			printf '%s\n' "           ${b}---------------------------------     "
 			printf "  ${b}CPU: ${c}"
 				grep -m 1 "model name" /proc/cpuinfo | cut -d: -f2 | sed -e 's/^ *//' | sed -e 's/$//'
 			printf "  ${b}No. of CPU Cores: ${c}"
@@ -64,7 +64,7 @@ function Monitor {
 				finalUptimeString="${totalUptimeDays}${totalUptimeHours}${totalUptimeMins}${totalUptimeSecs}"
 				printf "${finalUptimeString}"
 			printf '%s\n' ""
-			printf '%s\n' "         ${b}---------------------------------     "
+			printf '%s\n' "           ${b}---------------------------------     "
 			printf "  ${b}Memory Usage: ${c}"
 				free -m | awk 'NR==2{printf "%s/%s MB (%.2f%)\n", $3,$2,$3*100/$2 }'
 			printf "  ${b}Swap Usage: ${c}"
@@ -75,8 +75,10 @@ function Monitor {
 				ps axr | wc -l | awk '{print $1}'
 			printf "  ${b}Total Processes: ${c}"
 				ps ax | wc -l | awk '{print $1}'
-			printf "  ${b}CPU Load (avg): ${c}"
-				grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}'
+			printf '%s\n' "           ${b}---------------------------------     "
+			printf '%s\n' "${b}| PiD | User | |         Command         | |Cpu%|Mem%|${c}"
+				ps -e -o pid,uname,cmd,pcpu,pmem --sort=-pcpu,-pmem  | tail -n +2 | head -5
+
 			sleep 1
 		clear
 	done
