@@ -1,7 +1,7 @@
 -------
 | BRAND NEW :  AndroidThreeScripts Auto-Installer |
 | :------------: |
-| Download Latest Version : [ AndroidThreeScripts_2.0_all.deb ](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases/download/v2.0/AndroidThreeScripts_2.0_all.deb) |
+| Download Latest Version : [ AndroidThreeScripts_2.0_all.deb ](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases/download/2.0/AndroidThreeScripts_2.0_all.deb) |
 | Show all Releases : [ View all Releases ](https://github.com/SmokeyMcBong/AndroidThreeScripts/releases) |
 
 -------
