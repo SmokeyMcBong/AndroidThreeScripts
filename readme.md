@@ -93,6 +93,42 @@ Planned Feature's..
 
 Change log's..
 ------------
+### 9/1/2015 ...
+
+* Version 2.0 Released !!
+* Merged Development branch into master
+
+### 8/1/2015 ...
+
+* Reformatted base code, completed first stage console output
+* updated todo list
+
+### 12/12/2014 ...
+
+* Removed .deb download from development branch readme
+* Part 3 + 4 of new logical structure
+
+### 11/12/2014 ...
+
+* Removed dektop environment checks from START.ME
+* Removed overall cpu % in favor of 'ps -e' call
+* Colorized output
+* Updated Github's ATOM text editor .deb link
+* Added temporary TODO list
+* Started logical file project restructuring
+
+### 08/12/2014 ...
+
+* Made startup easier and more robust
+* Added NEW Auto-installer .deb release link
+* Re-formatted Readme
+
+### 07/12/2014 ...
+
+* Updated Github's ATOM Text Editor to 0.153.0
+* Updated Readme, target was too broad scope, changed to "Ubuntu (or Debian based)" for clarity
+* Fixed Readme derp
+
 ### 06/12/2014 ...
 
 * Added running procceses to system load monitor
