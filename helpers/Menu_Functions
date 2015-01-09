@@ -1,0 +1,121 @@
+#!/bin/bash
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   This file is part of the 'AndroidThreeScripts' project                  #
+#   Copyright (C) 2014  'theFONZ'                                           #
+#                                                                           #
+#   This program is free software: you can redistribute it and/or modify    #
+#   it under the terms of the GNU General Public License as published by    #
+#   the Free Software Foundation, either version 2 of the License, or       #
+#   any later version.                                                      #
+#                                                                           #
+#   This program is distributed in the hope that it will be useful,         #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    #
+#   See the GNU General Public License for more details.                    #
+#                                                                           #
+#   You should have received a copy of the GNU General Public license       #
+#   along with this program.  If not, see 'license' in project root         #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+A3S_DIR="$( cd $( dirname ${0} )/.. && pwd )"
+A3S_CONF_DIR="${A3S_DIR}/config.d"
+A3S_PREFS_DIR="${A3S_DIR}/prefs"
+A3S_HELPERS_DIR="${A3S_DIR}/helpers"
+
+source ${A3S_CONF_DIR}/A3S-ui.conf				# Import Default Menu UI Variables
+source ${A3S_CONF_DIR}/A3S.conf						# Import Default Script Variables
+source ${A3S_PREFS_DIR}/UserPrefs.conf		# Import User Configurable Variables
+source ${A3S_HELPERS_DIR}/Console_Logger  # Import Console_Logger helper
+
+
+# open 'UserPrefs.conf'
+function editprefs {
+  ${SYSDEFAPP} ${PROJECTLOCATION}/prefs/UserPrefs.conf  &&
+  MESSAGE="Opening UserPrefs.conf for Editing"
+  Status_Pending
+  printf '%s\n'  ""
+  printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'UserPrefs.conf' ??"
+  printf '%s\n'  ""
+  printf '%s\n'  ""
+  read -p "		Load New Changes Now ?? (y/n)?" choice
+  case "$choice" in
+    y|Y ) showPreProgress
+    MESSAGE="Finished Editing UserPrefs.conf"
+    Status_Notice
+    showPostProgress
+    sleep 1
+    mainmenu;;
+    n|N ) mainmenu;;
+    * ) editprefs;;
+  esac
+}
+
+# Delete logs if they exist
+function deletelogs {
+  printf '%s\n'  ""
+  printf '%s\n'  ""
+  read -p "		Delete All Logs ?? (y/n)?" choice
+  case "$choice" in
+    y|Y ) if [ -d ${LOGLOCATION} ]; then
+    showPreProgress
+    rm -rf ${LOGLOCATION}
+    showPostProgress
+    # tell the console we are CLOSING A3S.monitor
+    MESSAGE="Deleted Logs"
+    Status_Notice
+    sleep 1
+  fi
+  mainmenu;;
+  n|N ) mainmenu;;
+  * ) deletelogs;;
+esac
+}
+
+# Exit Script
+function exitscript {
+  printf '%s\n'  ""
+  printf '%s\n'  ""
+  printf '%s\n' "    - Exiting & Closing Processes ...   "
+  showPreProgress
+  # tell the console we are CLOSING A3S.monitor
+  MESSAGE="CLOSING A3S.monitor.."
+  Status_Warning
+  sleep 1
+  ps -ef | awk '/A3S.monitor/{print $2}' | xargs kill
+  # tell the console we are CLOSING A3S.monitor
+  MESSAGE="CLOSING A3S.console & A3S.base.."
+  Status_Warning
+  sleep 1
+  ps -ef | awk '/A3S.console/{print $2}' | xargs kill
+  showPostProgress
+  printf '%s\n'  ""
+  printf '%s\n'  "                    ${g}GoodBye!!${n}                    "
+  printf '%s\n'  ""
+  sleep 1
+  clear && printf '\033c' && printf '\033c'
+  exit
+}
+
+# Restart PC
+function restartpc {
+  printf '%s\n'  ""
+  printf '%s\n'  ""
+  read -p "		Restart PC ?? (y/n)?" choice
+  case "$choice" in
+    y|Y ) sudo reboot;;
+    n|N ) mainmenu;;
+    * ) restartpc;;
+  esac
+}
+
+# Shutdown PC
+function shutdownpc {
+  printf '%s\n'  ""
+  printf '%s\n'  ""
+  read -p "		Shutdown PC ?? (y/n)?" choice
+  case "$choice" in
+    y|Y ) sudo poweroff;;
+    n|N ) mainmenu;;
+    * )  shutdownpc;;
+  esac
+}

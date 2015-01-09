@@ -1,0 +1,2275 @@
+#!/bin/bash
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   This file is part of the 'AndroidThreeScripts' project                  #
+#   Copyright (C) 2014  'theFONZ'                                           #
+#                                                                           #
+#   This program is free software: you can redistribute it and/or modify    #
+#   it under the terms of the GNU General Public License as published by    #
+#   the Free Software Foundation, either version 2 of the License, or       #
+#   any later version.                                                      #
+#                                                                           #
+#   This program is distributed in the hope that it will be useful,         #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    #
+#   See the GNU General Public License for more details.                    #
+#                                                                           #
+#   You should have received a copy of the GNU General Public license       #
+#   along with this program.  If not, see 'license' in project root         #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+A3S_DIR="$( cd $( dirname ${0} )/.. && pwd )"
+A3S_CONF_DIR="${A3S_DIR}/config.d"
+A3S_PREFS_DIR="${A3S_DIR}/prefs"
+A3S_HELPERS_DIR="${A3S_DIR}/helpers"
+
+source ${A3S_CONF_DIR}/A3S-ui.conf        # Import Default Menu UI Variables
+source ${A3S_CONF_DIR}/A3S.conf						# Import Default Script Variables
+source ${A3S_PREFS_DIR}/UserPrefs.conf		# Import User Configurable Variables
+source ${A3S_HELPERS_DIR}/Startup_Checks	# Import Startup_Checks helper
+source ${A3S_HELPERS_DIR}/Menu_Functions	# Import Menu_Functions helper
+source ${A3S_HELPERS_DIR}/Clean_Bash			# Import Clean_Bash helper
+
+
+# run console log checker and process checker ONE TIME only
+run_once_checks &&
+
+mainmenu()
+{
+	# run all startup checks
+	run_all_base_checks &&
+	clear && printf '\033c'
+	printf '\033]0;AndroidThreeScripts\a'
+	printf '\033[8;49;216t'
+	printf '%s\n' ""
+	printf '%s\n' ""
+	printf '%s\n' " ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	printf '%s\n' " ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	printf '%s\n' ""
+	printf '%s\n' ""
+	printf '%s\n' "   ${g}################################################################         ################################################################         ################################################################"
+	printf '%s\n' "   ${c}####################                        ####################         ####################                        ####################         ####################                        ####################"
+	printf '%s\n' "   ${c}####                                                        ####         ####                                                        ####         ####                                                        ####"
+	printf '%s\n' "   ${n}##                       Fresh-To-Ready                       ##         ##                         RomBuilder                         ##         ##                       KernelBuilder                        ##"
+	printf '%s\n' "   ${c}####                                                        ####         ####                                                        ####         ####                                                        ####"
+	printf '%s\n' "   ${c}####################                        ####################         ####################                        ####################         ####################                        ####################"
+	printf '%s\n' "   ${g}################################################################         ################################################################         ################################################################"
+	printf '%s\n' ""
+	printf '%s\n' ""
+	printf '%s\n' "   ${b}                    Setup Build Environment...                                        Compile Rom, Add Features & AROMA...                                     Compile Kernel, Add Features & AROMA..."
+	printf '%s\n' ""
+	printf '%s\n' ""
+	printf '%s\n' "   ${c}0${b})  Install ALL Dependencies (${dependencystatus})"
+	printf '%s\n' "    -------------------------------------------------------------           ${c}r1${b})  Clean ROM Build Folder Structure                                    ${c}k1${b})  Edit Kernel 'defconfig' File"
+	printf '%s\n' "   ${b}Linux Setup                                                              ${c}r2${b})  Sync ROM Repo's                                                     ${c}k2${b})  Clean Kernel Folder And Remove '.config' file"
+	printf '%s\n' "   ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source                                             ${c}k3${b})  Compile Kernel & Modules"
+	printf '%s\n' "   ${c}2${b})  Download & Install ${ASTUDIONAME}                ${c}r4${b})  Copy New 'system' Folder & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
+	printf '%s\n' "   ${c}3${b})  Download & Install ${APP1NAME}                          -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
+	printf '%s\n' "    -------------------------------------------------------------           ${c}r5${b})  Pull Gapps From Device                                               -------------------------------------------------------------"
+	printf '%s\n' "   ${b}Android ROM Development Setup                                            ${c}r6${b})  Download Additional App's Using 'Additions.links' file              ${c}k6${b})  Edit 'aroma-config' file in working_folder"
+	printf '%s\n' "   ${c}4${b})  Setup Build Environment for ROM Development                          ${c}r7${b})  Download Xposed Framework/Modules Using 'Xposed.links' file         ${c}k7${b})  Edit 'updater-script' file in working_folder"
+	printf '%s\n' "   ${c}5${b})  Download Personal ROM Development Repo's                             ${c}r8${b})  Copy Grabbed_Files structure to working_folder structure             -------------------------------------------------------------"
+	printf '%s\n' "   ${c}6${b})  Download ROM Source Code (Current Source = ${g}${DESIREDROMNAME}${b})             -------------------------------------------------------------"
+	printf '%s\n' "    -------------------------------------------------------------           ${c}r9${b})  Edit 'aroma-config' file                                            ${c}k8${b})  Zip working_folder Contents Ready For Flashing on Device"
+	printf '%s\n' "   ${b}Android Kernel Development Setup                                         ${c}r10${b}) Edit 'updater-script' file"
+	printf '%s\n' "   ${c}7${b})  Setup Build Environment for Kernel Development                       ${c}r11${b}) Edit 'build.prop' file"
+	printf '%s\n' "   ${c}8${b})  Download Sabermod ${TOOLCHAINNAME} Toolchain For Kernel Compile         -------------------------------------------------------------"
+	printf '%s\n' "   ${c}9${b})  Download Kernel Source Code (Current Source = ${g}${DESIREDKERNELNAME}${b})          ${c}r12${b}) Edit 'Additions.links' file"
+	printf '%s\n' "                                                                            ${c}r13${b}) Edit 'Xposed.links' file"
+	printf '%s\n' "    -------------------------------------------------------------            -------------------------------------------------------------"
+	printf '%s\n' "   ${c}Info>${b} Build Environment Currently Set To : ${g}${CURRENTENVSETUP}${b}"
+	printf '%s\n' "       (Use Options ${c}4${b} and ${c}7${b} To Switch Build Environments)                   ${c}r14${b}) Zip working_folder Contents Ready For Flashing on Device"
+	printf '%s\n' ""
+	printf '%s\n' ""
+	printf '%s\n' ""
+	printf '%s\n' ""
+	printf '%s\n' " ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	printf '%s\n' "   ${c}p${b} )  Edit Preferences   ${c}d${b} )  Delete Logs [Current = ${g}${LOGSIZE}kb${b}]                                                                                                                             'AndroidThreeScripts'"
+	printf '%s\n' " ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+	printf '%s\n' "   ${c}e${b} )  Exit Script        ${c}r${b} )  Restart PC        ${c}s${b} )  Shutdown PC                                                                                                            Written by 'theFONZ' ${SCRIPTBUILD}"
+	printf '%s\n' " ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------${n}"
+	printf '%s\n' ""
+	read mainmen
+	# Fresh-To-Ready Menu
+	if [ "$mainmen" == 0 ] ; then
+		installDependencies
+	elif [ "$mainmen" == 1 ] ; then
+		saberinstall
+	elif [ "$mainmen" == 2 ] ; then
+		installstudio
+	elif [ "$mainmen" == 3 ] ; then
+		installapps
+	elif [ "$mainmen" == 4 ] ; then
+		setuprenv
+	elif [ "$mainmen" == 5 ] ; then
+		downloadpresonalrrepos
+	elif [ "$mainmen" == 6 ] ; then
+		downloadrsource
+	elif [ "$mainmen" == 7 ] ; then
+		setupkenv
+	elif [ "$mainmen" == 8 ] ; then
+		downloadktoolchain
+	elif [ "$mainmen" == 9 ] ; then
+		downloadksource
+
+		# RomBuilder Menu
+	elif [ "$mainmen" == r1 ] ; then
+		rbcleanbuild
+	elif [ "$mainmen" == r2 ] ; then
+		rbsyncbuild
+	elif [ "$mainmen" == r3 ] ; then
+		rbcompilebuild
+	elif [ "$mainmen" == r4 ] ; then
+		rbcopy
+	elif [ "$mainmen" == r5 ] ; then
+		rbgapps
+	elif [ "$mainmen" == r6 ] ; then
+		rbadditions
+	elif [ "$mainmen" == r7 ] ; then
+		rbxposed
+	elif [ "$mainmen" == r8 ] ; then
+		rbcopy2
+	elif [ "$mainmen" == r9 ] ; then
+		rbeditaroma
+	elif [ "$mainmen" == r10 ] ; then
+		rbeditupdaterscript
+	elif [ "$mainmen" == r11 ] ; then
+		rbeditbuildprop
+	elif [ "$mainmen" == r12 ] ; then
+		rbeditadditions
+	elif [ "$mainmen" == r13 ] ; then
+		rbeditxposed
+	elif [ "$mainmen" == r14 ] ; then
+		rbzip
+
+		# KernelBuilder Menu
+	elif [ "$mainmen" == k1 ] ; then
+		kbdefconfig
+	elif [ "$mainmen" == k2 ] ; then
+		kbcleanbuild
+	elif [ "$mainmen" == k3 ] ; then
+		kbcompilebuild
+	elif [ "$mainmen" == k4 ] ; then
+		kbcreateboot
+	elif [ "$mainmen" == k5 ] ; then
+		kbcopy
+	elif [ "$mainmen" == k6 ] ; then
+		kbeditaroma
+	elif [ "$mainmen" == k7 ] ; then
+		kbeditupdaterscript
+	elif [ "$mainmen" == k8 ] ; then
+		kbzip
+
+		# Main Menu Preferences/Exit/Reboot/Shutdown
+	elif [ "$mainmen" == p ] ; then
+		editprefs
+	elif [ "$mainmen" == d ] ; then
+		deletelogs
+	elif [ "$mainmen" == e ] ; then
+		exitscript
+	elif [ "$mainmen" == r ] ; then
+		restartpc
+	elif [ "$mainmen" == s ] ; then
+		shutdownpc
+	elif
+		# Fresh-To-Ready Menu
+		[ "$mainmen" != 0 ] && [ "$mainmen" != 1 ] && [ "$mainmen" != 2 ] && [ "$mainmen" != 3 ] &&
+		[ "$mainmen" != 4 ] && [ "$mainmen" != 5 ] && [ "$mainmen" != 6 ] && [ "$mainmen" != 7 ] &&
+		[ "$mainmen" != 8 ] && [ "$mainmen" != 9 ] &&
+		# RomBuilder Menu
+		[ "$mainmen" != r1 ] && [ "$mainmen" != r2 ] && [ "$mainmen" != r3 ] && [ "$mainmen" != r4 ] &&
+		[ "$mainmen" != r5 ] && [ "$mainmen" != r6 ] && [ "$mainmen" != r7 ] && [ "$mainmen" != r8 ] &&
+		[ "$mainmen" != r9 ] && [ "$mainmen" != r10 ] && [ "$mainmen" != r11 ] && [ "$mainmen" != r12 ] &&
+		[ "$mainmen" != r13 ] && [ "$mainmen" != r14 ] &&
+		# KernelBuilder Menu
+		[ "$mainmen" != k1 ] && [ "$mainmen" != k2 ] && [ "$mainmen" != k3 ] && [ "$mainmen" != k4 ] &&
+		[ "$mainmen" != k5 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k6 ] && [ "$mainmen" != k8 ] &&
+		# Main Menu Preferences/Exit/Reboot/Shutdown
+		[ "$mainmen" != p ] && [ "$mainmen" != d ] && [ "$mainmen" != e ] && [ "$mainmen" != r ] && [ "$mainmen" != s ]; then
+		mainmenu
+	fi
+}
+
+# Fresh-To-Ready Menu >>>
+installDependencies() # Install ALL needed Dependencies before doing anything!
+{
+	clear && printf '\033c'
+	Function="InstallDependencies"
+	Stagenumber="0"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) INSTALL Dependencies"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read installDependenciesopt0
+	if [ "$installDependenciesopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="0"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> $MESSAGE... <-${n}             "
+		showPreProgress
+		sudo apt-get purge -y openjdk-\* icedtea-\* icedtea6-\* && sudo add-apt-repository -y ppa:webupd8team/java && sudo apt-get update && sudo apt-get install -y \
+		oracle-java6-installer git gnupg ccache lzop flex bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 libc6-dev lib32bz2-1.0 lib32ncurses5-dev \
+		x11proto-core-dev libx11-dev:i386 libreadline6-dev:i386 lib32z1-dev libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown \
+		libxml2-utils xsltproc libreadline6-dev lib32readline-gplv2-dev libncurses5-dev bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev lib32bz2-dev squashfs-tools \
+		pngcrush schedtool dpkg-dev libcloog-isl-dev libcap-dev liblz4* abootimg android-tools-adb android-tools-fastboot &&
+		sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so && mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo &&
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "Adding Paths and Variables to .bashrc file..."
+		if [ -f ~/.bashrc ]; then
+			cleanbash
+		fi
+		sleep 2
+		echo ${PATHHEADER} >> ~/.bashrc &&
+		echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
+		showPostProgress
+		echo dependencies have been satisfied >> ${PROJECTLOCATION}/d.s && sleep 2
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 1
+		printf '%s\n'  ""
+		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+		notify-send "Please Logout and Log back in again"
+		sleep 1
+		$logout
+		exitscript
+	elif [ "$installDependenciesopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$installDependenciesopt0" != 1 ] && [ "$installDependenciesopt0" != 2 ] ; then
+		installDependencies
+	fi
+}
+
+saberinstall() # Download, SYNC Repo, Compile & Install Latest SaberMod Linux Kernel
+{
+	clear && printf '\033c'
+	Function="saberinstall"
+	Stagenumber="1"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) Download Latest SaberMod Linux Kernel Source (home/'${USER}'/Linux/)"
+	printf '%s\n' "    2) SYNC Repo, Compile & Install Latest SaberMod Linux Kernel (If Already Downloaded)"
+	printf '%s\n' "    3) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read saberinstallopt0
+	if [ "$saberinstallopt0" == 1 ] ; then
+		Function="saberdownload"
+		clear && printf '\033c'
+		(
+		Stagenumber="1"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> $MESSAGE... <-${n}             "
+		cd &&
+		if [ ! -d Linux ]; then
+			mkdir Linux
+		else
+			rm -rf Linux && mkdir Linux
+		fi
+		cd Linux && sleep 1
+		repo init -u ${SABERLINUXSOURCE} && exec ${SYNC} & wait
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		saberinstall
+	elif [ "$saberinstallopt0" == 2 ] ; then
+		Function="sabercompileinstall"
+		clear && printf '\033c'
+		(
+		Stagenumber="1"
+		show_stage_header
+		# check to see if conflicting Android Kernel Dev PATH's exist in bash.rc, if so run the cleanbash function, add basic PATH and logout
+		KernelDevHeader=$KERNELDEVHEADER
+		if grep -q "$KERNELDEVHEADER" "$BASHALIAS"; then
+			# send console message
+			MESSAGE="Started Stage $Stagenumber - $Function"
+			Status_Notice "$MESSAGE"
+			printf '%s\n'  "        ${b}-> Current PATH settings are not setup correctly, Changing them now... <-${n}             "
+			if [ -f ~/.bashrc ]; then
+				cleanbash
+			fi
+			sleep 2
+			echo ${PATHHEADER} >> ~/.bashrc &&
+			echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
+			showPostProgress
+			sleep 2
+			printf '%s\n'  ""
+			printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+			notify-send "Please Logout and Log back in again"
+			sleep 1
+			$logout
+			exitscript
+		else
+			printf '%s\n'  "        ${b}-> Compiling & Installing Newest SaberMod Linux Kernel... <-${n}             "
+			cd && cd Linux &&
+			if [ -f ubuntu ]; then
+				# send console message
+				MESSAGE="Compiling & Installing Newest SaberMod Linux Kernel"
+				Status_Pending "$MESSAGE"
+				. ubuntu & wait
+			else
+				# send console message
+				MESSAGE="Sabermod 'ubuntu' script NOT found!"
+				Status_Pending "$MESSAGE"
+				printf '%s\n'  "$MESSAGE"
+				sleep 2.5
+				mainmenu
+			fi
+		fi
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$saberinstallopt0" == 3 ] ; then
+		mainmenu
+	elif [ "$saberinstallopt0" != 1 ] && [ "$saberinstallopt0" != 2 ] && [ "$saberinstallopt0" != 3 ] ; then
+		saberinstall
+	fi
+}
+
+installstudio() # install Android Studio 0.8.6 & SDK Bundle
+{
+	clear && printf '\033c'
+	Function="AstudioInstall"
+	Stagenumber="2"
+	StudioAlias="android-studio-bundle"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) Install ${ASTUDIONAME} "
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read installstudioopt0
+	if [ "$installstudioopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="2"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Downloading ${ASTUDIONAME} ... <-${n}          "
+		sleep 2
+		cd &&
+		if [ ! -d Android ]; then
+			mkdir Android
+		fi
+		cd Android &&
+		if [ -d android-studio ]; then
+			rm -rf android-studio
+		fi
+		for filename in *; do
+			case "${filename}" in
+				${StudioAlias}*) rm -f "$filename";;
+			esac
+		done &&
+		wget ${ASTUDIOSOURCE} &&
+		sleep 2
+		clear && printf '\033c'
+		Stagenumber="2"
+		show_stage_header
+		printf '%s\n'  "        ${b}-> Installing ${ASTUDIONAME} ... <-${n}          "
+		sleep 2
+		for filename in *; do
+			case "${filename}" in
+				${StudioAlias}*) tar -zxvf "$filename";;
+			esac
+		done &&
+		sleep 2
+		clear && printf '\033c'
+		Stagenumber="2"
+		show_stage_header
+		printf '%s\n'  "        ${b}-> Cleaning Up ... <-${n}          "
+		sleep 2
+		for filename in *; do
+			case "${filename}" in
+				${StudioAlias}*) rm -f "$filename";;
+			esac
+		done &&
+		sleep 2
+		clear && printf '\033c'
+		Stagenumber="2"
+		show_stage_header
+		printf '%s\n'  "      ${b}-> Adding Android Studio Path Environment... <-${n}          "
+		sleep 2
+		StudioPathHeader=$STUDIOPATHHEADER
+		if grep -q "$StudioPathHeader" "$BASHALIAS"; then
+			sed -i '/'"$StudioPathHeader"'/d' $BASHALIAS
+		fi
+		StudioPath="# A3S Android Studio Path Settings"
+		if grep -q "$StudioPath" "$BASHALIAS"; then
+			sed -i '/'"${StudioPath}"'/d' $BASHALIAS
+		fi
+		echo ${STUDIOPATHHEADER} >> ~/.bashrc &&
+		echo ${STUDIOPATH} "# A3S Android Studio Path Settings" >> ~/.bashrc &&
+		# create symlink on desktop
+		symlink=/home/$USER/Desktop/AndroidStudio.start
+		if [ -f ${symlink} ]; then
+			rm -f ${symlink}
+		fi
+		ln -s /home/$USER/Android/android-studio/bin/studio.sh ${symlink} &&
+		clear && printf '\033c'
+		Stagenumber="2"
+		show_stage_header
+		printf '%s\n'  "${b}-> All done ! use desktop shortcut to start Android-Studio (or type studio.sh from terminal)<-${n}          "
+		sleep 2
+		showPostProgress && sleep 2
+		# show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 1
+		printf '%s\n'  ""
+		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+		notify-send "Please Logout and Log back in again"
+		sleep 1
+		$logout
+		exitscript
+	elif [ "$installstudioopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$installstudioopt0" != 1 ] && [ "$installstudioopt0" != 2 ] ; then
+		installstudio
+	fi
+}
+
+installapps() # Download & Install 3rd party Apps
+{
+	clear && printf '\033c'
+	Function="installapps"
+	Stagenumber="3"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) Download & Install ${APP1NAME}"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read installappsopt0
+	if [ "$installappsopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="3"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "  ${b}-> Downloading 3rd Party Apps... <-${n}  "
+		sleep 1
+		cd ${PROJECTLOCATION} &&
+		if [ -d ${TEMPDIR} ]; then
+			rm -rf ${TEMPDIR}
+		fi
+		mkdir ${TEMPDIR} && cd ${TEMPDIR} &&
+		wget ${APP1SOURCE} &&
+		clear && printf '\033c'
+		Stagenumber="3"
+		show_stage_header
+		printf '%s\n'  "  ${b}-> Installing 3rd Party Apps... <-${n}  "
+		sleep 2
+		sudo dpkg -i ${APP1FILENAME} &&
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$installappsopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$installappsopt0" != 1 ] && [ "$installappsopt0" != 2 ] ; then
+		installapps
+	fi
+}
+
+setuprenv() # Setup ROM Build Environment
+{
+	clear && printf '\033c'
+	Function="setuprenv"
+	Stagenumber="4"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) SETUP ROM BUILD ENVIRONMENT"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read setuprenvopt0
+	if [ "$setuprenvopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="4"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Setting Build Environment For - ROM Development... <-${n}             "
+		printf '%s\n'  ""
+		printf '%s\n'  "Creating Folders, Adding Paths and Variables to .bashrc file..."
+		showPreProgress
+		if [ -f ~/.bashrc ]; then
+			cleanbash
+		fi
+		sleep 2
+		cd &&
+		echo '' >> ~/.bashrc &&
+		echo ${ROMDEVHEADER} >> ~/.bashrc &&
+		echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
+		echo ${CCACHE} "# A3S Ccache Settings" >> ~/.bashrc &&
+		cd &&
+		if [ ! -d Android ]; then
+			mkdir Android
+		fi
+		cd Android &&
+		if [ ! -d MyRepositories ]; then
+			mkdir MyRepositories
+		fi
+		if [ ! -d RomDevelopment ]; then
+			mkdir RomDevelopment
+		fi
+		showPostProgress
+		sleep 2
+		# show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 1
+		printf '%s\n'  ""
+		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+		notify-send "Please Logout and Log back in again"
+		sleep 1
+		$logout
+		exitscript
+	elif [ "$setuprenvopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$setuprenvopt0" != 1 ] && [ "$setuprenvopt0" != 2 ] ; then
+		setuprenv
+	fi
+}
+
+downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
+{
+	clear && printf '\033c'
+	Function="downloadpresonalrrepos"
+	Stagenumber="5"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD PERSONAL ROM DEVEOLPMENT RELATED REPOS"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read downloadpresonalrreposopt0
+	if [ "$downloadpresonalrreposopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="5"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Downloading Personal ROM-Related Repos... <-${n}             "
+		cd &&
+		if [ ! -d Android ]; then
+			mkdir Android
+		fi
+		cd Android &&
+		if [ ! -d MyRepositories ]; then
+			mkdir MyRepositories
+		fi
+		cd MyRepositories &&
+		git clone -v ${PERSONALREPO1} && git clone -v ${PERSONALREPO2} && git clone -v ${PERSONALREPO3} &&
+		git clone -v ${PERSONALREPO4} && git clone -v ${PERSONALREPO5} &&
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$downloadpresonalrreposopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$downloadpresonalrreposopt0" != 1 ] && [ "$downloadpresonalrreposopt0" != 2 ] ; then
+		downloadpresonalrrepos
+	fi
+}
+
+downloadrsource()  # Download Desired ROM Source Code
+{
+	clear && printf '\033c'
+	Function="downloadrsource"
+	Stagenumber="6"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD ${DESIREDROMNAME} ROM SOURCE CODE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read downloadrsourceopt0
+	if [ "$downloadrsourceopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="6"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "   ${b}-> Downloading ${DESIREDROMNAME} Source Code ... <-${n}       "
+		cd &&
+		if [ ! -d Android ]; then
+			mkdir Android
+		fi
+		cd Android &&
+		if [ ! -d RomDevelopment ]; then
+			mkdir RomDevelopment
+		fi
+		cd RomDevelopment &&
+		if [ -d ${DESIREDROMNAME} ]; then
+			rm -rf ${DESIREDROMNAME}
+		fi
+		mkdir ${DESIREDROMNAME} && cd ${DESIREDROMNAME} &&
+		repo init -u ${DESIREDROMSOURCE} -b du44 && ${SYNC} & wait
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$downloadrsourceopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$downloadrsourceopt0" != 1 ] && [ "$downloadrsourceopt0" !=2 ] ; then
+		downloadrsource
+	fi
+}
+
+setupkenv() # Setup Kernel Build Environment
+{
+	clear && printf '\033c'
+	Function="setupkenv"
+	Stagenumber="7"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) SETUP KERNEL BUILD ENVIRONMENT"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read setupkenvopt0
+	if [ "$setupkenvopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="7"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Setting Build Environment For - Kernel Development... <-${n}             "
+		printf '%s\n'  ""
+		printf '%s\n'  "Creating Folders, Adding Paths and Variables to .bashrc file..."
+		showPreProgress
+		if [ -f ~/.bashrc ]; then
+			cleanbash
+		fi
+		sleep 2
+		cd &&
+		echo '' >> ~/.bashrc &&
+		echo ${KERNELDEVHEADER} >> ~/.bashrc &&
+		echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
+		echo ${KERNELARCH} "# A3S KernelArch Settings" >> ~/.bashrc &&
+		echo ${CCOMPILE} "# A3S Ccompile Settings" >> ~/.bashrc &&
+		echo ${CCOMPILEARM} "# A3S Ccompile Arm Settings" >> ~/.bashrc &&
+		echo ${TOOLCHAINPATH} "# A3S ToolchainPath Settings" >> ~/.bashrc &&
+		cd &&
+		if [ ! -d Android ]; then
+			mkdir Android
+		fi
+		cd Android &&
+		if [ ! -d KernelDevelopment ]; then
+			mkdir KernelDevelopment
+		fi
+		showPostProgress
+		sleep 2
+		# show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 1
+		printf '%s\n'  ""
+		printf '%s\n'  "Please Logout and Log back in for PATH changes to take effect..."
+		notify-send "Please Logout and Log back in again"
+		sleep 1
+		$logout
+		exitscript
+	elif [ "$setupkenvopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$setupkenvopt0" != 1 ] && [ "$setupkenvopt0" !=2 ] ; then
+		setupkenv
+	fi
+}
+
+downloadktoolchain() # Download SaberMod 4.9.3 Kernel Toolchain
+{
+	clear && printf '\033c'
+	Function="downloadktoolchain"
+	Stagenumber="8"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD LATEST SABERMOD KERNEL TOOLCHAIN"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read downloadktoolchainopt0
+	if [ "$downloadktoolchainopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="8"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Downloading ${TOOLCHAINNAME} Toolchain... <-${n}             "
+		cd &&
+		if [ ! -d Android ]; then
+			mkdir Android
+		fi
+		cd Android &&
+		if [ ! -d KernelDevelopment ]; then
+			mkdir KernelDevelopment
+		fi
+		cd KernelDevelopment &&
+		if [ -d Toolchain ]; then
+			rm -rf Toolchain
+		fi
+		mkdir Toolchain &&  cd Toolchain &&
+		git clone -v ${TOOLCHAINSOURCE} &&
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$downloadktoolchainopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$downloadktoolchainopt0" != 1 ] && [ "$downloadktoolchainopt0" != 2 ] ; then
+		downloadktoolchain
+	fi
+}
+
+downloadksource()   # Download Kernel Source Code (specified in .config)
+{
+	clear && printf '\033c'
+	Function="downloadksource"
+	Stagenumber="9"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD ${DESIREDKERNELNAME} ROM SOURCE CODE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read downloadksourceopt0
+	if [ "$downloadksourceopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="9"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "   ${b}-> Downloading ${DESIREDKERNELNAME} Source Code ... <-${n}       "
+		cd &&
+		if [ ! -d Android ]; then
+			mkdir Android
+		fi
+		cd Android &&
+		if [ ! -d KernelDevelopment ]; then
+			mkdir KernelDevelopment
+		fi
+		cd KernelDevelopment &&
+		if [ -d ${DESIREDKERNELNAME} ]; then
+			rm -rf ${DESIREDKERNELNAME}
+		fi
+		#mkdir ${DESIREDKERNELNAME} && cd ${DESIREDKERNELNAME} &&
+		git clone -v ${DESIREDKERNELSOURCE} ${DESIREDKERNELNAME} &&
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$downloadksourceopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$downloadksourceopt0" != 1 ] && [ "$downloadksourceopt0" !=2 ] ; then
+		downloadksource
+	fi
+}
+
+# RomBuilder Menu >>>
+rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands
+{
+	clear && printf '\033c'
+	Function="rbcleanbuild"
+	Stagenumber="r1"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) CLEAN ROM BUILD FOLDERS"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbcleanbuildopt0
+	if [ "$rbcleanbuildopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="r1"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "        ${b}-> Cleaning Previous Folder Structure... <-${n}             "
+		cd &&
+		if [ -d Android ]; then
+			cd Android
+		else
+			printf '%s\n'  " No Root 'Android' Folder Found !, Have You Downloaded The Source ??  "
+			sleep 3 && mainmenu
+		fi
+		if [ -d RomDevelopment ]; then
+			cd RomDevelopment
+		else
+			printf '%s\n'  " No Root 'RomDevelopment' Folder Found !, Have You Downloaded The Source ??  "
+			sleep 3 && mainmenu
+		fi
+		if [ -d ${DESIREDROMNAME} ]; then
+			cd ${DESIREDROMNAME}
+		else
+			printf '%s\n'  " No Root '${DESIREDROMNAME}' Folder Found !, Have You Downloaded The Source ?? "
+			sleep 3 && mainmenu
+		fi
+		showPreProgress
+		clean="make clean"
+		clobber="make clobber"
+		exec ${clean} & wait
+		exec ${clobber} & wait
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$rbcleanbuildopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbcleanbuildopt0" != 1 ] && [ "$rbcleanbuildopt0" != 2 ] ; then
+		rbcleanbuild
+	fi
+}
+
+rbSYNCbuild() # Invoke 'repo SYNC -j5' Command to SYNC repos
+{
+	clear && printf '\033c'
+	Function="rbSYNCbuild"
+	Stagenumber="r2"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) SYNC REPO'S"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbSYNCbuildopt0
+	if [ "$rbSYNCbuildopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="r2"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "        ${b}-> SYNCing Rom Repo's... <-${n}             "
+		cd &&
+		if [ -d Android ]; then
+			cd Android
+		else
+			printf '%s\n'  " No Root 'Android' Folder Found !, Have You Downloaded The Source ??  "
+			sleep 3 && mainmenu
+		fi
+		if [ -d RomDevelopment ]; then
+			cd RomDevelopment
+		else
+			printf '%s\n'  " No Root 'RomDevelopment' Folder Found !, Have You Downloaded The Source ??  "
+			sleep 3 && mainmenu
+		fi
+		if [ -d ${DESIREDROMNAME} ]; then
+			cd ${DESIREDROMNAME}
+		else
+			printf '%s\n'  " No Root '${DESIREDROMNAME}' Folder Found !, Have You Downloaded The Source ?? "
+			sleep 3 && mainmenu
+		fi
+		SYNC="repo SYNC -j5"
+		exec ${SYNC} & wait
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$rbSYNCbuildopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbSYNCbuildopt0" != 1 ] && [ "$rbSYNCbuildopt0" != 2 ] ; then
+		rbSYNCbuild
+	fi
+}
+
+rbcompilebuild() # Compile Rom From Source
+{
+	clear && printf '\033c'
+	Function="rbcompilebuild"
+	Stagenumber="r3"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COMPILE ROM USING BRUNCH COMMAND"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbcompilebuildopt0
+	if [ "$rbcompilebuildopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="r3"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "        ${b}-> Compiling New Complete Rom ... <-${n}          "
+		sleep 2
+		cd &&
+		if [ -d Android ]; then
+			cd Android
+		else
+			printf '%s\n'  " No Root 'Android' Folder Found !, Have You Downloaded The Source ??  "
+			sleep 3 && mainmenu
+		fi
+		if [ -d RomDevelopment ]; then
+			cd RomDevelopment
+		else
+			printf '%s\n'  " No Root 'RomDevelopment' Folder Found !, Have You Downloaded The Source ??  "
+			sleep 3 && mainmenu
+		fi
+		if [ -d ${DESIREDROMNAME} ]; then
+			cd ${DESIREDROMNAME}
+		else
+			printf '%s\n'  " No Root '${DESIREDROMNAME}' Folder Found !, Have You Downloaded The Source ?? "
+			sleep 3 && mainmenu
+		fi
+		${BUILDENV} && sleep 2 && ${COMPILEROM} && sleep 4
+		show_stage_completed
+		notify-send "Android Rom Compile Completed"
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$rbcompilebuildopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbcompilebuildopt0" != 1 ] && [ "$rbcompilebuildopt0" != 2 ] ; then
+		rbcompilebuild
+	fi
+}
+
+rbcopy() # Copy newly compiled system and boot.img to working_folder
+{
+	clear && printf '\033c'
+	Function="rbcopy"
+	Stagenumber="r4"
+	ComiledRomAlias="DU_m7gsm_"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COPY NEWLY COMPILED ROM TO working_folder STRUCTURE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbcopyopt0
+	if [ "$rbcopyopt0" == 1 ] ; then
+		clear && printf '\033c'
+		Stagenumber="r4"
+		show_stage_header
+		printf '%s\n'  "  ${b}-> Checking if Newly Compiled Rom Exists... <-${n}  "
+		sleep 3
+		cd &&
+		if [ -d ${OUTDIR} ]; then
+			clear && printf '\033c'
+			(
+			Stagenumber="r4"
+			show_stage_header
+			# send console message
+			MESSAGE="Started Stage $Stagenumber - $Function"
+			Status_Notice "$MESSAGE"
+			printf '%s\n'  "  ${b}-> Cleaning Previous system Folder and boot.img... <-${n}  "
+			cd && cd ${PROJECTLOCATION}
+			if [ ! -d RomBuilder ]; then
+				mkdir RomBuilder && cd RomBuilder
+			fi
+			if [ ! -d working_folder ]; then
+				mkdir working_folder && cd working_folder
+			fi
+			systemdir=${PROJECTLOCATION}/RomBuilder/working_folder/system
+			if [ -d ${systemdir} ]; then
+				printf '%s\n' " - Removing... ($systemdir)"
+				showPreProgress
+				rm -rf ${systemdir} &&
+				showPostProgress
+			fi
+			img=boot.img
+			if [ -f ${img} ] ; then
+				printf '%s\n' " - Removing... (${img})"
+				showPreProgress
+				rm -f ${img} &&
+				showPostProgress
+			fi
+			# Create Temp folder
+			if [ -d ${PROJECTLOCATION}/RomBuilder/working_folder/temp ]; then
+				printf '%s\n' " - Removing... (${PROJECTLOCATION}/working_folder/temp)"
+				showPreProgress
+				rm -rf ${PROJECTLOCATION}/RomBuilder/working_folder/temp &&
+				showPostProgress
+				printf '%s\n' " - Creating Temp Folder..."
+				showPreProgress
+				mkdir ${PROJECTLOCATION}/RomBuilder/working_folder/temp &&
+				showPostProgress
+			else
+				sleep 1
+				printf '%s\n' " - Creating Temp Folder..."
+				showPreProgress
+				mkdir ${PROJECTLOCATION}/RomBuilder/working_folder/temp &&
+				showPostProgress
+			fi
+			# Copy Compiled Rom to working_folder
+			cd && cd ${OUTDIR}
+			printf '%s\n' " - Copying Compiled Rom to working_folder/temp..."
+			showPreProgress
+			for filename in *; do
+				case "${filename}" in
+					${ComiledRomAlias}*.zip) cp "$filename" "${PROJECTLOCATION}/RomBuilder/working_folder/temp" ;;
+				esac
+			done &&
+			showPostProgress
+			# Unzip and place system and boot.img into working_folder
+			cd && cd ${PROJECTLOCATION}/RomBuilder/working_folder/temp
+			printf '%s\n' " - Unzipping Compiled Rom..."
+			showPreProgress
+			for filename in *; do
+				case "${filename}" in
+					${ComiledRomAlias}*.zip) exec unzip "$filename" & wait ;;
+				esac
+			done &&
+			showPostProgress
+			printf '%s\n' ""
+			printf '%s\n' " - Copying 'system' and 'boot.img to working_folder..."
+			showPreProgress
+			cp -ar system ${PROJECTLOCATION}/RomBuilder/working_folder &&
+			cp -ar boot.img ${PROJECTLOCATION}/RomBuilder/working_folder &&
+			showPostProgress
+			# Delete temp Folder
+			cd && cd ${PROJECTLOCATION}/RomBuilder/working_folder
+			printf '%s\n' " - Removing temp Folder..."
+			showPreProgress
+			rm -rf temp &&
+			showPostProgress
+			show_stage_completed
+			# send console message
+			MESSAGE="Finished Stage $Stagenumber - $Function"
+			Status_Success "$MESSAGE"
+			) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+			sleep 2.5
+			mainmenu
+		else
+			sleep 1
+			printf '%s\n' ""
+			printf '%s\n' " - Doesnt Look Like New Rom Has Been Compiled Yet, Compile New ROM First !!    "
+			sleep 2.5
+			mainmenu
+		fi
+	elif [ "$rbcopyopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbcopyopt0" != 1 ] && [ "$rbcopyopt0" != 2 ] ; then
+		rbcopy
+	fi
+}
+
+rbgapps() # Pull Gapps Files From Device
+{
+	clear && printf '\033c'
+	Function="rbgapps"
+	Stagenumber="r5"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) PULL GAPPS FILES FROM THE DEVICE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbgappsopt0
+	if [ "$rbgappsopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="r5"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "        ${b}-> Cleaning Previous Folder Structure... <-${n}             "
+		cd RomBuilder &&
+		if [ ! -d grabbed_files ]; then
+			mkdir grabbed_files
+		fi
+		if [ -d ${DIR1} ]; then
+			printf '%s\n' " - Removing... ($DIR1)"
+			showPreProgress
+			rm -rf ${DIR1} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		mkdir ${DIR1} && mkdir ${DIR1}/priv-app &&
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "        ${b}-> Extracting Gapps File's From Device... <-${n}        "
+		printf ""
+		printf ""
+		adb start-server &&
+		printf ""
+		printf " >>                                               (01%%)\r"
+		adb pull /system/priv-app/GoogleLoginService.apk ${DIR1}/priv-app &&
+		printf "                                                  (25%%)\r"
+		adb pull /system/priv-app/GoogleServicesFramework.apk ${DIR1}/priv-app &&
+		printf "                                                  (50%%)\r"
+		adb pull /system/priv-app/Phonesky.apk ${DIR1}/priv-app &&
+		printf "                                                  (75%%)\r"
+		adb pull /system/priv-app/PrebuiltGmsCore.apk ${DIR1}/priv-app &&
+		showPostProgress
+		adb kill-server
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$rbgappsopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbgappsopt0" != 1 ] && [ "$rbgappsopt0" != 2 ] ; then
+		rbgapps
+	fi
+}
+
+rbadditions() # Download Additional Apps Using 'additions.links' File
+{
+	clear && printf '\033c'
+	Function="rbadditions"
+	Stagenumber="r6"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD ADDITIONAL APPS USING 'additions.links' FILE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbadditionsopt0
+	if [ "$rbadditionsopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="r6"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "        ${b}-> Cleaning Previous Folder Structure... <-${n}             "
+		cd RomBuilder &&
+		if [ ! -d grabbed_files ]; then
+			mkdir grabbed_files
+		fi
+		# - removed, as tracking own vender_du repo for time being
+		#if [ -d ${DIR2} ]; then
+		#printf '%s\n' " - Removing... ($DIR2)"
+		#showPreProgress
+		#rm -rf ${DIR2} &&
+		#showPostProgress
+		#else
+		#sleep 1
+		#fi
+		if [ -d ${DIR3} ]; then
+			printf '%s\n' " - Removing... ($DIR3)"
+			showPreProgress
+			rm -rf ${DIR3} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		if [ -d ${DIR4} ]; then
+			printf '%s\n' " - Removing... ($DIR4)"
+			showPreProgress
+			rm -rf ${DIR4} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		if [ -d ${DIR5} ]; then
+			printf '%s\n' " - Removing... ($DIR5)"
+			showPreProgress
+			rm -rf ${DIR5} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		if [ -d ${DIR6} ]; then
+			printf '%s\n' " - Removing... ($DIR6)"
+			showPreProgress
+			rm -rf ${DIR6} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "    ${b}-> Downloading Additional Apps Using Additions.links... <-${n}   "
+		printf ""
+		printf ""
+		cd && cd ${PROJECTLOCATION}/RomBuilder/ &&
+		while read url target; do
+			wget "$url" -P "$target";
+		done < Additions.links
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$rbadditionsopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbadditionsopt0" != 1 ] && [ "$rbadditionsopt0" != 2 ] ; then
+		rbadditions
+	fi
+}
+
+rbxposed() # Download Additional Apps Using 'additions.links' File
+{
+	clear && printf '\033c'
+	Function="rbxposed"
+	Stagenumber="r7"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) DOWNLOAD XPOSED FRAMEWORK/MODULES USING 'xposed.links' FILE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbxposedopt0
+	if [ "$rbxposedopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="r7"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "        ${b}-> Cleaning Previous Folder Structure... <-${n}             "
+		cd RomBuilder &&
+		if [ ! -d grabbed_files ]; then
+			mkdir grabbed_files
+		fi
+		if [ -d ${DIR7} ]; then
+			printf '%s\n' " - Removing... ($DIR7)"
+			showPreProgress
+			rm -rf ${DIR7} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		if [ -d ${DIR8} ]; then
+			printf '%s\n' " - Removing... ($DIR8)"
+			showPreProgress
+			rm -rf ${DIR8} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "    ${b}-> Downloading Additional Apps Using Additions.links... <-${n}   "
+		printf ""
+		printf ""
+		cd && cd ${PROJECTLOCATION}/RomBuilder &&
+		while read url target; do
+			wget "$url" -P "$target";
+		done < Xposed.links
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$rbxposedopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbxposedopt0" != 1 ] && [ "$rbxposedopt0" != 2 ] ; then
+		rbxposed
+	fi
+}
+
+rbcopy2()  # Copy grabbed_files To working_folder, Ready To Be Zipped Up
+{
+	clear && printf '\033c'
+	Function="rbcopy2"
+	Stagenumber="r8"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COPY GRABBED_FILES TO WORKING_FOLDER"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbcopy2opt0
+	if [ "$rbcopy2opt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="r8"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "     ${b}-> Cleaning Folder Structure & Copying Files ... <-${n}       "
+		if [ -d ${TDIR1} ]; then
+			printf '%s\n' " - Removing... ($TDIR1)"
+			showPreProgress
+			rm -rf ${TDIR1} &&
+			showPostProgress
+			printf '%s\n' " - Copying... ($DIR1) to ($TDIR1)"
+			showPreProgress
+			cp -ar ${DIR1} ${ADDITIONSDIR} &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... ($DIR1) to ($TDIR1)"
+			showPreProgress
+			cp -ar ${DIR1} ${ADDITIONSDIR} &&
+			showPostProgress
+		fi
+		# - removed, as tracking own vender_du repo for time being
+		#if [ -d ${TDIR2} ]; then
+		#printf '%s\n' " - Removing... ($TDIR2)"
+		#showPreProgress
+		#rm -rf ${TDIR2} &&
+		#showPostProgress
+		#printf '%s\n' " - Copying... ($DIR2) to ($TDIR2)"
+		#showPreProgress
+		#cp -ar ${DIR2} ${ADDITIONSDIR} &&
+		#showPostProgress
+		#else
+		#sleep 1
+		#printf '%s\n' " - Copying... ($DIR2) to ($TDIR2)"
+		#showPreProgress
+		#cp -ar ${DIR2} ${ADDITIONSDIR} &&
+		#showPostProgress
+		#fi
+		if [ -d ${TDIR3} ]; then
+			printf '%s\n' " - Removing... ($TDIR3)"
+			showPreProgress
+			rm -rf ${TDIR3} &&
+			showPostProgress
+			printf '%s\n' " - Copying... ($DIR3) to ($TDIR3)"
+			showPreProgress
+			cp -ar ${DIR3} ${ADDITIONSDIR} &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... ($DIR3) to ($TDIR3)"
+			showPreProgress
+			cp -ar ${DIR3} ${ADDITIONSDIR} &&
+			showPostProgress
+		fi
+		if [ -d ${TDIR4} ]; then
+			printf '%s\n' " - Removing... ($TDIR4)"
+			showPreProgress
+			rm -rf ${TDIR4} &&
+			showPostProgress
+			printf '%s\n' " - Copying... ($DIR4) to ($TDIR4)"
+			showPreProgress
+			cp -ar ${DIR4} ${ADDITIONSDIR} &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... ($DIR4) to ($TDIR4)"
+			showPreProgress
+			cp -ar ${DIR4} ${ADDITIONSDIR} &&
+			showPostProgress
+		fi
+		if [ -d ${TDIR5} ]; then
+			printf '%s\n' " - Removing... ($TDIR5)"
+			showPreProgress
+			rm -rf ${TDIR5} &&
+			showPostProgress
+			printf '%s\n' " - Copying... ($DIR5) to ($TDIR5)"
+			showPreProgress
+			cp -ar ${DIR5} ${ADDITIONSDIR} &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... ($DIR5) to ($TDIR5)"
+			showPreProgress
+			cp -ar ${DIR5} ${ADDITIONSDIR} &&
+			showPostProgress
+		fi
+		if [ -d ${TDIR6} ]; then
+			printf '%s\n' " - Removing... ($TDIR6)"
+			showPreProgress
+			rm -rf ${TDIR6} &&
+			showPostProgress
+			printf '%s\n' " - Copying... ($DIR6) to ($TDIR6)"
+			showPreProgress
+			cp -ar ${DIR6} ${ADDITIONSDIR} &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... ($DIR6) to ($TDIR6)"
+			showPreProgress
+			cp -ar ${DIR6} ${ADDITIONSDIR} &&
+			showPostProgress
+		fi
+		if [ -d ${TDIR7} ]; then
+			printf '%s\n' " - Removing... ($TDIR7)"
+			showPreProgress
+			rm -rf ${TDIR7} &&
+			showPostProgress
+			printf '%s\n' " - Copying... ($DIR7) to ($TDIR7)"
+			showPreProgress
+			cp -ar ${DIR7} ${ADDITIONSDIR} &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... ($DIR7) to ($TDIR7)"
+			showPreProgress
+			cp -ar ${DIR7} ${ADDITIONSDIR} &&
+			showPostProgress
+		fi
+		if [ -d ${TDIR8} ]; then
+			printf '%s\n' " - Removing... ($TDIR8)"
+			showPreProgress
+			rm -rf ${TDIR8} &&
+			showPostProgress
+			printf '%s\n' " - Copying... ($DIR8) to ($TDIR8)"
+			showPreProgress
+			cp -ar ${DIR8} ${ADDITIONSDIR} &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... ($DIR8) to ($TDIR8)"
+			showPreProgress
+			cp -ar ${DIR8} ${ADDITIONSDIR} &&
+			showPostProgress
+		fi
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$rbcopy2opt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbcopy2opt0" != 1 ] && [ "$rbcopy2opt0" !=2 ] ; then
+		rbcopy2
+	fi
+}
+rbeditaroma() # Edit 'aroma-config' File
+{
+	${SYSDEFAPP} ${RBAROMADIR}/aroma-config &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'aroma-config' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in
+		y|Y ) showPreProgress
+		showPostProgress
+		sleep 1
+		mainmenu;;
+		n|N ) mainmenu;;
+		* ) rbeditaroma;;
+	esac
+}
+
+rbeditupdaterscript() # Edit 'updater-script' File
+{
+	${SYSDEFAPP} ${RBAROMADIR}/updater-script &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'updater-script' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in
+		y|Y ) showPreProgress
+		showPostProgress
+		sleep 1
+		mainmenu;;
+		n|N ) mainmenu;;
+		* ) rbeditupdaterscript;;
+	esac
+}
+
+rbeditbuildprop() # Edit 'build.prop' File
+{
+	if [ -f ${BUILDPROP} ]; then
+		${SYSDEFAPP} ${BUILDPROP} &&
+		printf '%s\n'  ""
+		printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'build.prop' ??"
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		read -p "		Load New Changes Now ?? (y/n)?" choice
+		case "$choice" in
+			y|Y ) showPreProgress
+			showPostProgress
+			sleep 1
+			mainmenu;;
+			n|N ) mainmenu;;
+			* ) rbeditbuildprop;;
+		esac
+	else
+		printf '%s\n'  " No 'build.prop' File Found !, Have You Copied The Compiled Rom Yet ??  "
+		sleep 3 && mainmenu
+	fi
+}
+
+rbeditadditions() # Edit 'Additions.links' File
+{
+	${SYSDEFAPP} ${PROJECTLOCATION}/RomBuilder/Additions.links  &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'Additions.links' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in
+		y|Y ) showPreProgress
+		showPostProgress
+		sleep 1
+		mainmenu;;
+		n|N ) mainmenu;;
+		* ) rbeditadditions;;
+	esac
+}
+
+rbeditxposed() # Edit 'Xposed.links' File
+{
+	${SYSDEFAPP} ${PROJECTLOCATION}/RomBuilder/Xposed.links  &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'Additions.links' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in
+		y|Y ) showPreProgress
+		showPostProgress
+		sleep 1
+		mainmenu;;
+		n|N ) mainmenu;;
+		* ) rbeditxposed;;
+	esac
+}
+
+rbzip()   # Zip working_folder Contents To Make Flashable Zip File
+{
+	clear && printf '\033c'
+	Function="rbzip"
+	Stagenumber="r14"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) ZIP WORKING_FOLDER CONTENTS READY TO FLASH ON DEVICE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read rbzipopt0
+	if [ "$rbzipopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="r14"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "  ${b}-> Cleaning Previous Zip Structure & Zipping New Files... <-${n}  "
+		printf '%s\n'  ""
+		showPreProgress
+		sleep 2
+		printf ""
+		if [ ! -d ${FINALOUT} ]; then
+			mkdir ${FINALOUT}
+		fi
+		# Search build.prop file for string begining with 'ro.du.version', Then strip 'ro.du.version=' From String And Use Outcome To Name Zip File
+		results=$(grep ro.du.version ${BUILDPROP} | sed -r 's/^.{14}//')
+		name=${results}
+		cd ${PROJECTLOCATION}/RomBuilder/working_folder &&
+		exec zip -r ${FINALOUT}/${name}.zip * & wait
+		showPostProgress
+		printf ""
+		sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$rbzipopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$rbzipopt0" != 1 ] && [ "$rbzipopt0" != 2 ] ; then
+		rbzip
+	fi
+}
+
+# KernelBuilder Menu >>>
+kbdefconfig() # Edit '${DCONFIG}' File
+{
+	cd && ${SYSDEFAPP} ${DCONFIGDIR}/${DCONFIG} &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED '${DCONFIG}' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in
+		y|Y ) showPreProgress
+		showPostProgress
+		sleep 1
+		mainmenu;;
+		n|N ) mainmenu;;
+		* ) kbdefconfig;;
+	esac
+}
+
+kbcleanbuild() # Invoke the 'make clean' Command and remove '.config' file
+{
+	clear && printf '\033c'
+	Function="kbcleanbuild"
+	Stagenumber="k2"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) CLEAN KERNEL BUILD FOLDERS"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbcleanbuildopt0
+	if [ "$kbcleanbuildopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="k2"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Cleaning Previous Folder Structure... <-${n}             "
+		cd &&
+		if [ -d Android ]; then
+			cd Android
+		else
+			printf '%s\n'  " No Root 'Android' Folder Found !, Have You Downloaded The Source ??  "
+			sleep 3 && mainmenu
+		fi
+		if [ -d KernelDevelopment ]; then
+			cd KernelDevelopment
+		else
+			printf '%s\n'  " No Root 'KernelDevelopment' Folder Found !, Have You Downloaded The Source ??  "
+			sleep 3 && mainmenu
+		fi
+		if [ -d ${DESIREDKERNELNAME} ]; then
+			cd ${DESIREDKERNELNAME}
+		else
+			printf '%s\n'  " No Root '${DESIREDKERNELNAME}' Folder Found !, Have You Downloaded The Source ?? "
+			sleep 3 && mainmenu
+		fi
+		showPreProgress
+		clean="make clean"
+		exec ${clean} & wait
+		rm -f .config &&
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$kbcleanbuildopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbcleanbuildopt0" != 1 ] && [ "$kbcleanbuildopt0" != 2 ] ; then
+		kbcleanbuild
+	fi
+}
+
+kbcompilebuild() # Compile Kernel
+{
+	clear && printf '\033c'
+	Function="kbcompilebuild"
+	Stagenumber="k3"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COMPILE KERNEL & MODULES"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbcompilebuildopt0
+	if [ "$kbcompilebuildopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="k3"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Compiling New Kernel & Modules... <-${n}             "
+		sleep 2
+		if [ ! -d ${KBDIR}/compiled_files ]; then
+			mkdir ${KBDIR}/compiled_files
+		fi
+		if [ -d ${KDIR3} ]; then
+			printf '%s\n' " - Cleaning... ($KDIR3)"
+			showPreProgress
+			rm -rf ${KDIR3} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		if [ -d ${KDIR2} ]; then
+			printf '%s\n' " - Cleaning... ($KDIR2)"
+			showPreProgress
+			rm -rf ${KDIR2} &&
+			showPostProgress
+		else
+			sleep 1
+		fi
+		cd && cd Android/KernelDevelopment/${DESIREDKERNELNAME} &&
+		make ${DCONFIG} && sleep 2 && ${COMPILEKERNEL} && sleep 4
+		notify-send "Android Kernel Compile Completed"
+		# Copy zImage To 'compiled_files' folder
+		printf '%s\n'  ""
+		printf '%s\n'  "      ${b}-> Copying New zImage to 'compiled_files'... <-${n}         "
+		cd
+		if [ -d ${KDIR3} ]; then
+			printf '%s\n' " - Cleaning... ($KDIR3)"
+			showPreProgress
+			rm -rf ${KDIR3} &&
+			mkdir ${KDIR3} &&
+			showPostProgress
+			printf '%s\n' " - Copying... (zImage) to ($KDIR3)"
+			showPreProgress
+			cp -ar Android/KernelDevelopment/${DESIREDKERNELNAME}/arch/arm/boot/zImage ${KDIR3} &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... (zImage) to ($KDIR3)"
+			showPreProgress
+			mkdir ${KDIR3} &&
+			cp -ar Android/KernelDevelopment/${DESIREDKERNELNAME}/arch/arm/boot/zImage ${KDIR3} &&
+			showPostProgress
+		fi
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		read -p "Copy kernel Modules to compiled_files too? .. Continue?? (y/n)" choice
+		case "$choice" in
+			y|Y ) printf '%s\n'  "      ${b}-> Copying New Modules to 'compiled_files'... <-${n}         "
+			# Copy Modules To 'compiled_files' folder
+			cd && cd Android/KernelDevelopment/${DESIREDKERNELNAME} &&
+			if [ -d ${KDIR2} ]; then
+				printf '%s\n' " - Cleaning... ($KDIR2)"
+				showPreProgress
+				rm -rf ${KDIR2} &&
+				mkdir ${KDIR2} &&
+				showPostProgress
+				printf '%s\n' " - Copying... (Modules) to ($KDIR2)"
+				showPreProgress
+				cp `find ./ | grep .ko$` modules.order ${KDIR2}/ &&
+				cd ${KDIR2}
+				rm -f modules.order &&
+				showPostProgress
+			else
+				sleep 1
+				printf '%s\n' " - Copying... (Modules) to ($KDIR2)"
+				showPreProgress
+				mkdir ${KDIR2} &&
+				cp `find ./ | grep .ko$` modules.order ${KDIR2}/ &&
+				cd ${KDIR2}
+				rm -f modules.order &&
+				showPostProgress
+			fi
+			;;
+			n|N )
+			sleep 2
+			show_stage_completed
+			sleep 2.5
+			mainmenu
+		esac
+		sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$kbcompilebuildopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbcompilebuildopt0" != 1 ] && [ "$kbcompilebuildopt0" != 2 ] ; then
+		kbcompilebuild
+	fi
+}
+
+kbcreateboot()  # Create New boot.img file
+{
+	clear && printf '\033c'
+	Function="kbcreateboot"
+	Stagenumber="k4"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) CREATE NEW 'boot.img' FILE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbcreatebootopt0
+	if [ "$kbcreatebootopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="k4"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "   ${b}-> Cleaning Previous Folder Structure ... <-${n}       "
+		cd
+		if [ -d ${BOOTDIR} ]; then
+			printf '%s\n' " - Cleaning... ($BOOTDIR)"
+			showPreProgress
+			rm -rf ${BOOTDIR} &&
+			mkdir ${BOOTDIR} &&
+			showPostProgress
+			sleep 2
+		else
+			sleep 1
+			printf '%s\n' " - Creating... ($BOOTDIR)"
+			showPreProgress
+			mkdir ${BOOTDIR} &&
+			showPostProgress
+			sleep 2
+		fi
+		clear && printf '\033c'
+		Stagenumber="k4"
+		show_stage_header
+		printf '%s\n'  "       ${b} (Openning 'original_bootimg' folder,"
+		printf '%s\n'  "    place stock 'boot.img' from compiled ROM in the folder)${n} "
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		cd
+		${SYSDEFAPP} ${BOOTDIR}
+		sleep 4
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		read -p "${b}Placed stock 'boot.img' file in directory? .. Continue?? (y/n)${n} " choice
+		case "$choice" in
+			y|Y ) printf '%s\n'  "Extracting 'boot.img'..."
+			cd && cd ${BOOTDIR}
+			abootimg -x boot.img
+			sleep 4
+			mkdir initrd &&
+			sleep 4
+			cd initrd
+			zcat ../initrd.img | cpio -i &&
+			showPostProgress
+			sleep 4
+			clear && printf '\033c'
+			Stagenumber="k4"
+			show_stage_header
+			printf '%s\n'  ""
+			printf '%s\n'  ""
+			printf '%s\n'  ""
+			printf '%s\n'  "        ${b}Editing 'bootimg.cfg' & 'default.prop' files...\r          "
+			printf '%s\n'  ""
+			printf '%s\n'  ""
+			printf '%s\n'  ""
+			showPreProgress
+			cd && cd ${BOOTDIR}
+			TargetFileA=bootimg.cfg
+			TargetStringA=bootsize
+			if grep -q "$TargetStringA" "$TargetFileA"; then
+				sed -i '/'"$TargetStringA"'/d' $TargetFileA
+			fi
+			cd initrd &&
+			TargetFileB=default.prop
+			TargetStringB="ro.secure=1"
+			if grep -q "$TargetStringB" "$TargetFileB"; then
+				sed -i 's|'"$TargetStringB"'|'"ro.secure=0"'|g' $TargetFileB
+			fi
+			TargetStringC="ro.debuggable=0"
+			if grep -q "$TargetStringC" "$TargetFileB"; then
+				sed -i 's|'"$TargetStringC"'|'"ro.debuggable=1"'|g' $TargetFileB
+			fi
+			showPostProgress
+			sleep 2.5
+			clear && printf '\033c'
+			Stagenumber="k4"
+			show_stage_header
+			printf '%s\n'  "        ${b}-> Cleaning Folder Structure... <-${n}         "
+			printf '%s\n'  ""
+			printf '%s\n' " - Removing Files..."
+			showPreProgress
+			cd && cd ${BOOTDIR}
+			rm -f boot.img &&
+			rm -f initrd.img &&
+			rm -f zImage &&
+			showPostProgress
+			printf '%s\n'  ""
+			printf '%s\n' " - Copying... (zImage) to (${BOOTDIR})"
+			showPreProgress
+			cd &&
+			cp ${KDIR3}/zImage ${BOOTDIR}
+			showPostProgress
+			printf '%s\n'  ""
+			printf '%s\n'  ""
+			printf '%s\n' " - Creating 'initrd.img'..."
+			cd && cd ${BOOTDIR}/initrd
+			find . | cpio -o -H newc | gzip > ../initrd.img &&
+			sleep 2
+			showPostProgress
+			printf "\n"
+			printf '%s\n'  ""
+			printf '%s\n'  ""
+			printf '%s\n' " - Creating New 'boot.img'..."
+			cd && cd ${BOOTDIR}
+			abootimg --create boot.img -k zImage -r initrd.img &&
+			sleep 0.5
+			abootimg --create boot.img -f bootimg.cfg -k zImage -r initrd.img &&
+			sleep 2
+			showPostProgress
+			printf "\n"
+			printf '%s\n'  ""
+			printf '%s\n'  ""
+			if [ -d ${DIR1} ]; then
+				printf '%s\n' " - Cleaning... ($KDIR1)"
+				showPreProgress
+				cd
+				rm -rf ${KDIR1} &&
+				mkdir ${KDIR1} &&
+				showPostProgress
+				printf '%s\n' " - Copying New 'boot.img' to $KDIR1..."
+				showPreProgress
+				cd && cd ${BOOTDIR}
+				cp boot.img ${KDIR1}
+				showPostProgress
+			else
+				sleep 1
+				printf '%s\n' " - Cannot Remove ($DIR1), Does Not Exist"
+				printf '%s\n' " - Copying New 'boot.img' to $KDIR1..."
+				showPreProgress
+				cd
+				mkdir ${KDIR1} &&
+				cd && cd ${BOOTDIR}
+				cp boot.img ${KDIR1}
+				showPostProgress
+			fi
+			;;
+			n|N )
+			mainmenu;;
+			* ) printf '%s\n'  "invalid response"
+			kbcreateboot;;
+		esac
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$kbcreatebootopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbcreatebootopt0" != 1 ] && [ "$kbcreatebootopt0" !=2 ] ; then
+		kbcreateboot
+	fi
+}
+
+kbcopy()  # Copy compiled_files To working_folder, Ready To Be Zipped Up
+{
+	clear && printf '\033c'
+	Function="kbcopy"
+	Stagenumber="k5"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) COPY 'COMPILED_FILES' TO WORKING_FOLDER"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbcopyopt0
+	if [ "$kbcopyopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="k5"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "     ${b}-> Cleaning Folder Structure & Copying Files ... <-${n}       "
+		cd
+		if [ -d ${TKDIR1} ]; then
+			printf '%s\n' " - Removing... ($TKDIR1)"
+			showPreProgress
+			rm -rf ${TKDIR1} &&
+			showPostProgress
+			printf '%s\n' " - Copying... ($KDIR1) to ($TKDIR1)"
+			showPreProgress
+			cp -ar ${KDIR1} ${KBDIR}/working_folder/AROMA &&
+			showPostProgress
+		else
+			sleep 1
+			printf '%s\n' " - Copying... ($KDIR1) to ($TDIR1)"
+			showPreProgress
+			cp -ar ${KDIR1} ${KBDIR}/working_folder/AROMA &&
+			showPostProgress
+		fi
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		read -p "Copy kernel Modules to 'working_folder' too? .. Continue?? (y/n)" choice
+		case "$choice" in
+			y|Y ) printf '%s\n'  "        ${b}-> Copying New Modules to 'working_folder'... <-${n}         "
+			# Copy Modules To 'working_folder'
+			if [ -d ${TKDIR2} ]; then
+				printf '%s\n' " - Removing... ($TKDIR2)"
+				showPreProgress
+				rm -rf ${TKDIR2} &&
+				showPostProgress
+				printf '%s\n' " - Copying... ($KDIR2) to ($TKDIR2)"
+				showPreProgress
+				cp -ar ${KDIR2} ${KBDIR}/working_folder/AROMA/system/lib &&
+				showPostProgress
+			else
+				sleep 1
+				printf '%s\n' " - Copying... ($KDIR2) to ($TKDIR2)"
+				showPreProgress
+				cp -ar ${KDIR2} ${KBDIR}/working_folder/AROMA/system/lib &&
+				showPostProgress
+			fi
+			;;
+			n|N )
+			show_stage_completed
+			sleep 4
+			mainmenu
+		esac
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$kbcopyopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbcopyopt0" != 1 ] && [ "$kbcopyopt0" !=2 ] ; then
+		kbcopy
+	fi
+}
+
+kbeditaroma() # Edit 'aroma-config' File
+{
+	${SYSDEFAPP} ${KBAROMADIR}/aroma-config &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'aroma-config' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in
+		y|Y ) showPreProgress
+		showPostProgress
+		sleep 1
+		mainmenu;;
+		n|N ) mainmenu;;
+		* ) kbeditaroma;;
+	esac
+}
+
+kbeditupdaterscript() # Edit 'aroma-config' File
+{
+	${SYSDEFAPP} ${KBAROMADIR}/updater-script &&
+	printf '%s\n'  ""
+	printf '%s\n'  "    HAVE YOU FINISHED EDITING AND SAVED 'aroma-config' ??"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read -p "		Load New Changes Now ?? (y/n)?" choice
+	case "$choice" in
+		y|Y ) showPreProgress
+		showPostProgress
+		sleep 1
+		mainmenu;;
+		n|N ) mainmenu;;
+		* ) kbeditupdaterscript;;
+	esac
+}
+
+kbzip() # Zip working_folder Contents To Make Flashable Zip File
+{
+	clear && printf '\033c'
+	Function="kbzip"
+	Stagenumber="k8"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) ZIP WORKING_FOLDER CONTENTS READY TO FLASH ON DEVICE"
+	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read kbzipopt0
+	if [ "$kbzipopt0" == 1 ] ; then
+		clear && printf '\033c'
+		(
+		Stagenumber="k8"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "  ${b}-> Cleaning Previous Zip Structure & Zipping New Files... <-${n}  "
+		printf '%s\n'  ""
+		printf '%s\n' " - Zipping Working_Folder Structure Ready For Flash"
+		showPreProgress
+		sleep 2
+		if [ ! -d ${FINALOUT} ]; then
+			mkdir ${FINALOUT}
+		fi
+		printf ""
+		cd && source ${DCONFIGDIR}/${DCONFIG} &&
+		cd && cd ${KBDIR}/working_folder
+		exec zip -r ${FINALOUT}/${CONFIG_LOCALVERSION}_${TODAY}.zip * & wait
+		showPostProgress
+		printf ""
+		sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$kbzipopt0" == 2 ] ; then
+		mainmenu
+	elif [ "$kbzipopt0" != 1 ] && [ "$kbzipopt0" != 2 ] ; then
+		kbzip
+	fi
+}
+
+mainmenu
+## END OF SCRIPT FILE ##

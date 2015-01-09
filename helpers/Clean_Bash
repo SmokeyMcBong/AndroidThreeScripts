@@ -1,0 +1,68 @@
+#!/bin/bash
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   This file is part of the 'AndroidThreeScripts' project                  #
+#   Copyright (C) 2014  'theFONZ'                                           #
+#                                                                           #
+#   This program is free software: you can redistribute it and/or modify    #
+#   it under the terms of the GNU General Public License as published by    #
+#   the Free Software Foundation, either version 2 of the License, or       #
+#   any later version.                                                      #
+#                                                                           #
+#   This program is distributed in the hope that it will be useful,         #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    #
+#   See the GNU General Public License for more details.                    #
+#                                                                           #
+#   You should have received a copy of the GNU General Public license       #
+#   along with this program.  If not, see 'license' in project root         #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+A3S_DIR="$( cd $( dirname ${0} )/.. && pwd )"
+A3S_CONF_DIR="${A3S_DIR}/config.d"
+A3S_PREFS_DIR="${A3S_DIR}/prefs"
+A3S_HELPERS_DIR="${A3S_DIR}/helpers"
+
+source ${A3S_CONF_DIR}/A3S-ui.conf				# Import Default Menu UI Variables
+source ${A3S_CONF_DIR}/A3S.conf						# Import Default Script Variables
+source ${A3S_PREFS_DIR}/UserPrefs.conf		# Import User Configurable Variables
+# source ${A3S_HELPERS_DIR}/Console_Logger  # Import Console_Logger helper
+
+# check 'bash.rc' for conflicting entries before adding new ones
+function cleanbash {
+  PathHeader=$PATHHEADER
+  if grep -q "$PathHeader" "$ALIAS_BASH"; then
+      sed -i '/'"$PathHeader"'/d' $ALIAS_BASH
+  fi
+  Path="# A3S Path Settings"
+  if grep -q "$Path" "$ALIAS_BASH"; then
+    sed -i '/'"${Path}"'/d' $ALIAS_BASH
+  fi
+  RomDevHeader=$ROMDEVHEADER
+  if grep -q "$RomDevHeader" "$ALIAS_BASH"; then
+      sed -i '/'"$RomDevHeader"'/d' $ALIAS_BASH
+  fi
+  Ccache="# A3S Ccache Settings"
+  if grep -q "$Ccache" "$ALIAS_BASH"; then
+    sed -i '/'"$Ccache"'/d' $ALIAS_BASH
+  fi
+  KernelDevHeader=$KERNELDEVHEADER
+  if grep -q "$KernelDevHeader" "$ALIAS_BASH"; then
+      sed -i '/'"$KernelDevHeader"'/d' $ALIAS_BASH
+  fi
+  KernelArch="# A3S KernelArch Settings"
+  if grep -q "$KernelArch" "$ALIAS_BASH"; then
+    sed -i '/'"$KernelArch"'/d' $ALIAS_BASH
+  fi
+  Ccompile="# A3S Ccompile Settings"
+  if grep -q "$Ccompile" "$ALIAS_BASH"; then
+      sed -i '/'"$Ccompile"'/d' $ALIAS_BASH
+  fi
+  CcompileArm="# A3S Ccompile Arm Settings"
+  if grep -q "$CcompileArm" "$ALIAS_BASH"; then
+    sed -i '/'"$CcompileArm"'/d' $ALIAS_BASH
+  fi
+  ToolchainPath="# A3S ToolchainPath Settings"
+  if grep -q "$ToolchainPath" "$ALIAS_BASH"; then
+    sed -i '/'"$ToolchainPath"'/d' $ALIAS_BASH
+  fi
+}

@@ -1,9 +1,4 @@
-wanting to add....
+looking to add....
 
 * add Sabermod toolchain download, compile and install options for Linux Kernel,Android Rom & android Kernel toolchains
-* merge new whiptail function into A3S.base for Andoid Rom & Kernel Compiles (toolchain/CC options to be added later)
-* pipe output for whiptail functions within whiptail menu
-* change dir structure, use... /bin /core /config.d /config.u
-* use colorized output for main steps, ie .. sucess,failure,error,completed etc
-* overhaul logging system
-* overhaul the aroma/copy functions,get rid of all hardcoded locations
+* remove aroma installer from both core's

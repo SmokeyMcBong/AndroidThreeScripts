@@ -1,0 +1,127 @@
+#!/bin/bash
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   This file is part of the 'AndroidThreeScripts' project                  #
+#   Copyright (C) 2014  'theFONZ'                                           #
+#                                                                           #
+#   This program is free software: you can redistribute it and/or modify    #
+#   it under the terms of the GNU General Public License as published by    #
+#   the Free Software Foundation, either version 2 of the License, or       #
+#   any later version.                                                      #
+#                                                                           #
+#   This program is distributed in the hope that it will be useful,         #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    #
+#   See the GNU General Public License for more details.                    #
+#                                                                           #
+#   You should have received a copy of the GNU General Public license       #
+#   along with this program.  If not, see 'license' in project root         #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+A3S_DIR="$( cd $( dirname ${0} )/.. && pwd )"
+A3S_CONF_DIR="${A3S_DIR}/config.d"
+A3S_PREFS_DIR="${A3S_DIR}/prefs"
+A3S_HELPERS_DIR="${A3S_DIR}/helpers"
+
+source ${A3S_CONF_DIR}/A3S.conf           # Import Default Script Variables
+source ${A3S_PREFS_DIR}/UserPrefs.conf    # Import User Configurable Variables
+source ${A3S_HELPERS_DIR}/Console_Logger  # Import Console_Logger helper
+
+# make startup checks
+function log_check_base {
+  # check for log directory, create if not found
+  if [ ! -d "$LOGLOCATION" ]; then
+    mkdir $LOGLOCATION
+  fi
+}
+
+function log_check_base_size {
+  # check for log directory size and show result
+  DIRSIZE=`du -s $LOGLOCATION | cut -f 1`
+  LOGSIZE="$DIRSIZE"
+}
+
+function dependency_check {
+  # check to see if dependencies have been installed yet
+  DependencyCheck="${PROJECTLOCATION}/d.s"
+  if [ ! -f "$DependencyCheck" ]; then
+    dependencystatus="${r}<-Important!${b}"
+  else
+    dependencystatus="${g}<-Done!${b}"
+  fi
+}
+
+function bash_check {
+  # check for bash.rc entries and show result
+  if grep -q "$ROMDEVHEADER" "$ALIAS_BASH"; then
+    CURRENTENVSETUP="Rom Development"
+  elif grep -q "$KERNELDEVHEADER" "$ALIAS_BASH"; then
+    CURRENTENVSETUP="Kernel Development"
+  fi
+}
+
+function de_check {
+  # check which desktop environment is being used
+  if [ $(pgrep -c cinnamon-panel) -gt 0 ]; then
+    logout=$CINNAMON_LOGOUT
+  elif [ $(pgrep -c gnome-panel) -gt 0 ]; then
+    logout=$GNOME_LOGOUT
+  elif [ $(pgrep -c kde-panel) -gt 0 ]; then
+    logout=$KDE_LOGOUT
+  elif [ $(pgrep -c mate-panel) -gt 0 ]; then
+    logout=$MATE_LOGOUT
+  elif [ $(pgrep -c xfce4-panel) -gt 0 ]; then
+    logout=$XFCE4_LOGOUT
+  fi
+}
+
+function process_check {
+  # check if all A3S processes have started
+  SERVICE1='A3S.base'
+  if ps ax | grep -v grep | grep $SERVICE1 > /dev/null
+    then
+    MESSAGE="A3S Started"
+      Status_Success
+  else
+    # process not found
+    MESSAGE="A3S Not Running"
+      Status_Warning
+  fi
+  SERVICE2='A3S.monitor'
+  if ps ax | grep -v grep | grep $SERVICE2 > /dev/null
+    then
+    MESSAGE="A3S Monitor Started"
+      Status_Success
+  else
+    # process not found
+    MESSAGE="A3S Monitor Not Running"
+      Status_Warning
+  fi
+  SERVICE3='A3S.console'
+  if ps ax | grep -v grep | grep $SERVICE3 > /dev/null
+    then
+    MESSAGE="A3S Console Started"
+      Status_Success
+  else
+    # process not found
+    MESSAGE="A3S Console Not Running"
+      Status_Warning
+  fi
+}
+
+function log_check_console {
+  # check for console.log, remove if found
+  if [ -f "$A3S_HELPERS_DIR/console.log" ]; then
+    rm -rf ${A3S_HELPERS_DIR}/console.log
+  fi
+}
+
+function run_all_base_checks {
+  # run all checks (excluding log_check_console & process_check)
+  bash_check && log_check_base && log_check_base_size && \
+  dependency_check && de_check
+}
+
+function run_once_checks {
+  # run console log checker and process checker once first
+  log_check_console && process_check
+}

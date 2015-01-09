@@ -17,27 +17,37 @@
 #   along with this program.  If not, see 'license' in project root         #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# Default Project Location (Let the script find its own directory structure - Now it's portable !)
-PROJECTLOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BINARYLOCATION="${PROJECTLOCATION}/bin"
+A3S_DIR="$( cd $( dirname ${0} )/.. && pwd )"
+A3S_CONF_DIR="${A3S_DIR}/config.d"
+A3S_HELPERS_DIR="${A3S_DIR}/helpers"
 
-STARTBASE="/A3S.base"
-STARTMONITOR="/A3S.monitor"
-STARTCONSOLE="/A3S.console"
-NOTIFY_MESSAGE="AndroidThreeScripts is running..."
+source ${A3S_CONF_DIR}/A3S-ui.conf  # Import Default Menu UI Variables
+source ${A3S_CONF_DIR}/A3S.conf    	# Import Default Script Variables
 
-function Start_All_A3S {
-  # Open all three A3S scripts in their own termminals
-  x-terminal-emulator --hide-menubar --working-directory="$BINARYLOCATION" -e $BINARYLOCATION/$STARTMONITOR
-    # sleep 0.05
-  x-terminal-emulator --hide-menubar --working-directory="$BINARYLOCATION" -e $BINARYLOCATION/$STARTCONSOLE
-    sleep 0.05
-  x-terminal-emulator --hide-menubar --working-directory="$BINARYLOCATION" -e $BINARYLOCATION/$STARTBASE
-    sleep 0.05
+printf '\033]0;A3S Console\a'
+printf '\033[8;6;216t'
+clear
+
+function Console {
+  while read line
+    do
+      printf ""
+      printf "${line}\n"
+      printf ""
+  done <${A3S_HELPERS_DIR}/console.log
 }
 
-# Initialize all A3S scripts
-Start_All_A3S
-
-# Show default message
-notify-send "$NOTIFY_MESSAGE"
+# Run Console function every 1 second to check for console.log updates
+while true
+  do
+    # check to see if console.log exists first
+    if [ ! -f "${A3S_HELPERS_DIR}/console.log" ]; then
+      printf ""
+      printf "Please Wait\n"
+      printf ""
+    else
+      Console
+      sleep 1
+      clear && printf '\033c'
+    fi
+done

@@ -1,0 +1,70 @@
+#!/bin/bash
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   This file is part of the 'AndroidThreeScripts' project                  #
+#   Copyright (C) 2014  'theFONZ'                                           #
+#                                                                           #
+#   This program is free software: you can redistribute it and/or modify    #
+#   it under the terms of the GNU General Public License as published by    #
+#   the Free Software Foundation, either version 2 of the License, or       #
+#   any later version.                                                      #
+#                                                                           #
+#   This program is distributed in the hope that it will be useful,         #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    #
+#   See the GNU General Public License for more details.                    #
+#                                                                           #
+#   You should have received a copy of the GNU General Public license       #
+#   along with this program.  If not, see 'license' in project root         #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+A3S_DIR="$( cd $( dirname ${0} )/.. && pwd )"
+A3S_CONF_DIR="${A3S_DIR}/config.d"
+A3S_PREFS_DIR="${A3S_DIR}/prefs"
+A3S_BIN_DIR="${A3S_DIR}/bin"
+A3S_HELPERS_DIR="${A3S_DIR}/helpers"
+
+source ${A3S_CONF_DIR}/A3S-ui.conf  		  # Import Default Menu UI Variables
+source ${A3S_CONF_DIR}/A3S.conf    			  # Import Default Script Variables
+source ${A3S_PREFS_DIR}/UserPrefs.conf    # Import User Configurable Variables
+
+function get_time {
+  TIME=$(date +"%r")
+}
+
+function Status_Success {
+  get_time
+  # add process for success console message
+  echo "  ${blb} ${TIME}${n}  ${gb}   ${n}  ${wb}${bl} ${MESSAGE} ${n}" \
+  >> ${A3S_HELPERS_DIR}/console.log
+}
+
+function Status_Error {
+  # add process for error console message
+  echo "add Status_Error"
+}
+
+function Status_Pending {
+  get_time
+  # add process for pending console message
+  echo "  ${blb} ${TIME}${n}  ${yb}   ${n}  ${bb}${w} ${MESSAGE} ${n}" \
+  >> ${A3S_HELPERS_DIR}/console.log
+}
+
+function Status_Notice {
+  get_time
+  # add process for general notice console message
+  echo "  ${blb} ${TIME}${n}  ${bb}   ${n}  ${bb}${w} ${MESSAGE} ${n}" \
+  >> ${A3S_HELPERS_DIR}/console.log
+}
+
+function Status_Warning {
+  get_time
+  # add process for warning console message
+  echo "  ${blb} ${TIME}${n}  ${rb}   ${n}  ${wb}${bl} ${MESSAGE} ${n}" \
+  >> ${A3S_HELPERS_DIR}/console.log
+}
+
+function Status_Fatal {
+  # add process for fatal error console message
+  echo "add Status_Fatal"
+}
