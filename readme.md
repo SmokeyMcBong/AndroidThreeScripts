@@ -87,7 +87,24 @@ KernelBuilder...
 
 Planned Feature's..
 ------------
-* Make some functions a bit smarter with automation
+
+ToDo ....
+
+
+- [ ] Add Sabermod toolchain download, compile and install options for..
+  - [ ] a) Android Rom
+  - [ ] b) Android Kernel
+- [ ] Remove aroma installer from both core's and..
+  - [ ] a) Create dynamic updater-script generator
+  - [ ] b) Change hardcoded directories to a more robust dynamic way to handle additional user folders
+- [ ] Create a user selectable list for downloading different android rom source code for..
+ - [ ] a) DirtyUnicorns
+ - [ ] b) OMNIrom
+ - [ ] c) CyanogenMOD
+ - [ ] d) Pacman
+- [ ] Create a user selectable list for choosing which android device to build for and..
+ - [ ] a) Generate a device list using build config folder contents (ie all available devices to build out of the box)
+
 
 <br />
 
