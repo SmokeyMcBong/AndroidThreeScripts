@@ -1,4 +1,20 @@
-looking to add....
 
-* add Sabermod toolchain download, compile and install options for Linux Kernel,Android Rom & android Kernel toolchains
-* remove aroma installer from both core's
+ToDo ....
+
+* add Sabermod toolchain download, compile and install options for
+* a) Linux Kernel
+* b) Android Rom
+* c) Android Kernel
+
+* remove aroma installer from both core's and
+* a) create dynamic updater-script generator
+* b) change hardcoded directories to a more robust dynamic way to handle user folders
+
+* create a user selectable list for downloading different android rom source code for
+* a) dirty unicorns
+* b) omnirom
+* c) cyanogenmod
+* d) pacman
+
+* create a user selectable list for choosing which android device to build for
+* a) generate a device list using build config folder contents (ie all available devices to build out of the box)
