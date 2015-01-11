@@ -25,7 +25,6 @@ A3S_HELPERS_DIR="${A3S_DIR}/helpers"
 source ${A3S_CONF_DIR}/A3S-ui.conf				# Import Default Menu UI Variables
 source ${A3S_CONF_DIR}/A3S.conf						# Import Default Script Variables
 source ${A3S_PREFS_DIR}/UserPrefs.conf		# Import User Configurable Variables
-# source ${A3S_HELPERS_DIR}/Console_Logger  # Import Console_Logger helper
 
 # check 'bash.rc' for conflicting entries before adding new ones
 function cleanbash {

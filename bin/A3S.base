@@ -22,29 +22,32 @@ A3S_CONF_DIR="${A3S_DIR}/config.d"
 A3S_PREFS_DIR="${A3S_DIR}/prefs"
 A3S_HELPERS_DIR="${A3S_DIR}/helpers"
 
+#source ${A3S_DIR}/a3s.settings						# Import a3s.settings Variables
 source ${A3S_CONF_DIR}/A3S-ui.conf        # Import Default Menu UI Variables
 source ${A3S_CONF_DIR}/A3S.conf						# Import Default Script Variables
 source ${A3S_PREFS_DIR}/UserPrefs.conf		# Import User Configurable Variables
 source ${A3S_HELPERS_DIR}/Startup_Checks	# Import Startup_Checks helper
 source ${A3S_HELPERS_DIR}/Menu_Functions	# Import Menu_Functions helper
 source ${A3S_HELPERS_DIR}/Clean_Bash			# Import Clean_Bash helper
+source ${A3S_HELPERS_DIR}/Settings_Passer # Import Clean_Bash helper
 
+# check for settings file, if none found then run the basic settings generator
+if [ ! -f "${A3S_DIR}/a3s.settings" ]; then
+	Generate_Basic_Settings 2>&1 /dev/null
+fi
 
 # run console log checker and process checker ONE TIME only
 run_once_checks &&
 
 mainmenu()
 {
-	# run all startup checks
+	# run all base startup checks
 	run_all_base_checks &&
 	clear && printf '\033c'
 	printf '\033]0;AndroidThreeScripts\a'
 	printf '\033[8;49;216t'
-	printf '%s\n' ""
-	printf '%s\n' ""
 	printf '%s\n' " ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 	printf '%s\n' " ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' "   ${g}################################################################         ################################################################         ################################################################"
 	printf '%s\n' "   ${c}####################                        ####################         ####################                        ####################         ####################                        ####################"
@@ -57,29 +60,32 @@ mainmenu()
 	printf '%s\n' ""
 	printf '%s\n' "   ${b}                    Setup Build Environment...                                        Compile Rom, Add Features & AROMA...                                     Compile Kernel, Add Features & AROMA..."
 	printf '%s\n' ""
-	printf '%s\n' ""
 	printf '%s\n' "   ${c}0${b})  Install ALL Dependencies (${dependencystatus})"
 	printf '%s\n' "    -------------------------------------------------------------           ${c}r1${b})  Clean ROM Build Folder Structure                                    ${c}k1${b})  Edit Kernel 'defconfig' File"
 	printf '%s\n' "   ${b}Linux Setup                                                              ${c}r2${b})  Sync ROM Repo's                                                     ${c}k2${b})  Clean Kernel Folder And Remove '.config' file"
-	printf '%s\n' "   ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source                                             ${c}k3${b})  Compile Kernel & Modules"
+	printf '%s\n' "                                                                            ${r}pholder${b})  Select Device To Compile ROM For                                                                                        "
+	printf '%s\n' "   ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source (Current Device : ${r}pholder${b})                  ${c}k3${b})  Compile Kernel & Modules"
 	printf '%s\n' "   ${c}2${b})  Download & Install ${ASTUDIONAME}                ${c}r4${b})  Copy New 'system' Folder & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
 	printf '%s\n' "   ${c}3${b})  Download & Install ${APP1NAME}                          -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
+	printf '%s\n' "   ${r}pholder${b})  Download,Compile & Install SaberMod Android Toolchains"
+	printf '%s\n' "   ${c}Info>${b} Current Installed SaberMod Toolchains : ${r}pholder${b}"
 	printf '%s\n' "    -------------------------------------------------------------           ${c}r5${b})  Pull Gapps From Device                                               -------------------------------------------------------------"
 	printf '%s\n' "   ${b}Android ROM Development Setup                                            ${c}r6${b})  Download Additional App's Using 'Additions.links' file              ${c}k6${b})  Edit 'aroma-config' file in working_folder"
 	printf '%s\n' "   ${c}4${b})  Setup Build Environment for ROM Development                          ${c}r7${b})  Download Xposed Framework/Modules Using 'Xposed.links' file         ${c}k7${b})  Edit 'updater-script' file in working_folder"
 	printf '%s\n' "   ${c}5${b})  Download Personal ROM Development Repo's                             ${c}r8${b})  Copy Grabbed_Files structure to working_folder structure             -------------------------------------------------------------"
-	printf '%s\n' "   ${c}6${b})  Download ROM Source Code (Current Source = ${g}${DESIREDROMNAME}${b})             -------------------------------------------------------------"
+	printf '%s\n' "   ${r}pholder${b})  Select ROM Source from list"
+	printf '%s\n' "   ${c}6${b})  Download ROM Source Code                                              -------------------------------------------------------------"
+	printf '%s\n' "   ${c}Info>${b} Current Selected ROM Source : ${g}${DESIREDROMNAME}${b}"
 	printf '%s\n' "    -------------------------------------------------------------           ${c}r9${b})  Edit 'aroma-config' file                                            ${c}k8${b})  Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' "   ${b}Android Kernel Development Setup                                         ${c}r10${b}) Edit 'updater-script' file"
 	printf '%s\n' "   ${c}7${b})  Setup Build Environment for Kernel Development                       ${c}r11${b}) Edit 'build.prop' file"
-	printf '%s\n' "   ${c}8${b})  Download Sabermod ${TOOLCHAINNAME} Toolchain For Kernel Compile         -------------------------------------------------------------"
-	printf '%s\n' "   ${c}9${b})  Download Kernel Source Code (Current Source = ${g}${DESIREDKERNELNAME}${b})          ${c}r12${b}) Edit 'Additions.links' file"
+	printf '%s\n' "   ${c}9${b})  Download Kernel Source Code                                             -------------------------------------------------------------"
+	printf '%s\n' "   ${c}Info>${b} Current Source : ${g}${DESIREDKERNELNAME}${b}"
+	printf '%s\n' "                                                                            ${c}r12${b}) Edit 'Additions.links' file"
 	printf '%s\n' "                                                                            ${c}r13${b}) Edit 'Xposed.links' file"
 	printf '%s\n' "    -------------------------------------------------------------            -------------------------------------------------------------"
 	printf '%s\n' "   ${c}Info>${b} Build Environment Currently Set To : ${g}${CURRENTENVSETUP}${b}"
 	printf '%s\n' "       (Use Options ${c}4${b} and ${c}7${b} To Switch Build Environments)                   ${c}r14${b}) Zip working_folder Contents Ready For Flashing on Device"
-	printf '%s\n' ""
-	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' " ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -231,8 +237,9 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		sleep 2
 		echo ${PATHHEADER} >> ~/.bashrc &&
 		echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
+		# set dependency status to true in settings file
+		sed -i '/^Depen/ s/false/true/' ${A3S_DIR}/a3s.settings
 		showPostProgress
-		echo dependencies have been satisfied >> ${PROJECTLOCATION}/d.s && sleep 2
 		# send console message
 		MESSAGE="Finished Stage $Stagenumber - $Function"
 		Status_Success "$MESSAGE"

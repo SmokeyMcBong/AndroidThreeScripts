@@ -22,6 +22,7 @@ A3S_CONF_DIR="${A3S_DIR}/config.d"
 A3S_PREFS_DIR="${A3S_DIR}/prefs"
 A3S_HELPERS_DIR="${A3S_DIR}/helpers"
 
+source ${A3S_DIR}/a3s.settings            # Import a3s.settings Variables
 source ${A3S_CONF_DIR}/A3S.conf           # Import Default Script Variables
 source ${A3S_PREFS_DIR}/UserPrefs.conf    # Import User Configurable Variables
 source ${A3S_HELPERS_DIR}/Console_Logger  # Import Console_Logger helper
@@ -42,11 +43,10 @@ function log_check_base_size {
 
 function dependency_check {
   # check to see if dependencies have been installed yet
-  DependencyCheck="${PROJECTLOCATION}/d.s"
-  if [ ! -f "$DependencyCheck" ]; then
-    dependencystatus="${r}<-Important!${b}"
-  else
+  if [ $Dependencies_Satisfied = "true" ]; then
     dependencystatus="${g}<-Done!${b}"
+  else
+    dependencystatus="${r}<-Important!${b}"
   fi
 }
 
