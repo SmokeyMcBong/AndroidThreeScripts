@@ -96,6 +96,9 @@ ToDo ....
 - [x] Add Sabermod toolchain download, compile and install options
   - [x] a) Android Rom
   - [x] b) Android Kernel
+- [ ] Create a robust error handler
+  - [ ] Setup each function so that all errors are caught and dealt with
+  - [ ] Report all errors to a3s.console using the error handler
 - [ ] Change the way RomBuilder & KernelBuilder cores work
   - [ ] a) Remove AROMA Installer from both core's
   - [ ] b) Create dynamic updater-script generator
