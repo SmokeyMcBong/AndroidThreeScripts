@@ -115,10 +115,39 @@ function log_check_console {
   fi
 }
 
+function toolchain_check {
+  # check for installed sabermod toolchains
+  cd ~/tmp &&
+  if [ -d "arm-linux-androideabi-4.8" ]; then
+    rom4_8="androideabi-4.8"
+  else
+    status1="0"
+  fi
+  if [ -d "arm-linux-androideabi-4.9" ]; then
+    rom4_9="androideabi-4.9"
+  else
+    status2="0"
+  fi
+  if [ -d "arm-eabi-4.8" ]; then
+    kernel4_8="eabi-4.8"
+  else
+    status3="0"
+  fi
+  if [ -d "arm-eabi-4.9" ]; then
+    kernel4_9="eabi-4.9"
+  else
+    status4="0"
+  fi
+  #  if no sabermod toolchains are found then show this status
+  if [[ "$status1" && "$status2" && "$status3" && "$status4" == "0" ]]; then
+    nfound="No SaberMod Toolchains Installed Yet"
+  fi
+}
+
 function run_all_base_checks {
   # run all checks (excluding log_check_console & process_check)
   bash_check && log_check_base && log_check_base_size && \
-  dependency_check && de_check
+  dependency_check && de_check && toolchain_check
 }
 
 function run_once_checks {

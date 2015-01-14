@@ -17,13 +17,22 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # DirtyUnicorns
-DUSOURCE="https://github.com/DirtyUnicorns-KitKat/manifest.git"
+DUKSOURCE="https://github.com/DirtyUnicorns-KitKat/manifest.git"
+DU_KITKAT="du44"
+DULSOURCE="https://github.com/DirtyUnicorns/manifest.git"
+DU_LOLLIPOP="lollipop"
 
 # Omnirom
 OMNISOURCE="https://github.com/omnirom/android.git"
+OMNI_KITKAT="android-4.4"
+OMNI_LOLLIPOP="android-5.0"
 
 # CyanogenMod
 CMSOURCE="https://github.com/CyanogenMod/android.git"
+CM_KITKAT="cm-11.0"
+CM_LOLLIPOP="cm-12.0"
 
 # PacMan
 PACSOURCE="https://github.com/PAC-man/pacman.git"
+PAC_KITKAT="pac-4.4"
+PAC_LOLLIPOP="pac-5.0"

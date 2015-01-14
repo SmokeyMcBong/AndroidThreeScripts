@@ -64,4 +64,6 @@ function cleanbash {
   if grep -q "$ToolchainPath" "$ALIAS_BASH"; then
     sed -i '/'"$ToolchainPath"'/d' $ALIAS_BASH
   fi
+  # remove empty lines from bash.rc
+  sed -i '/^$/d' $ALIAS_BASH
 }

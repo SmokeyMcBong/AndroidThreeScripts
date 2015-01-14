@@ -29,15 +29,28 @@ source ${A3S_PREFS_DIR}/UserPrefs.conf		# Import User Configurable Variables
 source ${A3S_HELPERS_DIR}/Startup_Checks	# Import Startup_Checks helper
 source ${A3S_HELPERS_DIR}/Menu_Functions	# Import Menu_Functions helper
 source ${A3S_HELPERS_DIR}/Clean_Bash			# Import Clean_Bash helper
-source ${A3S_HELPERS_DIR}/Settings_Passer # Import Clean_Bash helper
-
-# check for settings file, if none found then run the basic settings generator
-if [ ! -f "${A3S_DIR}/a3s.settings" ]; then
-	Generate_Basic_Settings 2>&1 /dev/null
-fi
+source ${A3S_HELPERS_DIR}/Settings_Passer # Import Settings_Passer helper
 
 # run console log checker and process checker ONE TIME only
 run_once_checks &&
+
+# check for settings file, if none found then run the basic settings generator
+if [ ! -f "${A3S_DIR}/a3s.settings" ]; then
+	# send console messages
+	MESSAGE="No Settings File Found !"
+	Status_Warning "$MESSAGE"
+	MESSAGE="Generating Basic Settings File..."
+	Status_Notice "$MESSAGE"
+	# run settings generator
+	Generate_Basic_Settings 2>&1 /dev/null &&
+	# send console message
+	MESSAGE="Basic Settings File Created"
+	Status_Success "$MESSAGE"
+else
+	# send console message
+	MESSAGE="Settings File Found"
+	Status_Success "$MESSAGE"
+fi
 
 mainmenu()
 {
@@ -67,25 +80,26 @@ mainmenu()
 	printf '%s\n' "   ${c}1${b})  Download,Compile & Install Latest SaberMod Linux Kernel              ${c}r3${b})  Compile ROM From Source (Current Device : ${r}pholder${b})                  ${c}k3${b})  Compile Kernel & Modules"
 	printf '%s\n' "   ${c}2${b})  Download & Install ${ASTUDIONAME}                ${c}r4${b})  Copy New 'system' Folder & 'boot.img' to working_folder             ${c}k4${b})  Create New boot.img file"
 	printf '%s\n' "   ${c}3${b})  Download & Install ${APP1NAME}                          -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
-	printf '%s\n' "   ${r}pholder${b})  Download,Compile & Install SaberMod Android Toolchains"
-	printf '%s\n' "   ${c}Info>${b} Current Installed SaberMod Toolchains : ${r}pholder${b}"
+	printf '%s\n' "   ${c}4${b})  Download,Compile & Install SaberMod Android Toolchains"
+	printf '%s\n' "   ${c}Info>${b} Current Compiled & Installed SaberMod Toolchains :"
+	printf '%s\n' "       ${r}${nfound}${b}${g}${rom4_8}${b} ${g}${rom4_9}${b} ${g}${kernel4_8}${b} ${g}${kernel4_9}${b}"
 	printf '%s\n' "    -------------------------------------------------------------           ${c}r5${b})  Pull Gapps From Device                                               -------------------------------------------------------------"
 	printf '%s\n' "   ${b}Android ROM Development Setup                                            ${c}r6${b})  Download Additional App's Using 'Additions.links' file              ${c}k6${b})  Edit 'aroma-config' file in working_folder"
-	printf '%s\n' "   ${c}4${b})  Setup Build Environment for ROM Development                          ${c}r7${b})  Download Xposed Framework/Modules Using 'Xposed.links' file         ${c}k7${b})  Edit 'updater-script' file in working_folder"
-	printf '%s\n' "   ${c}5${b})  Download Personal ROM Development Repo's                             ${c}r8${b})  Copy Grabbed_Files structure to working_folder structure             -------------------------------------------------------------"
-	printf '%s\n' "   ${r}pholder${b})  Select ROM Source from list"
-	printf '%s\n' "   ${c}6${b})  Download ROM Source Code                                              -------------------------------------------------------------"
+	printf '%s\n' "   ${c}5${b})  Setup Build Environment for ROM Development                          ${c}r7${b})  Download Xposed Framework/Modules Using 'Xposed.links' file         ${c}k7${b})  Edit 'updater-script' file in working_folder"
+	printf '%s\n' "   ${c}6${b})  Download Personal ROM Development Repo's                             ${c}r8${b})  Copy Grabbed_Files structure to working_folder structure             -------------------------------------------------------------"
+	printf '%s\n' "   ${c}7${b})  Select ROM Source from list"
+	printf '%s\n' "   ${c}8${b})  Download ROM Source Code                                              -------------------------------------------------------------"
 	printf '%s\n' "   ${c}Info>${b} Current Selected ROM Source : ${g}${DESIREDROMNAME}${b}"
 	printf '%s\n' "    -------------------------------------------------------------           ${c}r9${b})  Edit 'aroma-config' file                                            ${c}k8${b})  Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' "   ${b}Android Kernel Development Setup                                         ${c}r10${b}) Edit 'updater-script' file"
-	printf '%s\n' "   ${c}7${b})  Setup Build Environment for Kernel Development                       ${c}r11${b}) Edit 'build.prop' file"
-	printf '%s\n' "   ${c}9${b})  Download Kernel Source Code                                             -------------------------------------------------------------"
+	printf '%s\n' "   ${c}9${b})  Setup Build Environment for Kernel Development                       ${c}r11${b}) Edit 'build.prop' file"
+	printf '%s\n' "   ${c}10${b}) Download Kernel Source Code                                             -------------------------------------------------------------"
 	printf '%s\n' "   ${c}Info>${b} Current Source : ${g}${DESIREDKERNELNAME}${b}"
 	printf '%s\n' "                                                                            ${c}r12${b}) Edit 'Additions.links' file"
 	printf '%s\n' "                                                                            ${c}r13${b}) Edit 'Xposed.links' file"
 	printf '%s\n' "    -------------------------------------------------------------            -------------------------------------------------------------"
 	printf '%s\n' "   ${c}Info>${b} Build Environment Currently Set To : ${g}${CURRENTENVSETUP}${b}"
-	printf '%s\n' "       (Use Options ${c}4${b} and ${c}7${b} To Switch Build Environments)                   ${c}r14${b}) Zip working_folder Contents Ready For Flashing on Device"
+	printf '%s\n' "       (Use Options ${c}5${b} and ${c}8${b} To Switch Build Environments)                   ${c}r14${b}) Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' " ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -105,16 +119,18 @@ mainmenu()
 	elif [ "$mainmen" == 3 ] ; then
 		installapps
 	elif [ "$mainmen" == 4 ] ; then
-		setuprenv
+		installtoolchain
 	elif [ "$mainmen" == 5 ] ; then
-		downloadpresonalrrepos
+		setuprenv
 	elif [ "$mainmen" == 6 ] ; then
-		downloadrsource
+		downloadpresonalrrepos
 	elif [ "$mainmen" == 7 ] ; then
-		setupkenv
+		selectrsource
 	elif [ "$mainmen" == 8 ] ; then
-		downloadktoolchain
+		downloadrsource
 	elif [ "$mainmen" == 9 ] ; then
+		setupkenv
+	elif [ "$mainmen" == 10 ] ; then
 		downloadksource
 
 		# RomBuilder Menu
@@ -238,7 +254,9 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		echo ${PATHHEADER} >> ~/.bashrc &&
 		echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
 		# set dependency status to true in settings file
-		sed -i '/^Depen/ s/false/true/' ${A3S_DIR}/a3s.settings
+		Setting_Name="Dependencies_Satisfied"
+		Setting_Value="true"
+		Pass_To_Settings
 		showPostProgress
 		# send console message
 		MESSAGE="Finished Stage $Stagenumber - $Function"
@@ -270,7 +288,7 @@ saberinstall() # Download, SYNC Repo, Compile & Install Latest SaberMod Linux Ke
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n' "    1) Download Latest SaberMod Linux Kernel Source (home/'${USER}'/Linux/)"
-	printf '%s\n' "    2) SYNC Repo, Compile & Install Latest SaberMod Linux Kernel (If Already Downloaded)"
+	printf '%s\n' "    2) Sync Repo, Compile & Install Latest SaberMod Linux Kernel (If Already Downloaded)"
 	printf '%s\n' "    3) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
@@ -522,11 +540,156 @@ installapps() # Download & Install 3rd party Apps
 	fi
 }
 
+installtoolchain() # Download,Compile and install SaberMod Toolchains
+{
+	clear && printf '\033c'
+	Function="installtoolchain"
+	Stagenumber="4"
+	show_stage_header
+	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	printf '%s\n' "    1) Download Latest SaberMod Android Toolchain Source (home/'${USER}'/sm-tc/)"
+	printf '%s\n' "    > Compile & Install Latest SaberMod Android ROM Toolchain (If Already Downloaded)..."
+	printf '%s\n' "     2) arm-linux-androideabi-4.8"
+	printf '%s\n' "     3) arm-linux-androideabi-4.9"
+	printf '%s\n' "    > Compile & Install Latest SaberMod Android Kernel Toolchain (If Already Downloaded)..."
+	printf '%s\n' "     4) arm-eabi-4.8"
+	printf '%s\n' "     5) arm-eabi-4.9"
+	printf '%s\n' "    6) return to main menu${n}"
+	printf '%s\n'  ""
+	printf '%s\n'  ""
+	read installtoolchainopt0
+	if [ "$installtoolchainopt0" == 1 ] ; then
+		Function="sabertoolchaindownload"
+		clear && printf '\033c'
+		(
+		Stagenumber="4"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Downloading SaberMod Toolchain Source... <-${n}             "
+		printf '%s\n'  ""
+		cd &&
+		if [ ! -d sm-tc ]; then
+			mkdir sm-tc
+		else
+			rm -rf sm-tc && mkdir sm-tc
+		fi
+		cd sm-tc && sleep 1
+		repo init -u ${TOOLCHAINSOURCE} && exec ${SYNC} & wait
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		installtoolchain
+	elif [ "$installtoolchainopt0" == 2 ] ; then
+		# add SaberMod Android Kernel Toolchain function
+		Function="saberrom485compile"
+		clear && printf '\033c'
+		(
+		Stagenumber="4"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Pending "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Compiling & Installing SaberMod ROM Toolchain Version 4.8.5... <-${n}             "
+		printf '%s\n'  ""
+		cd ~/sm-tc/build-scripts &&
+		./arm-androideabi-4.8 & wait
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$installtoolchainopt0" == 3 ] ; then
+		# add SaberMod Android Kernel Toolchain function
+		Function="saberrom493compile"
+		clear && printf '\033c'
+		(
+		Stagenumber="4"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Compiling & Installing SaberMod ROM Toolchain Version 4.9.3... <-${n}             "
+		printf '%s\n'  ""
+		cd ~/sm-tc/build-scripts &&
+		./arm-androideabi-4.9 & wait
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$installtoolchainopt0" == 4 ] ; then
+		# add SaberMod Android Kernel Toolchain function
+		Function="saberker485compile"
+		clear && printf '\033c'
+		(
+		Stagenumber="4"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Compiling & Installing SaberMod Kernel Toolchain Version 4.8.5... <-${n}             "
+		printf '%s\n'  ""
+		cd ~/sm-tc/build-scripts &&
+		./arm-eabi-4.8 & wait
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$installtoolchainopt0" == 5 ] ; then
+		# add SaberMod Android Kernel Toolchain function
+		Function="saberker493compile"
+		clear && printf '\033c'
+		(
+		Stagenumber="4"
+		show_stage_header
+		# send console message
+		MESSAGE="Started Stage $Stagenumber - $Function"
+		Status_Notice "$MESSAGE"
+		printf '%s\n'  "      ${b}-> Compiling & Installing SaberMod Kernel Toolchain Version 4.9.3... <-${n}             "
+		printf '%s\n'  ""
+		cd ~/sm-tc/build-scripts &&
+		./arm-eabi-4.9 & wait
+		showPostProgress && sleep 2
+		show_stage_completed
+		# send console message
+		MESSAGE="Finished Stage $Stagenumber - $Function"
+		Status_Success "$MESSAGE"
+		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+		sleep 2.5
+		mainmenu
+	elif [ "$installtoolchainopt0" == 6 ] ; then
+		mainmenu
+	elif [ "$installtoolchainopt0" != 1 ] && [ "$installtoolchainopt0" != 2 ] && [ "$installtoolchainopt0" != 3 ] &&
+		[ "$installtoolchainopt0" != 4 ] && [ "$installtoolchainopt0" != 5 ] && [ "$installtoolchainopt0" != 6 ]; then
+			installtoolchain
+	fi
+}
+
 setuprenv() # Setup ROM Build Environment
 {
 	clear && printf '\033c'
 	Function="setuprenv"
-	Stagenumber="4"
+	Stagenumber="5"
 	show_stage_header
 	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
@@ -541,7 +704,7 @@ setuprenv() # Setup ROM Build Environment
 	if [ "$setuprenvopt0" == 1 ] ; then
 		clear && printf '\033c'
 		(
-		Stagenumber="4"
+		Stagenumber="5"
 		show_stage_header
 		# send console message
 		MESSAGE="Started Stage $Stagenumber - $Function"
@@ -595,7 +758,7 @@ downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
 {
 	clear && printf '\033c'
 	Function="downloadpresonalrrepos"
-	Stagenumber="5"
+	Stagenumber="6"
 	show_stage_header
 	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
@@ -610,7 +773,7 @@ downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
 	if [ "$downloadpresonalrreposopt0" == 1 ] ; then
 		clear && printf '\033c'
 		(
-		Stagenumber="5"
+		Stagenumber="6"
 		show_stage_header
 		# send console message
 		MESSAGE="Started Stage $Stagenumber - $Function"
@@ -641,11 +804,18 @@ downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
 	fi
 }
 
+
+# selectsource() # Select which android rom source to download
+# {
+# 	# ToDo : add select source function here
+# }
+
+
 downloadrsource()  # Download Desired ROM Source Code
 {
 	clear && printf '\033c'
 	Function="downloadrsource"
-	Stagenumber="6"
+	Stagenumber="8"
 	show_stage_header
 	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
@@ -660,7 +830,7 @@ downloadrsource()  # Download Desired ROM Source Code
 	if [ "$downloadrsourceopt0" == 1 ] ; then
 		clear && printf '\033c'
 		(
-		Stagenumber="6"
+		Stagenumber="8"
 		show_stage_header
 		# send console message
 		MESSAGE="Started Stage $Stagenumber - $Function"
@@ -698,7 +868,7 @@ setupkenv() # Setup Kernel Build Environment
 {
 	clear && printf '\033c'
 	Function="setupkenv"
-	Stagenumber="7"
+	Stagenumber="9"
 	show_stage_header
 	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
@@ -713,7 +883,7 @@ setupkenv() # Setup Kernel Build Environment
 	if [ "$setupkenvopt0" == 1 ] ; then
 		clear && printf '\033c'
 		(
-		Stagenumber="7"
+		Stagenumber="9"
 		show_stage_header
 		# send console message
 		MESSAGE="Started Stage $Stagenumber - $Function"
@@ -763,64 +933,11 @@ setupkenv() # Setup Kernel Build Environment
 	fi
 }
 
-downloadktoolchain() # Download SaberMod 4.9.3 Kernel Toolchain
-{
-	clear && printf '\033c'
-	Function="downloadktoolchain"
-	Stagenumber="8"
-	show_stage_header
-	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	printf '%s\n' "    1) DOWNLOAD LATEST SABERMOD KERNEL TOOLCHAIN"
-	printf '%s\n' "    2) return to main menu${n}"
-	printf '%s\n'  ""
-	printf '%s\n'  ""
-	read downloadktoolchainopt0
-	if [ "$downloadktoolchainopt0" == 1 ] ; then
-		clear && printf '\033c'
-		(
-		Stagenumber="8"
-		show_stage_header
-		# send console message
-		MESSAGE="Started Stage $Stagenumber - $Function"
-		Status_Notice "$MESSAGE"
-		printf '%s\n'  "      ${b}-> Downloading ${TOOLCHAINNAME} Toolchain... <-${n}             "
-		cd &&
-		if [ ! -d Android ]; then
-			mkdir Android
-		fi
-		cd Android &&
-		if [ ! -d KernelDevelopment ]; then
-			mkdir KernelDevelopment
-		fi
-		cd KernelDevelopment &&
-		if [ -d Toolchain ]; then
-			rm -rf Toolchain
-		fi
-		mkdir Toolchain &&  cd Toolchain &&
-		git clone -v ${TOOLCHAINSOURCE} &&
-		show_stage_completed
-		# send console message
-		MESSAGE="Finished Stage $Stagenumber - $Function"
-		Status_Success "$MESSAGE"
-		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
-		sleep 2.5
-		mainmenu
-	elif [ "$downloadktoolchainopt0" == 2 ] ; then
-		mainmenu
-	elif [ "$downloadktoolchainopt0" != 1 ] && [ "$downloadktoolchainopt0" != 2 ] ; then
-		downloadktoolchain
-	fi
-}
-
 downloadksource()   # Download Kernel Source Code (specified in .config)
 {
 	clear && printf '\033c'
 	Function="downloadksource"
-	Stagenumber="9"
+	Stagenumber="10"
 	show_stage_header
 	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
@@ -835,7 +952,7 @@ downloadksource()   # Download Kernel Source Code (specified in .config)
 	if [ "$downloadksourceopt0" == 1 ] ; then
 		clear && printf '\033c'
 		(
-		Stagenumber="9"
+		Stagenumber="10"
 		show_stage_header
 		# send console message
 		MESSAGE="Started Stage $Stagenumber - $Function"
@@ -934,10 +1051,10 @@ rbcleanbuild() # Invoke both 'make clean' & 'make clobber' Commands
 	fi
 }
 
-rbSYNCbuild() # Invoke 'repo SYNC -j5' Command to SYNC repos
+rbsyncbuild() # Invoke 'repo SYNC -j16' Command to SYNC repos
 {
 	clear && printf '\033c'
-	Function="rbSYNCbuild"
+	Function="rbsyncbuild"
 	Stagenumber="r2"
 	show_stage_header
 	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
@@ -949,8 +1066,8 @@ rbSYNCbuild() # Invoke 'repo SYNC -j5' Command to SYNC repos
 	printf '%s\n' "    2) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read rbSYNCbuildopt0
-	if [ "$rbSYNCbuildopt0" == 1 ] ; then
+	read rbsyncbuildopt0
+	if [ "$rbsyncbuildopt0" == 1 ] ; then
 		clear && printf '\033c'
 		(
 		Stagenumber="r2"
@@ -958,7 +1075,7 @@ rbSYNCbuild() # Invoke 'repo SYNC -j5' Command to SYNC repos
 		# send console message
 		MESSAGE="Started Stage $Stagenumber - $Function"
 		Status_Notice "$MESSAGE"
-		printf '%s\n'  "        ${b}-> SYNCing Rom Repo's... <-${n}             "
+		printf '%s\n'  "        ${b}-> Syncing Rom Repo's... <-${n}             "
 		cd &&
 		if [ -d Android ]; then
 			cd Android
@@ -978,8 +1095,8 @@ rbSYNCbuild() # Invoke 'repo SYNC -j5' Command to SYNC repos
 			printf '%s\n'  " No Root '${DESIREDROMNAME}' Folder Found !, Have You Downloaded The Source ?? "
 			sleep 3 && mainmenu
 		fi
-		SYNC="repo SYNC -j5"
-		exec ${SYNC} & wait
+		sync="repo sync -j16"
+		exec ${sync} & wait
 		showPostProgress && sleep 2
 		show_stage_completed
 		# send console message
@@ -988,12 +1105,19 @@ rbSYNCbuild() # Invoke 'repo SYNC -j5' Command to SYNC repos
 		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
 		sleep 2.5
 		mainmenu
-	elif [ "$rbSYNCbuildopt0" == 2 ] ; then
+	elif [ "$rbsyncbuildopt0" == 2 ] ; then
 		mainmenu
-	elif [ "$rbSYNCbuildopt0" != 1 ] && [ "$rbSYNCbuildopt0" != 2 ] ; then
-		rbSYNCbuild
+	elif [ "$rbsyncbuildopt0" != 1 ] && [ "$rbsyncbuildopt0" != 2 ] ; then
+		rbsyncbuild
 	fi
 }
+
+
+# selectdevice() # Select device to compile for
+# {
+# 	# ToDo : add select device function here
+# }
+
 
 rbcompilebuild() # Compile Rom From Source
 {

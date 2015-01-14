@@ -28,12 +28,11 @@ NOTIFY_MESSAGE="AndroidThreeScripts is running..."
 
 function Start_All_A3S {
   # Open all three A3S scripts in their own termminals
-  x-terminal-emulator --hide-menubar --working-directory="$BINARYLOCATION" -e $BINARYLOCATION/$STARTMONITOR
-    # sleep 0.05
   x-terminal-emulator --hide-menubar --working-directory="$BINARYLOCATION" -e $BINARYLOCATION/$STARTCONSOLE
-    sleep 0.05
+  sleep 0.05
   x-terminal-emulator --hide-menubar --working-directory="$BINARYLOCATION" -e $BINARYLOCATION/$STARTBASE
-    sleep 0.05
+  sleep 0.05
+  x-terminal-emulator --hide-menubar --working-directory="$BINARYLOCATION" -e $BINARYLOCATION/$STARTMONITOR
 }
 
 # Initialize all A3S scripts

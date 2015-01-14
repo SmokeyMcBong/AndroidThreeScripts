@@ -34,7 +34,7 @@ function get_time {
 function Status_Success {
   get_time
   # add process for success console message
-  echo "  ${blb} ${TIME}${n}  ${gb}   ${n}  ${wb}${bl} ${MESSAGE} ${n}" \
+  echo "  ${blb} ${TIME}${n}  ${gb} Success > ${n}  ${wb}${bl} ${MESSAGE} ${n}" \
   >> ${A3S_HELPERS_DIR}/console.log
 }
 
@@ -46,21 +46,21 @@ function Status_Error {
 function Status_Pending {
   get_time
   # add process for pending console message
-  echo "  ${blb} ${TIME}${n}  ${yb}   ${n}  ${bb}${w} ${MESSAGE} ${n}" \
+  echo "  ${blb} ${TIME}${n}  ${yb} Pending > ${n}  ${yb}${w} ${MESSAGE} ${n}" \
   >> ${A3S_HELPERS_DIR}/console.log
 }
 
 function Status_Notice {
   get_time
   # add process for general notice console message
-  echo "  ${blb} ${TIME}${n}  ${bb}   ${n}  ${bb}${w} ${MESSAGE} ${n}" \
+  echo "  ${blb} ${TIME}${n}  ${bb} Notice  > ${n}  ${bb}${w} ${MESSAGE} ${n}" \
   >> ${A3S_HELPERS_DIR}/console.log
 }
 
 function Status_Warning {
   get_time
   # add process for warning console message
-  echo "  ${blb} ${TIME}${n}  ${rb}   ${n}  ${wb}${bl} ${MESSAGE} ${n}" \
+  echo "  ${blb} ${TIME}${n}  ${rb} Warning > ${n}  ${rb}${w} ${MESSAGE} ${n}" \
   >> ${A3S_HELPERS_DIR}/console.log
 }
 
