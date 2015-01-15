@@ -34,7 +34,7 @@ function get_time {
 function Status_Success {
   get_time
   # add process for success console message
-  echo "  ${blb} ${TIME}${n}  ${gb} Success > ${n}  ${wb}${bl} ${MESSAGE} ${n}" \
+  echo "  ${blb} ${TIME}${n}  ${gb} Success > ${n}  ${gb}${w} ${MESSAGE} ${n}" \
   >> ${A3S_HELPERS_DIR}/console.log
 }
 

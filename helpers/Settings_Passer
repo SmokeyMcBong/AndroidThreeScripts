@@ -38,6 +38,7 @@ function Generate_Basic_Settings {
   get_time
   printf '%s\n' "### A3S Settings File, Auto-Generated at ${TIME} ###" \
   "-----------------------------------------------------------" \
+  "# Dependency Status..." \
   "Dependencies_Satisfied=false" \
   >> ${A3S_DIR}/a3s.settings
   Cleanup_Settings
@@ -46,12 +47,18 @@ function Generate_Basic_Settings {
 # pass settings to a3s.settings file
 function Pass_To_Settings {
   if grep -q "$Setting_Name" "$A3S_DIR/a3s.settings"; then
+    sed -i '/'"${Setting_Header}"'/d' ${A3S_DIR}/a3s.settings
+    sed -i '/'"${Setting_Title_Name}"'/d' ${A3S_DIR}/a3s.settings
     sed -i '/'"${Setting_Name}"'/d' ${A3S_DIR}/a3s.settings
-    printf '%s\n' "${Setting_Name}=${Setting_Value}" \
+    printf '%s\n' "${Setting_Header}" \
+    "${Setting_Title_Name}=${Setting_Title_Value}" \
+    "${Setting_Name}=${Setting_Value}" \
     >> ${A3S_DIR}/a3s.settings
     Cleanup_Settings
   else
-    printf '%s\n' "${Setting_Name}=${Setting_Value}" \
+    printf '%s\n' "${Setting_Header}" \
+    "${Setting_Title_Name}=${Setting_Title_Value}" \
+    "${Setting_Name}=${Setting_Value}" \
     >> ${A3S_DIR}/a3s.settings
     Cleanup_Settings
   fi

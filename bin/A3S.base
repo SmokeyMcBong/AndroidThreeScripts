@@ -22,14 +22,14 @@ A3S_CONF_DIR="${A3S_DIR}/config.d"
 A3S_PREFS_DIR="${A3S_DIR}/prefs"
 A3S_HELPERS_DIR="${A3S_DIR}/helpers"
 
-#source ${A3S_DIR}/a3s.settings						# Import a3s.settings Variables
-source ${A3S_CONF_DIR}/A3S-ui.conf        # Import Default Menu UI Variables
-source ${A3S_CONF_DIR}/A3S.conf						# Import Default Script Variables
-source ${A3S_PREFS_DIR}/UserPrefs.conf		# Import User Configurable Variables
-source ${A3S_HELPERS_DIR}/Startup_Checks	# Import Startup_Checks helper
-source ${A3S_HELPERS_DIR}/Menu_Functions	# Import Menu_Functions helper
-source ${A3S_HELPERS_DIR}/Clean_Bash			# Import Clean_Bash helper
-source ${A3S_HELPERS_DIR}/Settings_Passer # Import Settings_Passer helper
+source ${A3S_CONF_DIR}/A3S-ui.conf         # Import Default Menu UI Variables
+source ${A3S_CONF_DIR}/A3S.conf						 # Import Default Script Variables
+source ${A3S_CONF_DIR}/A3S-romsources.list # Import Default Rom Sources Variables
+source ${A3S_PREFS_DIR}/UserPrefs.conf		 # Import User Configurable Variables
+source ${A3S_HELPERS_DIR}/Startup_Checks	 # Import Startup_Checks helper
+source ${A3S_HELPERS_DIR}/Menu_Functions   # Import Menu_Functions helper
+source ${A3S_HELPERS_DIR}/Clean_Bash			 # Import Clean_Bash helper
+source ${A3S_HELPERS_DIR}/Settings_Passer  # Import Settings_Passer helper
 
 # run console log checker and process checker ONE TIME only
 run_once_checks &&
@@ -54,11 +54,13 @@ fi
 
 mainmenu()
 {
+	# Import a3s.settings variables
+	source ${A3S_DIR}/a3s.settings
 	# run all base startup checks
 	run_all_base_checks &&
 	clear && printf '\033c'
 	printf '\033]0;AndroidThreeScripts\a'
-	printf '\033[8;49;216t'
+	printf '\033[8;51;216t'
 	printf '%s\n' " ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 	printf '%s\n' " ${b}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 	printf '%s\n' ""
@@ -71,7 +73,7 @@ mainmenu()
 	printf '%s\n' "   ${g}################################################################         ################################################################         ################################################################"
 	printf '%s\n' ""
 	printf '%s\n' ""
-	printf '%s\n' "   ${b}                    Setup Build Environment...                                        Compile Rom, Add Features & AROMA...                                     Compile Kernel, Add Features & AROMA..."
+	printf '%s\n' "   ${b}                    Setup Build Environment...                                        Compile Rom, Add Features & AROMA...                                    Compile Kernel, Add Features & AROMA..."
 	printf '%s\n' ""
 	printf '%s\n' "   ${c}0${b})  Install ALL Dependencies (${dependencystatus})"
 	printf '%s\n' "    -------------------------------------------------------------           ${c}r1${b})  Clean ROM Build Folder Structure                                    ${c}k1${b})  Edit Kernel 'defconfig' File"
@@ -82,14 +84,15 @@ mainmenu()
 	printf '%s\n' "   ${c}3${b})  Download & Install ${APP1NAME}                          -------------------------------------------------------------           ${c}k5${b})  Copy New Compiled boot.img & Modules To 'working_folder'"
 	printf '%s\n' "   ${c}4${b})  Download,Compile & Install SaberMod Android Toolchains"
 	printf '%s\n' "   ${c}Info>${b} Current Compiled & Installed SaberMod Toolchains :"
-	printf '%s\n' "       ${r}${nfound}${b}${g}${rom4_8}${b} ${g}${rom4_9}${b} ${g}${kernel4_8}${b} ${g}${kernel4_9}${b}"
+	printf '%s\n' "       ${c}${nfound}${b}${g}${rom4_8}${b} ${g}${rom4_9}${b} ${g}${kernel4_8}${b} ${g}${kernel4_9}${b}"
 	printf '%s\n' "    -------------------------------------------------------------           ${c}r5${b})  Pull Gapps From Device                                               -------------------------------------------------------------"
 	printf '%s\n' "   ${b}Android ROM Development Setup                                            ${c}r6${b})  Download Additional App's Using 'Additions.links' file              ${c}k6${b})  Edit 'aroma-config' file in working_folder"
 	printf '%s\n' "   ${c}5${b})  Setup Build Environment for ROM Development                          ${c}r7${b})  Download Xposed Framework/Modules Using 'Xposed.links' file         ${c}k7${b})  Edit 'updater-script' file in working_folder"
 	printf '%s\n' "   ${c}6${b})  Download Personal ROM Development Repo's                             ${c}r8${b})  Copy Grabbed_Files structure to working_folder structure             -------------------------------------------------------------"
-	printf '%s\n' "   ${c}7${b})  Select ROM Source from list"
+	printf '%s\n' "   ${c}7${b})  Select ROM Source from list (or add your own)"
 	printf '%s\n' "   ${c}8${b})  Download ROM Source Code                                              -------------------------------------------------------------"
-	printf '%s\n' "   ${c}Info>${b} Current Selected ROM Source : ${g}${DESIREDROMNAME}${b}"
+	printf '%s\n' "   ${c}Info>${b} Current Selected ROM Source :"
+	printf '%s\n' "       ${g}${sourcestatus}${b}${c}${nsource}${b}"
 	printf '%s\n' "    -------------------------------------------------------------           ${c}r9${b})  Edit 'aroma-config' file                                            ${c}k8${b})  Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' "   ${b}Android Kernel Development Setup                                         ${c}r10${b}) Edit 'updater-script' file"
 	printf '%s\n' "   ${c}9${b})  Setup Build Environment for Kernel Development                       ${c}r11${b}) Edit 'build.prop' file"
@@ -99,7 +102,7 @@ mainmenu()
 	printf '%s\n' "                                                                            ${c}r13${b}) Edit 'Xposed.links' file"
 	printf '%s\n' "    -------------------------------------------------------------            -------------------------------------------------------------"
 	printf '%s\n' "   ${c}Info>${b} Build Environment Currently Set To : ${g}${CURRENTENVSETUP}${b}"
-	printf '%s\n' "       (Use Options ${c}5${b} and ${c}8${b} To Switch Build Environments)                   ${c}r14${b}) Zip working_folder Contents Ready For Flashing on Device"
+	printf '%s\n' "       (Use Options ${c}5${b} and ${c}9${b} To Switch Build Environments)                   ${c}r14${b}) Zip working_folder Contents Ready For Flashing on Device"
 	printf '%s\n' ""
 	printf '%s\n' ""
 	printf '%s\n' " ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -254,6 +257,7 @@ installDependencies() # Install ALL needed Dependencies before doing anything!
 		echo ${PATHHEADER} >> ~/.bashrc &&
 		echo ${path} "# A3S Path Settings" >> ~/.bashrc &&
 		# set dependency status to true in settings file
+		Setting_Header="# Dependency Status..."
 		Setting_Name="Dependencies_Satisfied"
 		Setting_Value="true"
 		Pass_To_Settings
@@ -804,63 +808,297 @@ downloadpresonalrrepos() # Download Personal Repo's related to ROM Development
 	fi
 }
 
-
-# selectsource() # Select which android rom source to download
-# {
-# 	# ToDo : add select source function here
-# }
-
-
-downloadrsource()  # Download Desired ROM Source Code
+selectrsource() # Select which android rom source to download
 {
 	clear && printf '\033c'
-	Function="downloadrsource"
-	Stagenumber="8"
+	Function="selectsource"
+	Stagenumber="7"
 	show_stage_header
 	printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	printf '%s\n' "    1) DOWNLOAD ${DESIREDROMNAME} ROM SOURCE CODE"
-	printf '%s\n' "    2) return to main menu${n}"
+	printf '%s\n' "    1) Select DirtyUnicorns Source (Android 4.4.4 - Kitkat)"
+	printf '%s\n' "    2) Select DirtyUnicorns Source (Android 5.0 - Lollipop)"
+	printf '%s\n' "    3) Select Omnirom Source (Android 4.4.4 - Kitkat)"
+	printf '%s\n' "    4) Select Omnirom Source (Android 5.0 - Lollipop)"
+	printf '%s\n' "    5) Select CyanogenMod Source (Android 4.4.4 - Kitkat)"
+	printf '%s\n' "    6) Select CyanogenMod Source (Android 5.0 - Lollipop)"
+	printf '%s\n' "    7) Select PacMan Source (Android 4.4.4 - Kitkat)"
+	printf '%s\n' "    8) Select PacMan Source (Android 5.0 - Lollipop)"
+	printf '%s\n' "    9) Manually enter a Source (name,repo & branch)"
+	printf '%s\n' "   10) return to main menu${n}"
 	printf '%s\n'  ""
 	printf '%s\n'  ""
-	read downloadrsourceopt0
-	if [ "$downloadrsourceopt0" == 1 ] ; then
-		clear && printf '\033c'
-		(
-		Stagenumber="8"
-		show_stage_header
+	read selectsourceopt0
+	if [ "$selectsourceopt0" == 1 ] ; then
 		# send console message
-		MESSAGE="Started Stage $Stagenumber - $Function"
+		MESSAGE="Selected DirtyUnicorns Rom Source (Android 4.4.4 - Kitkat)"
 		Status_Notice "$MESSAGE"
-		printf '%s\n'  "   ${b}-> Downloading ${DESIREDROMNAME} Source Code ... <-${n}       "
-		cd &&
-		if [ ! -d Android ]; then
-			mkdir Android
-		fi
-		cd Android &&
-		if [ ! -d RomDevelopment ]; then
-			mkdir RomDevelopment
-		fi
-		cd RomDevelopment &&
-		if [ -d ${DESIREDROMNAME} ]; then
-			rm -rf ${DESIREDROMNAME}
-		fi
-		mkdir ${DESIREDROMNAME} && cd ${DESIREDROMNAME} &&
-		repo init -u ${DESIREDROMSOURCE} -b du44 && ${SYNC} & wait
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"DirtyUnicorns_Kitkat"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${DUKSOURCE} -b ${DU_KITKAT}"'"'
+		Pass_To_Settings & wait
+		showPostProgress
 		show_stage_completed
-		# send console message
-		MESSAGE="Finished Stage $Stagenumber - $Function"
-		Status_Success "$MESSAGE"
-		) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
 		sleep 2.5
 		mainmenu
-	elif [ "$downloadrsourceopt0" == 2 ] ; then
+	elif [ "$selectsourceopt0" == 2 ] ; then
+		# send console message
+		MESSAGE="Selected DirtyUnicorns Rom Source (Android 5.0 - Lollipop)"
+		Status_Notice "$MESSAGE"
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"DirtyUnicorns_Lollipop"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${DULSOURCE} -b ${DU_LOLLIPOP}"'"'
+		Pass_To_Settings
+		showPostProgress
+		show_stage_completed
+		sleep 2.5
 		mainmenu
-	elif [ "$downloadrsourceopt0" != 1 ] && [ "$downloadrsourceopt0" !=2 ] ; then
-		downloadrsource
+	elif [ "$selectsourceopt0" == 3 ] ; then
+		# send console message
+		MESSAGE="Selected Omnirom Rom Source (Android 4.4.4 - Kitkat)"
+		Status_Notice "$MESSAGE"
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"Omnirom_Kitkat"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${OMNISOURCE} -b ${OMNI_KITKAT}"'"'
+		Pass_To_Settings
+		showPostProgress
+		show_stage_completed
+		sleep 2.5
+		mainmenu
+	elif [ "$selectsourceopt0" == 4 ] ; then
+		# send console message
+		MESSAGE="Selected Omnirom Rom Source (Android 5.0 - Lollipop)"
+		Status_Notice "$MESSAGE"
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"Omnirom_Lollipop"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${OMNISOURCE} -b ${OMNI_LOLLIPOP}"'"'
+		Pass_To_Settings
+		showPostProgress
+		show_stage_completed
+		sleep 2.5
+		mainmenu
+	elif [ "$selectsourceopt0" == 5 ] ; then
+		# send console message
+		MESSAGE="Selected CyanogenMod Rom Source (Android 4.4.4 - Kitkat)"
+		Status_Notice "$MESSAGE"
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"CyanogenMod_Kitkat"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${CMSOURCE} -b ${CM_KITKAT}"'"'
+		Pass_To_Settings
+		showPostProgress
+		show_stage_completed
+		sleep 2.5
+		mainmenu
+	elif [ "$selectsourceopt0" == 6 ] ; then
+		# send console message
+		MESSAGE="Selected CyanogenMod Rom Source (Android 5.0 - Lollipop)"
+		Status_Notice "$MESSAGE"
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"CyanogenMod_Lollipop"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${CMSOURCE} -b ${CM_LOLLIPOP}"'"'
+		Pass_To_Settings
+		showPostProgress
+		show_stage_completed
+		sleep 2.5
+		mainmenu
+	elif [ "$selectsourceopt0" == 7 ] ; then
+		# send console message
+		MESSAGE="Selected PacMan Rom Source (Android 4.4.4 - Kitkat)"
+		Status_Notice "$MESSAGE"
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"PacMan_Kitkat"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${PACSOURCE} -b ${PAC_KITKAT}"'"'
+		Pass_To_Settings
+		showPostProgress
+		show_stage_completed
+		sleep 2.5
+		mainmenu
+	elif [ "$selectsourceopt0" == 8 ] ; then
+		# send console message
+		MESSAGE="Selected PacMan Rom Source (Android 5.0 - Lollipop)"
+		Status_Notice "$MESSAGE"
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"PacMan_Lollipop"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${PACSOURCE} -b ${PAC_LOLLIPOP}"'"'
+		Pass_To_Settings
+		showPostProgress
+		show_stage_completed
+		sleep 2.5
+		mainmenu
+	elif [ "$selectsourceopt0" == 9 ] ; then
+		clear && printf '\033c'
+		Function="selectsource"
+		Stagenumber="7"
+		show_stage_header
+		printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "  Enter Rom Source Name (eg. CyanogenMod or PACman etc)"
+		printf '%s\n'  ""
+		printf '%s\n'  "   MUST CONTAIN NO SPACES ! "
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "Enter Name Below >${n} "
+		read romsourcename
+		clear && printf '\033c'
+		Function="selectsource"
+		Stagenumber="7"
+		show_stage_header
+		printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "  Enter Rom Source (eg. https://github.com/SmokeyMcBong/AndroidThreeScripts.git)"
+		printf '%s\n'  ""
+		printf '%s\n'  "   MUST CONTAIN NO SPACES ! "
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "Enter Source Below >${n} "
+		read romsource
+		clear && printf '\033c'
+		Function="selectsource"
+		Stagenumber="7"
+		show_stage_header
+		printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "  Enter Rom Source Branch (eg. cm12 or 4.4 etc)"
+		printf '%s\n'  ""
+		printf '%s\n'  "   MUST CONTAIN NO SPACES ! "
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  "Enter Branch Below >${n} "
+		read romsourcebranch
+		# set rom source in settings
+		Setting_Header="# Selected Android Rom Source..."
+		Setting_Title_Name="Selected_Rom_Source_Name"
+		Setting_Title_Value='"'"${romsourcename}_(${romsourcebranch})"'"'
+		Setting_Name="Selected_Rom_Source"
+		Setting_Value='"'"${romsource} -b ${romsourcebranch}"'"'
+		Pass_To_Settings
+		showPostProgress
+		show_stage_completed
+		# send console message
+		MESSAGE="Added ${Setting_Title_Value} Rom Source"
+		Status_Success "$MESSAGE"
+		# send console message
+		MESSAGE="Selected ${Setting_Title_Value}"
+		Status_Notice "$MESSAGE"
+		sleep 2.5
+		mainmenu
+	elif [ "$selectsourceopt0" == 10 ] ; then
+		mainmenu
+	elif [ "$selectsourceopt0" != 1 ] && [ "$selectsourceopt0" != 2 ] && [ "$selectsourceopt0" != 3 ] &&
+		[ "$selectsourceopt0" != 4 ] && [ "$selectsourceopt0" != 5 ] && [ "$selectsourceopt0" != 6 ] &&
+		[ "$selectsourceopt0" != 7 ] && [ "$selectsourceopt0" != 8 ] && [ "$selectsourceopt0" != 9 ] &&
+		[ "$selectsourceopt0" != 10 ]; then
+		selectrsource
+	fi
+}
+
+downloadrsource()  # Download Desired ROM Source Code
+{
+	if grep -q "Selected_Rom_Source_Name" "$A3S_DIR/a3s.settings"; then
+		clear && printf '\033c'
+		Function="downloadrsource"
+		Stagenumber="8"
+		show_stage_header
+		printf "    ${b}Make Your Selection, And Let Me Do The Work :) ..."
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n' "    1) DOWNLOAD ${Selected_Rom_Source_Name} ROM SOURCE CODE"
+		printf '%s\n' "    2) return to main menu${n}"
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		read downloadrsourceopt0
+		if [ "$downloadrsourceopt0" == 1 ] ; then
+			clear && printf '\033c'
+			(
+			Stagenumber="8"
+			show_stage_header
+			# send console message
+			MESSAGE="Started Stage $Stagenumber - $Function"
+			Status_Notice "$MESSAGE"
+			printf '%s\n'  "   ${b}-> Downloading ${Selected_Rom_Source_Name} Source Code ... <-${n}       "
+			cd &&
+			if [ ! -d Android ]; then
+				mkdir Android
+			fi
+			cd Android &&
+			if [ ! -d RomDevelopment ]; then
+				mkdir RomDevelopment
+			fi
+			cd RomDevelopment &&
+			# Strip special characters from source string and use as new dir name
+			New_Directory_Name=${Selected_Rom_Source_Name//[-()]/}
+			# New_Directory_Name=${Selected_Rom_Source_Name//.}
+			if [ -d ${New_Directory_Name} ]; then
+				rm -rf ${New_Directory_Name}
+			fi
+			mkdir ${New_Directory_Name} && cd ${New_Directory_Name} &&
+			repo init -u ${Selected_Rom_Source} && ${SYNC} & wait
+			show_stage_completed
+			# send console message
+			MESSAGE="Finished Stage $Stagenumber - $Function"
+			Status_Success "$MESSAGE"
+			) 2>&1 | tee ${LOGLOCATION}/${TODAY}_${Function}.log
+			sleep 2.5
+			mainmenu
+		elif [ "$downloadrsourceopt0" == 2 ] ; then
+			mainmenu
+		elif [ "$downloadrsourceopt0" != 1 ] && [ "$downloadrsourceopt0" !=2 ] ; then
+			downloadrsource
+		fi
+	else
+		clear && printf '\033c'
+		Function="downloadrsource"
+		Stagenumber="8"
+		show_stage_header
+		printf "    ${b}No Rom Source Selected ..."
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		printf '%s\n' "    Please Select a Rom Source First !"
+		printf '%s\n'  ""
+		printf '%s\n'  ""
+		sleep 2.5
+		mainmenu
 	fi
 }
 

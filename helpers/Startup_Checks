@@ -116,6 +116,11 @@ function log_check_console {
 }
 
 function toolchain_check {
+  # check if toolchain directory exists
+  cd &&
+  if [ ! -d "tmp" ]; then
+    nfound="No SaberMod Toolchains Installed Yet"
+  fi
   # check for installed sabermod toolchains
   cd ~/tmp &&
   if [ -d "arm-linux-androideabi-4.8" ]; then
@@ -138,16 +143,28 @@ function toolchain_check {
   else
     status4="0"
   fi
-  #  if no sabermod toolchains are found then show this status
+  #  if no sabermod toolchains are found then show that status
   if [[ "$status1" && "$status2" && "$status3" && "$status4" == "0" ]]; then
     nfound="No SaberMod Toolchains Installed Yet"
+  fi
+}
+
+function rom_source_check {
+  # check for selected rom source
+  if [ ${Selected_Rom_Source_Name:+1} ]
+    then
+    sourcestatus=${Selected_Rom_Source_Name}
+    nsource=""
+  else
+    nsource="No Rom Source Selected Yet"
   fi
 }
 
 function run_all_base_checks {
   # run all checks (excluding log_check_console & process_check)
   bash_check && log_check_base && log_check_base_size && \
-  dependency_check && de_check && toolchain_check
+  dependency_check && de_check && toolchain_check && \
+  rom_source_check
 }
 
 function run_once_checks {
