@@ -6,15 +6,15 @@
 
 -------
 <br />
-<center>![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/cropped-LOGO-A3S-alpha.png)</center>
+![](http://i.imgur.com/IMTH9dL.png)
 <br />  
 
 <center>"***Complete Android Build Helper. With 'Fresh-to-Ready', 'RomBuilder' and 'KernelBuilder'  !***"</center>
 
 <br />
-<center>
-![Screenshot](https://dl.dropboxusercontent.com/u/18271886/AndroidThreeScripts/A3S.png)
-</center>
+
+![](http://i.imgur.com/ZdNI03j.png)
+
 
 <br />
 <br />
